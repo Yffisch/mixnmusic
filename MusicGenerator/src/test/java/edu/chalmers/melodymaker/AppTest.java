@@ -1,4 +1,4 @@
-package se.chalmers.musicgenerator;
+package edu.chalmers.melodymaker;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
