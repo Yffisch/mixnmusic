@@ -11,5 +11,5 @@ package edu.chalmers.melodymaker.controller;
  * @author Yff
  */
 public class MelodyController {
-    
+    String bla;
 }
