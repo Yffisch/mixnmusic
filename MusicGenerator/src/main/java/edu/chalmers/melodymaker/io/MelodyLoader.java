@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package edu.chalmers.melodymaker;
+package edu.chalmers.melodymaker.io;
 
 /**
  *
- * @author Yff
+ * @author David
  */
-public class MelodyExporter {
+public class MelodyLoader {
     
 }

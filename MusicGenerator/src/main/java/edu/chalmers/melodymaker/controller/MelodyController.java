@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package edu.chalmers.melodymaker;
+package edu.chalmers.melodymaker.controller;
 
 /**
  *
  * @author Yff
  */
-public class Signature {
+public class MelodyController {
     
 }
