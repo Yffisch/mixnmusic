@@ -99,6 +99,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         minorRadioButton.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup1.add(minorRadioButton);
+        minorRadioButton.setSelected(true);
         minorRadioButton.setText("Minor");
 
         majorRadioButton.setBackground(new java.awt.Color(204, 204, 204));
