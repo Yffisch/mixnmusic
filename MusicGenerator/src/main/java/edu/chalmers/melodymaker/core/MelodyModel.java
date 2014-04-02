@@ -27,6 +27,7 @@ public class MelodyModel {
         
         MelodyLoader m = new MelodyLoader();
         m.loadFileList();
+        
         if (!MelodyLoader.files.isEmpty()){
             //String genre, String signature, String key, String length)
             for(File f: MelodyLoader.files){

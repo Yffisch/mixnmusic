@@ -28,7 +28,7 @@ public class MelodyExporter {
         String output = generator.generateTune();
         
         try {
-            try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/" + exportFilename))) {
+            try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/exportfiles/" + exportFilename))) {
                 //out.write(m.GetTopPart());
                 out.write(output);
             }
