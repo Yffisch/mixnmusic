@@ -6,6 +6,8 @@
 
 package edu.chalmers.melodymaker.gui;
 
+import edu.chalmers.melodymaker.controller.MelodyController;
+
 /**
  *
  * @author David
@@ -107,6 +109,11 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         majorRadioButton.setText("Major");
 
         generateButton.setText("Generate");
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
@@ -211,6 +218,20 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genreComboBoxActionPerformed
+/**
+ *
+ * @author Emma
+ */
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+        // TODO add your handling code here:
+        
+        String inputGenre = (String)genreComboBox.getSelectedItem();
+        String inputSignature = (String)signatureComboBox.getSelectedItem();
+        String inputKey = (String)keyComboBox.getSelectedItem();
+        String inputLength = (String)lengthComboBox.getSelectedItem();
+        
+        new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength); 
+    }//GEN-LAST:event_generateButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,16 +8,16 @@ package edu.chalmers.melodymaker.core;
 
 /**
  *
- * @author PearlOfNash
+ * @author Emma
  */
 public class Melody {
     
-    public String genre, title, noteLegnth, signature;
+    public String genre, title, noteLength, signature;
     
     public void Melody(String g, String t, String n, String s){
         genre = g;
         title = t;
-        noteLegnth = n;
+        noteLength = n;
         signature = s;
     }
     
@@ -30,7 +30,7 @@ public class Melody {
     }
     
     public String getNoteLegnth(){
-        return noteLegnth;
+        return noteLength;
     }
     
     public String getSignature(){
