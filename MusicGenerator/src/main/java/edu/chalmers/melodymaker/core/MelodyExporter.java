@@ -13,26 +13,28 @@ import java.io.IOException;
 
 /**
  *
- * @author Yff
+ * @author Kristofer
  */
 public class MelodyExporter {
 
     MelodyLoader m = new MelodyLoader();
 
+    //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
     public MelodyExporter(String importFilename, String exportFilename) throws IOException {
-        
-        m.LoadMelody(importFilename);
-        m.getFileList();
-       // for (File fil : MelodyLoader.files) {
+        m.loadFileList();
 
-            
-            try {
-                try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/" + exportFilename))) {
-                    //out.write(m.GetTopPart());
-                    out.write(m.getNoteListVisible());
-                }
-            } catch (IOException e) {
+        for (File fil : MelodyLoader.files) {
+            m.loadMelody(fil.getName().toString());
+            //getNoteList() för att få dem utan string
+           System.out.println(m.getNoteListVisible()); 
+        }
+
+        try {
+            try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/" + exportFilename))) {
+                //out.write(m.GetTopPart());
+               // out.write(m.getNoteListVisible());
             }
-      //  }
+        } catch (IOException e) {
+        }
     }
 }

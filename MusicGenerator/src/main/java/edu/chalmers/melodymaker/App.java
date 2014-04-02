@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Author: Kristofer
+ * @author: Kristofer
  *
  */
 public class App {
@@ -20,7 +20,7 @@ public class App {
     public App() throws IOException {
     
                                        // Import file, export file
-              e = new MelodyExporter("supermario.abc", "huuu.txt");
+              e = new MelodyExporter("supermario.abc", "huuuu.txt");
               
 
        
