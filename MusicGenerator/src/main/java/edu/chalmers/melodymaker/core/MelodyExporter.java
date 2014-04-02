@@ -20,6 +20,7 @@ public class MelodyExporter {
     
     public MelodyExporter() throws IOException{
         m.LoadMelody();
+        m.getFileList();
         try {
             try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/lala.txt"))) {
                 

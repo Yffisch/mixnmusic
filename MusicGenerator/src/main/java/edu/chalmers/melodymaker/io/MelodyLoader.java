@@ -8,6 +8,7 @@ package edu.chalmers.melodymaker.io;
 import edu.chalmers.melodymaker.core.Alphabet;
 import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,6 +38,19 @@ public class MelodyLoader {
         return topPart;
     }
     
+     public String getFileList(){
+         File folder = new File("src/main/resources/abc/");
+File[] listOfFiles = folder.listFiles();
+
+for (File file : listOfFiles) {
+    if (file.isFile()) {
+        System.out.println(file.getName());
+    }
+}
+return "f";
+     }
+     
+     
     public String getNoteListVisible() {
         StringBuilder sb = new StringBuilder();
 
@@ -59,7 +73,6 @@ public class MelodyLoader {
                 line = br.readLine();
             }
             String fullString = sb.toString();
-            //Ska vara i annan kod
             parts = fullString.split("-");
             topPart = parts[0];
             botPart = parts[1];
