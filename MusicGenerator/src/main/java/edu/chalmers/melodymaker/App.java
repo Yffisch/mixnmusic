@@ -1,13 +1,22 @@
 package edu.chalmers.melodymaker;
 
+import edu.chalmers.melodymaker.io.MelodyLoader;
+import java.io.IOException;
+
 /**
- * Hello world!
+ * Author: Kristofer
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+public class App {
+
+    MelodyLoader m;
+
+    public static void main(String[] args) throws IOException {
+        new App();
+    }
+
+    public App() throws IOException {
+        m = new MelodyLoader();
+
     }
 }
