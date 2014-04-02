@@ -3,7 +3,6 @@ package edu.chalmers.melodymaker.core;
 import edu.chalmers.melodymaker.io.MelodyLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  *
@@ -29,11 +28,11 @@ public class MelodyGenerator {
         ArrayList<Melody> melodies = loadABC(genre, length, signature);
         learnABC(melodies);
     }
-    
+
     /**
      * For testing purpose
      */
-    public MelodyGenerator(){
+    public MelodyGenerator() {
         MAX = 100;
         MIN = 25;
         ORDER = 4;
@@ -56,8 +55,8 @@ public class MelodyGenerator {
      * @param signature
      * @return
      */
-private ArrayList<Melody> loadABC(String genre, String length, String signature) {
-        return MelodyLoader.load(genre, length, signature);
+    private ArrayList<Melody> loadABC(String genre, String length, String signature) {
+        return MelodyLoader.loadMelody(genre, length, signature);
     }
 
     /**
@@ -100,16 +99,21 @@ private ArrayList<Melody> loadABC(String genre, String length, String signature)
             updateTable(current.toString(), following, markovTable);
             i++;
             // Update the string
-            currentNotes = (ArrayList<Note>) tune.subList(i-ORDER, i);
+            currentNotes = (ArrayList<Note>) tune.subList(i - ORDER, i);
         }
+        current = new StringBuilder();
+        for (Note note : currentNotes) {
+            current.append(note.getNote());
+        }
+        updateTable(current.toString(), end, markovTable);
     }
 
     /**
-     * Updating the ordered table. Helper method to addMelody
+     * Updating the ordered table. Helper method to the table methods
      *
      * @param seq The history that next should be based on
-     * @param next the next char seen from the history (seq)
-     * @param hmap the k-order table that should be updated
+     * @param next the next note seen from the history (seq)
+     * @param hmap the table that should be updated
      */
     private void updateTable(String seq, String next, HashMap<String, MarkovInstance> hmap) {
         if (!hmap.containsKey(seq)) {
@@ -122,5 +126,37 @@ private ArrayList<Melody> loadABC(String genre, String length, String signature)
         }
     }
 
-   
+    /**
+     * Returns a generated tune from Markov probabilities
+     *
+     * @return a Markov chain presented as a String
+     */
+    public String generateTune() {
+
+        StringBuilder tuneBuilder = new StringBuilder();
+        int length = ORDER;
+
+        MarkovInstance start = startTable.get("START");
+        ArrayList<String> list = start.toProbabilities(null);
+        int random = (int) Math.random() * list.size();
+        String current = list.get(random);
+        tuneBuilder.append(current);
+        String keyToRemove = end;
+
+        while (true) {
+            if (length >= MIN) {
+                keyToRemove = null;
+            }
+            MarkovInstance history = markovTable.get(current);
+            ArrayList<String> nextProb = history.toProbabilities(keyToRemove);
+            random = (int) Math.random() * nextProb.size();
+            current = nextProb.get(random);
+            tuneBuilder.append(current);
+            length++;
+            if (length > MAX) {
+                break;
+            }
+        }
+        return tuneBuilder.toString();
+    }
 }

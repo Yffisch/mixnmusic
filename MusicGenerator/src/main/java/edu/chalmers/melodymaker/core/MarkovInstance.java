@@ -41,6 +41,7 @@ public class MarkovInstance {
      * Ineffective and ugly way to calculate fair probabilities. Takes the
      * following notes and fills an array list with each notes percentage*10000
      *
+     * @param keyToRemove
      * @return an array list with following notes occurring according to their %
      */
     public ArrayList<String> toProbabilities(String keyToRemove) {
