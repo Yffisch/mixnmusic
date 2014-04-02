@@ -20,11 +20,23 @@ import java.util.ArrayList;
 public class MelodyLoader {
 
     ArrayList<Note> noteList = new ArrayList();
+     String[] parts;
+            String topPart;
+            String botPart;
 
     public MelodyLoader() {
 
     }
 
+    
+    public String GetBotPart(){
+        return botPart;
+    }
+    
+     public String GetTopPart(){
+        return topPart;
+    }
+    
     public String getNoteListVisible() {
         StringBuilder sb = new StringBuilder();
 
@@ -48,9 +60,9 @@ public class MelodyLoader {
             }
             String fullString = sb.toString();
             //Ska vara i annan kod
-            String[] parts = fullString.split("-");
-            String topPart = parts[0];
-            String botPart = parts[1];
+            parts = fullString.split("-");
+            topPart = parts[0];
+            botPart = parts[1];
 
             for (int i = 0; i < fullString.length(); i++) {
                 if (Alphabet.isLetterInAlphabet(fullString.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till

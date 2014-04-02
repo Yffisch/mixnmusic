@@ -23,7 +23,7 @@ public class MelodyExporter {
         try {
             try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/lala.txt"))) {
                 
-                    out.write(m.getNoteListVisible());
+                    out.write(m.GetTopPart());
                 
             }
         } catch (IOException e) {
