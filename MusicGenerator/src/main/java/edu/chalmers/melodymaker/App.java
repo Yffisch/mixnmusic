@@ -2,6 +2,7 @@ package edu.chalmers.melodymaker;
 
 import edu.chalmers.melodymaker.core.MelodyExporter;
 import edu.chalmers.melodymaker.io.MelodyLoader;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -17,8 +18,11 @@ public class App {
     }
 
     public App() throws IOException {
-     
-        e = new MelodyExporter();
+    
+                                       // Import file, export file
+              e = new MelodyExporter("supermario.abc", "huuu.txt");
+              
 
+       
     }
 }

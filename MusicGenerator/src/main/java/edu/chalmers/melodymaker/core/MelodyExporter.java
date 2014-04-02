@@ -7,6 +7,7 @@ package edu.chalmers.melodymaker.core;
 
 import edu.chalmers.melodymaker.io.MelodyLoader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -17,17 +18,21 @@ import java.io.IOException;
 public class MelodyExporter {
 
     MelodyLoader m = new MelodyLoader();
-    
-    public MelodyExporter() throws IOException{
-        m.LoadMelody();
+
+    public MelodyExporter(String importFilename, String exportFilename) throws IOException {
+        
+        m.LoadMelody(importFilename);
         m.getFileList();
-        try {
-            try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/lala.txt"))) {
-                
-                    out.write(m.GetTopPart());
-                
+       // for (File fil : MelodyLoader.files) {
+
+            
+            try {
+                try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/" + exportFilename))) {
+                    //out.write(m.GetTopPart());
+                    out.write(m.getNoteListVisible());
+                }
+            } catch (IOException e) {
             }
-        } catch (IOException e) {
-        }
+      //  }
     }
 }

@@ -1,6 +1,0 @@
-X:1
-T:Hey Jude
-R:Reel
-L:1/8
-M:4/4
-K:C 

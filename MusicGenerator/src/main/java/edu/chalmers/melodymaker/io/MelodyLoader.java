@@ -20,50 +20,53 @@ import java.util.ArrayList;
  */
 public class MelodyLoader {
 
-    ArrayList<Note> noteList = new ArrayList();
-     String[] parts;
-            String topPart;
-            String botPart;
+    public ArrayList<Note> noteList = new ArrayList();
+    public static ArrayList<File> files = new ArrayList();
+    String[] parts;
+    String topPart;
+    String botPart;
+    String fullString;
 
     public MelodyLoader() {
 
     }
 
-    
-    public String GetBotPart(){
+    public String GetBotPart() {
         return botPart;
     }
-    
-     public String GetTopPart(){
+
+    public String GetTopPart() {
         return topPart;
     }
     
-     public String getFileList(){
-         File folder = new File("src/main/resources/abc/");
-File[] listOfFiles = folder.listFiles();
+// Shows list of all files in the folder
+    public void getFileList() {
+        File folder = new File("src/main/resources/abc/");
+        File[] listOfFiles = folder.listFiles();
 
-for (File file : listOfFiles) {
-    if (file.isFile()) {
-        System.out.println(file.getName());
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                System.out.println(file.getName());
+                files.add(file);
+            }
+        }
+                        //System.out.println(files.size());
+
     }
-}
-return "f";
-     }
-     
-     
+// Get all the filtered notes in the note list to a string
     public String getNoteListVisible() {
         StringBuilder sb = new StringBuilder();
 
         for (Note n : noteList) {
             sb.append(n.getNote());
-
         }
         return sb.toString();
-        ///System.out.println(sb);
     }
-
-    public String LoadMelody() throws FileNotFoundException, IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/hey_jude.abc"))) {
+// Load melody from file and pick top and bot part
+    public String LoadMelody(String filename) throws FileNotFoundException, IOException {
+        
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -72,7 +75,7 @@ return "f";
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            String fullString = sb.toString();
+            fullString = sb.toString();
             parts = fullString.split("-");
             topPart = parts[0];
             botPart = parts[1];
@@ -82,14 +85,9 @@ return "f";
                 {
                     noteList.add(new Note(fullString.charAt(i) + ""));
                 }
-
             }
-
-           
             System.out.println(noteList.size());
             return fullString;
-
         }
-
     }
 }
