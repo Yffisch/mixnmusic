@@ -39,4 +39,8 @@ public class MelodyModel {
 
     }
     
+    public ArrayList<Melody> getMelodies(){
+        return melObj;
+    }
+    
 }
