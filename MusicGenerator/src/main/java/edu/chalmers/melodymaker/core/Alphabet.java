@@ -11,13 +11,13 @@ package edu.chalmers.melodymaker.core;
  */
 public class Alphabet {
 
-    String[] noteAlphabet = {"c", "d", "e", "f", "g", "a", "b", "C", "D", "E", "F", "G", "A", "B", "h", "H"};
+    static String[] noteAlphabet = {"c", "d", "e", "f", "g", "a", "b", "C", "D", "E", "F", "G", "A", "B", "h", "H"};
 
     public Alphabet() {
 
     }
 
-    public boolean isLetterInAlphabet(String s) {
+    public static boolean isLetterInAlphabet(String s) {
         for (int i = 0; i < noteAlphabet.length; i++) {
             if (noteAlphabet[i].contains(s)) {
                 return true;

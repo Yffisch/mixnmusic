@@ -17,6 +17,8 @@ public class App {
 
     public App() throws IOException {
         m = new MelodyLoader();
+        m.LoadMelody();
+        m.getNoteListVisible();
 
     }
 }

@@ -13,11 +13,12 @@ package edu.chalmers.melodymaker.core;
 public class Note {
     
     String note;
-    Note(String s){
+    public Note(String s){
         note = s;
     }
     
     public String getNote(){
         return note;
     }
+    
 }

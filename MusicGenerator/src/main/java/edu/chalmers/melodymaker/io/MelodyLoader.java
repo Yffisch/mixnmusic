@@ -5,10 +5,13 @@
  */
 package edu.chalmers.melodymaker.io;
 
+import edu.chalmers.melodymaker.core.Alphabet;
+import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,10 +19,23 @@ import java.io.IOException;
  */
 public class MelodyLoader {
 
+    ArrayList<Note> noteList = new ArrayList();
+
     public MelodyLoader() {
 
     }
 
+    public void getNoteListVisible(){
+                    
+
+        for(Note n : noteList){
+              System.out.println(n.getNote());
+
+        }
+        
+    }
+    
+    
     public String LoadMelody() throws FileNotFoundException, IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/hey_jude.abc"))) {
             StringBuilder sb = new StringBuilder();
@@ -35,8 +51,17 @@ public class MelodyLoader {
             String[] parts = fullString.split("-");
             String topPart = parts[0];
             String botPart = parts[1];
+
+            for (int i = 0; i < fullString.length(); i++) {
+                if (Alphabet.isLetterInAlphabet(fullString.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till
+                {
+                    noteList.add(new Note(fullString.charAt(i) + ""));
+                }
+
+            }
+
             ///////////////////////
-           // System.out.println(botPart);
+             System.out.println(noteList.size());
             return fullString;
 
         }
