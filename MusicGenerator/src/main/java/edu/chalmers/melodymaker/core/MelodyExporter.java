@@ -24,15 +24,14 @@ public class MelodyExporter {
         m.loadFileList();
 
         for (File fil : MelodyLoader.files) {
-            m.loadMelody(fil.getName().toString());
-            //getNoteList() för att få dem utan string
-           System.out.println(m.getNoteListVisible()); 
+            m.loadMelody(fil.getName());
+            
         }
 
         try {
             try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/abc/" + exportFilename))) {
                 //out.write(m.GetTopPart());
-               // out.write(m.getNoteListVisible());
+                out.write(m.getNoteListVisible());
             }
         } catch (IOException e) {
         }

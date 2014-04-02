@@ -69,7 +69,8 @@ public class MelodyLoader {
 // Load melody from file and pick top and bot part
     public String loadMelody(String filename) throws FileNotFoundException, IOException {
         
-        
+        //noteList.clear();
+
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
