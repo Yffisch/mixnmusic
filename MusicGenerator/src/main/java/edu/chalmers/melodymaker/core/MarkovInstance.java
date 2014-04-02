@@ -38,21 +38,22 @@ public class MarkovInstance {
     }
 
     /**
-     * Ineffective and ugly way to calculate fair probabilities. Takes
-     * the following notes and fills an array list with each notes
-     * percentage*10000
+     * Ineffective and ugly way to calculate fair probabilities. Takes the
+     * following notes and fills an array list with each notes percentage*10000
      *
      * @return an array list with following notes occurring according to their %
      */
-    public ArrayList<String> toProbabilities() {
+    public ArrayList<String> toProbabilities(String keyToRemove) {
         Set<String> keySet = following.keySet();
         ArrayList<String> probList = new ArrayList<>();
         for (String key : keySet) {
-            double value = (float) following.get(key) / total;
-            value *= 10000;
-            while (value > 0) {
-                probList.add(key);
-                value--;
+            if (!key.equals(keyToRemove)) {
+                double value = (float) following.get(key) / total;
+                value *= 10000;
+                while (value > 0) {
+                    probList.add(key);
+                    value--;
+                }
             }
         }
         return probList;
