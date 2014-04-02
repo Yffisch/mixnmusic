@@ -47,6 +47,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         minorRadioButton = new javax.swing.JRadioButton();
         majorRadioButton = new javax.swing.JRadioButton();
         generateButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,11 +94,11 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             }
         });
 
-        signatureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        signatureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "4/4", "2/2", "2/4", "3/4", "3/8", "6/8", "9/8", "12/8" }));
 
-        keyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        keyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C", "D", "E", "F", "G", "A", "B", "C#", "Bb", "Eb", "F#", "Ab" }));
 
-        lengthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lengthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1/2", "1/4", "1/8", "1/16" }));
 
         minorRadioButton.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup1.add(minorRadioButton);
@@ -115,6 +116,9 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Takt, E D D E");
+        jLabel1.setToolTipText("");
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
@@ -131,14 +135,17 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addComponent(minorRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(majorRadioButton))
-                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(majorRadioButton)))
                 .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generatingPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -159,7 +166,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(signatureLabel)
-                    .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(keyLabel)
@@ -274,6 +282,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JPanel generatingPanel;
     private javax.swing.JComboBox genreComboBox;
     private javax.swing.JLabel genreLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox keyComboBox;
     private javax.swing.JLabel keyLabel;
     private javax.swing.JComboBox lengthComboBox;
