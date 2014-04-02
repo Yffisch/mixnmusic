@@ -25,17 +25,17 @@ public class MelodyLoader {
 
     }
 
-    public void getNoteListVisible(){
-                    
+    public String getNoteListVisible() {
+        StringBuilder sb = new StringBuilder();
 
-        for(Note n : noteList){
-              System.out.println(n.getNote());
+        for (Note n : noteList) {
+            sb.append(n.getNote());
 
         }
-        
+        return sb.toString();
+        ///System.out.println(sb);
     }
-    
-    
+
     public String LoadMelody() throws FileNotFoundException, IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/hey_jude.abc"))) {
             StringBuilder sb = new StringBuilder();
@@ -60,8 +60,8 @@ public class MelodyLoader {
 
             }
 
-            ///////////////////////
-             System.out.println(noteList.size());
+           
+            System.out.println(noteList.size());
             return fullString;
 
         }
