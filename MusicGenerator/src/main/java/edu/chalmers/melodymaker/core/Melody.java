@@ -12,5 +12,28 @@ package edu.chalmers.melodymaker.core;
  */
 public class Melody {
     
-    public String genre, titel, noteLegnth, signature;
+    public String genre, title, noteLegnth, signature;
+    
+    public void Melody(String g, String t, String n, String s){
+        genre = g;
+        title = t;
+        noteLegnth = n;
+        signature = s;
+    }
+    
+    public String getGenre(){
+        return genre;
+    }
+    
+    public String getTitle(){
+        return title;
+    }
+    
+    public String getNoteLegnth(){
+        return noteLegnth;
+    }
+    
+    public String getSignature(){
+        return signature;
+    }
 }
