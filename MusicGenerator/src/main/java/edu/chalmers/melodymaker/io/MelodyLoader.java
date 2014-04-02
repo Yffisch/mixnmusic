@@ -16,7 +16,11 @@ import java.io.IOException;
  */
 public class MelodyLoader {
 
-    public MelodyLoader() throws FileNotFoundException, IOException {
+    public MelodyLoader() {
+
+    }
+
+    public String LoadMelody() throws FileNotFoundException, IOException {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/hey_jude.abc"))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
@@ -26,9 +30,16 @@ public class MelodyLoader {
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            String everything = sb.toString();
-                    System.out.println(everything);
+            String fullString = sb.toString();
+            //Ska vara i annan kod
+            String[] parts = fullString.split("-");
+            String topPart = parts[0];
+            String botPart = parts[1];
+            ///////////////////////
+           // System.out.println(botPart);
+            return fullString;
 
         }
+
     }
 }
