@@ -29,6 +29,16 @@ public class MelodyGenerator {
         ArrayList<Melody> melodies = loadABC(genre, length, signature);
         learnABC(melodies);
     }
+    
+    /**
+     * For testing purpose
+     */
+    public MelodyGenerator(){
+        MAX = 100;
+        MIN = 25;
+        ORDER = 4;
+        initTables();
+    }
 
     /**
      * Initiate the HashMaps
@@ -46,8 +56,8 @@ public class MelodyGenerator {
      * @param signature
      * @return
      */
-    private ArrayList<Melody> loadABC(String genre, String length, String signature) {
-        return MelodyLoadeäör.load(genre, length, signature);
+private ArrayList<Melody> loadABC(String genre, String length, String signature) {
+        return MelodyLoader.load(genre, length, signature);
     }
 
     /**
@@ -56,37 +66,41 @@ public class MelodyGenerator {
      */
     private void learnABC(ArrayList<Melody> melodies) {
         for (Melody melody : melodies) {
-            setStartTable(melody.getTune());
-            setOrderTable(melody.getTune());
+            setStartTable(melody.getNoteList());
+            setOrderTable(melody.getNoteList());
         }
     }
 
-    private void setStartTable(String tune) {
-        if (tune.length() < ORDER) {
+    private void setStartTable(ArrayList<Note> tune) {       //tune should later on be a list of <Note>
+        if (tune.size() < ORDER) {
             System.err.print("Melody is to short!");
         }
-
-        String start = tune.substring(0, ORDER);
-        String following = tune.substring(0, 1);
-        updateTable(start, following, startTable);
+        String start = "START";
+        ArrayList<Note> startList = (ArrayList<Note>) tune.subList(0, ORDER);
+        StringBuilder intro = new StringBuilder();
+        for (Note note : startList) {
+            intro.append(note.getNote());
+        }
+        updateTable(start, intro.toString(), startTable);
     }
 
-    private void setOrderTable(String tune) {
-        int length = tune.length();
+    private void setOrderTable(ArrayList<Note> tune) {
+        int length = tune.size();
         int i = ORDER;
-        String current = tune.substring(0, i);
+        ArrayList<Note> currentNotes = (ArrayList<Note>) tune.subList(0, i);
+        StringBuilder current;
         String following;
 
         while (i < length) {
-            following = tune.substring(i, i + 1);
-            updateTable(current, following, markovTable);
+            current = new StringBuilder();
+            following = tune.subList(i, i + 1).get(0).getNote();
+            for (Note note : currentNotes) {
+                current.append(note.getNote());
+            }
+            updateTable(current.toString(), following, markovTable);
             i++;
             // Update the string
-            if (ORDER == 1) {
-                current = following;
-            } else {
-                current = current.substring(1, ORDER) + following;
-            }
+            currentNotes = (ArrayList<Note>) tune.subList(i-ORDER, i);
         }
     }
 
@@ -108,5 +122,5 @@ public class MelodyGenerator {
         }
     }
 
- 
+   
 }
