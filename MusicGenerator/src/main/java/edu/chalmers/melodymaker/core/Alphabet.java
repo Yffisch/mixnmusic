@@ -11,7 +11,9 @@ package edu.chalmers.melodymaker.core;
  */
 public class Alphabet {
 
-    static String[] noteAlphabet = {"c", "d", "e", "f", "g", "a", "b", "C", "D", "E", "F", "G", "A", "B", "h", "H"};
+    static String[] noteAlphabet = {"c/2", "d/2", "e/2", "f/2", "g/2", "a/2", "b/2", "C/2", "D/2", "E/2", "F/2", "G/2", "A/2", "B/2", "h/2", "H/2",
+                                     "c2", "d2", "e2", "f2", "g2", "a2", "b2", "C2", "D2", "E2", "F2", "G2", "A2", "B2", "h2", "H2",
+                                     "c", "d", "e", "f", "g", "a", "b", "C", "D", "E", "F", "G", "A", "B", "h", "H"};
 
     public Alphabet() {
 
