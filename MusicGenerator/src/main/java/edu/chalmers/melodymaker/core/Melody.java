@@ -7,7 +7,7 @@
 package edu.chalmers.melodymaker.core;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -17,15 +17,30 @@ public class Melody {
     
     //Classvariables
     public String genre, title, noteLength, signature;
-    public ArrayList<Note> listNodes = new ArrayList<>();
+    public ArrayList<Note> listNotes = new ArrayList<>();
+    
+    
+    //for test sake
+    public Melody(ArrayList<Note> alN){
+        listNotes = alN;
+    }
     
     //Our Melody-object
-    public void Melody(String g, String t, String n, String s, ArrayList<Note> alN ){
+
+    /**
+     *
+     * @param g
+     * @param t
+     * @param n
+     * @param s
+     * @param alN
+     */
+        public Melody(String g, String t, String n, String s, ArrayList<Note> alN ){
         genre = g;
         title = t;
         noteLength = n;
         signature = s;
-        listNodes = alN;
+        listNotes = alN;
     }
       
     public String getGenre(){
@@ -44,6 +59,6 @@ public class Melody {
         return signature;
     }
     public ArrayList<Note> getNoteList(){
-        return listNodes;
+        return listNotes;
     } 
 }
