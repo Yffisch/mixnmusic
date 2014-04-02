@@ -17,7 +17,7 @@ public class Melody {
     
     //Classvariables
     public String genre, title, noteLength, signature;
-    public ArrayList<Note> listNotes = new ArrayList<>();
+    public ArrayList<Note> listNotes;
     
     
     //for test sake

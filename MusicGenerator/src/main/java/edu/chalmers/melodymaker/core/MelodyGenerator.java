@@ -3,6 +3,7 @@ package edu.chalmers.melodymaker.core;
 import edu.chalmers.melodymaker.io.MelodyLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -25,8 +26,8 @@ public class MelodyGenerator {
         }
         this.ORDER = order;
         initTables();
-        ArrayList<Melody> melodies = loadABC(genre, length, signature);
-        learnABC(melodies);
+   //     ArrayList<Melody> melodies = loadABC(genre, length, signature);
+    //    learnABC(melodies);
     }
 
     /**
@@ -34,8 +35,8 @@ public class MelodyGenerator {
      */
     public MelodyGenerator() {
         MAX = 100;
-        MIN = 25;
-        ORDER = 4;
+        MIN = 5;
+        ORDER = 2;
         initTables();
     }
 
@@ -55,15 +56,16 @@ public class MelodyGenerator {
      * @param signature
      * @return
      */
-    private ArrayList<Melody> loadABC(String genre, String length, String signature) {
-        return MelodyLoader.loadMelody(genre, length, signature);
-    }
+//    private ArrayList<Melody> loadABC(String genre, String length, String signature) {
+ //       return MelodyLoader.loadMelody(genre, length, signature);
+  //  }
 
     /**
      *
      * @param melodies
      */
-    private void learnABC(ArrayList<Melody> melodies) {
+    public void learnABC(ArrayList<Melody> melodies) {
+        System.out.println("Amount of melodies: " + melodies.size());
         for (Melody melody : melodies) {
             setStartTable(melody.getNoteList());
             setOrderTable(melody.getNoteList());
@@ -75,7 +77,7 @@ public class MelodyGenerator {
             System.err.print("Melody is to short!");
         }
         String start = "START";
-        ArrayList<Note> startList = (ArrayList<Note>) tune.subList(0, ORDER);
+        List<Note> startList = tune.subList(0, ORDER);
         StringBuilder intro = new StringBuilder();
         for (Note note : startList) {
             intro.append(note.getNote());
@@ -86,7 +88,7 @@ public class MelodyGenerator {
     private void setOrderTable(ArrayList<Note> tune) {
         int length = tune.size();
         int i = ORDER;
-        ArrayList<Note> currentNotes = (ArrayList<Note>) tune.subList(0, i);
+        List<Note> currentNotes = tune.subList(0, i);
         StringBuilder current;
         String following;
 
@@ -99,7 +101,7 @@ public class MelodyGenerator {
             updateTable(current.toString(), following, markovTable);
             i++;
             // Update the string
-            currentNotes = (ArrayList<Note>) tune.subList(i - ORDER, i);
+            currentNotes = tune.subList(i - ORDER, i);
         }
         current = new StringBuilder();
         for (Note note : currentNotes) {
@@ -136,8 +138,10 @@ public class MelodyGenerator {
         StringBuilder tuneBuilder = new StringBuilder();
         int length = ORDER;
 
+        System.out.println("Starting table: " + startTable.size() + " " + startTable.toString());
+        System.out.println("Markov table: " + markovTable.size() + " " + markovTable.toString());
         MarkovInstance start = startTable.get("START");
-        ArrayList<String> list = start.toProbabilities(null);
+        ArrayList<String> list = start.toProbabilities("RANDOM_WORD");
         int random = (int) Math.random() * list.size();
         String current = list.get(random);
         tuneBuilder.append(current);
@@ -145,17 +149,22 @@ public class MelodyGenerator {
 
         while (true) {
             if (length >= MIN) {
-                keyToRemove = null;
+                keyToRemove = "RANDOM_WORD";
             }
             MarkovInstance history = markovTable.get(current);
             ArrayList<String> nextProb = history.toProbabilities(keyToRemove);
             random = (int) Math.random() * nextProb.size();
-            current = nextProb.get(random);
-            tuneBuilder.append(current);
+            String next = nextProb.get(random);
+            tuneBuilder.append(next);
             length++;
+            if (ORDER == 1)
+                current = next;
+            else
+                current = current.substring(1) + next;
             if (length > MAX) {
                 break;
             }
+            System.out.println(tuneBuilder.toString());
         }
         return tuneBuilder.toString();
     }

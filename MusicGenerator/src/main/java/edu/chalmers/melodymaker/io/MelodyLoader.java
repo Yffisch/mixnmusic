@@ -46,7 +46,7 @@ public class MelodyLoader {
 
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                System.out.println(file.getName());
+                //System.out.println(file.getName());
                 files.add(file);
             }
         }
@@ -69,7 +69,7 @@ public class MelodyLoader {
 // Load melody from file and pick top and bot part
     public String loadMelody(String filename) throws FileNotFoundException, IOException {
         
-        //noteList.clear();
+        noteList.clear();
 
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename))) {
             StringBuilder sb = new StringBuilder();
@@ -92,7 +92,8 @@ public class MelodyLoader {
                     noteList.add(new Note(fullString.charAt(i) + ""));
                 }
             }
-            System.out.println(noteList.size());
+            
+            //System.out.println(noteList.size());
             return fullString;
         }
     }

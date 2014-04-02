@@ -24,15 +24,16 @@ public class MelodyModel {
     
     
     public void makeMelody() throws IOException{
+        
+        MelodyLoader m = new MelodyLoader();
+        m.loadFileList();
         if (!MelodyLoader.files.isEmpty()){
             //String genre, String signature, String key, String length)
             for(File f: MelodyLoader.files){
-                MelodyLoader m = new MelodyLoader();
                 m.loadMelody(f.getName());
                 ArrayList<Note> notes = m.getNoteList();
                 Melody mel = new Melody(notes);
                 melObj.add(mel);
-            
             }
             
         }
