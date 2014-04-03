@@ -35,19 +35,14 @@ public class MelodyModel {
         if (!MelodyLoader.files.isEmpty()) {
             //String genre, String signature, String key, String length)
             for (File f : MelodyLoader.files) {
-                System.out.println(f.getName());
                 m.loadMelody(f.getName());
-                ArrayList<Note> notes = m.getNoteList();
-                Melody mel = new Melody(notes);
+                Melody mel = new Melody(m.getNoteList());
                 melObj.add(mel);
-                for (Melody melody : melObj) {
-                    for (Note note : melody.getNoteList()) {
-                        System.out.print(note.getNote());
-                    }
-                    System.out.println("\nABOVE FROM MELODYLOADER");
-                }
             }
-
+            for (Melody melody : melObj) {
+                System.out.print(melody);
+                System.out.println();
+            }
         }
     }
 

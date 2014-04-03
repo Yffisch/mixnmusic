@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class MelodyLoader {
 
-    public ArrayList<Note> noteList = new ArrayList();
+    public ArrayList<Note> noteList;
     public static ArrayList<File> files = new ArrayList();
     String[] parts;
     String topPart;
@@ -69,7 +69,7 @@ public class MelodyLoader {
 // Load melody from file and pick top and bot part
     public String loadMelody(String filename) throws FileNotFoundException, IOException {
         
-        noteList.clear();
+        noteList = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename))) {
             StringBuilder sb = new StringBuilder();
