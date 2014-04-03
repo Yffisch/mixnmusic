@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.chalmers.melodymaker.core;
+package edu.chalmers.melodymaker.io;
 
-import edu.chalmers.melodymaker.io.MelodyLoader;
+import edu.chalmers.melodymaker.core.MelodyGenerator;
+import edu.chalmers.melodymaker.core.MelodyLibrary;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class MelodyExporter {
 
     //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
     public MelodyExporter(String importFilename, String exportFilename){
-        MelodyModel model = MelodyModel.getInstance();
+        MelodyLibrary model = MelodyLibrary.getInstance();
         model.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
         generator.learnABC(model.getMelodies());

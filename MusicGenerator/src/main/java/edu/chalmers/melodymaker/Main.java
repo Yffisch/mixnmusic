@@ -1,20 +1,20 @@
 package edu.chalmers.melodymaker;
 
-import edu.chalmers.melodymaker.core.MelodyExporter;
+import edu.chalmers.melodymaker.io.MelodyExporter;
 
 /**
  * @author: Kristofer
  *
  */
-public class App {
+public class Main {
 
     MelodyExporter e;
 
     public static void main(String[] args){
-        new App();
+        new Main();
     }
 
-    public App() {
+    public Main() {
     
                                        // Import file, export file
               e = new MelodyExporter("supermario.abc", "huuuu.txt");

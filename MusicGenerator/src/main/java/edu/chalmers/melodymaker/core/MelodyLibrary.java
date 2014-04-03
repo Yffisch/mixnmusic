@@ -14,16 +14,16 @@ import java.util.ArrayList;
  *
  * @author Emma Nyborg
  */
-public class MelodyModel {
+public class MelodyLibrary {
 
     private ArrayList<Melody> melObj;
-    private static final MelodyModel melodyModel = new MelodyModel();
+    private static final MelodyLibrary melodyModel = new MelodyLibrary();
 
-    private MelodyModel() {
+    private MelodyLibrary() {
         melObj = new ArrayList<>();
     }
 
-    public static MelodyModel getInstance() {
+    public static MelodyLibrary getInstance() {
         return melodyModel;
     }
 
