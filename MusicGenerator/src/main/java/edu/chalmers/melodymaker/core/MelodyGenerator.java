@@ -26,7 +26,7 @@ public class MelodyGenerator {
         }
         this.ORDER = order;
         initTables();
-   //     ArrayList<Melody> melodies = loadABC(genre, length, signature);
+        //     ArrayList<Melody> melodies = loadABC(genre, length, signature);
         //    learnABC(melodies);
     }
 
@@ -64,7 +64,7 @@ public class MelodyGenerator {
      * @param melodies
      */
     public void learnABC(ArrayList<Melody> melodies) {
-        
+
         for (Melody melody : melodies) {
             setStartTable(melody.getNoteList());
             setOrderTable(melody.getNoteList());
@@ -127,6 +127,11 @@ public class MelodyGenerator {
         }
     }
 
+    public boolean breaksMusicTheory(String prev, String next) {
+        return prev.charAt(prev.length() - 1) == 'A' && next.equals("A");
+
+    }
+
     /**
      * Returns a generated tune from Markov probabilities
      *
@@ -157,16 +162,25 @@ public class MelodyGenerator {
             if (next.equals(end)) {
                 break;
             }
-            tuneBuilder.append(next);
-            length++;
-            if (ORDER == 1) {
-                current = next;
+            //// ifbreaktheory
+            //Pre, next
+            if (breaksMusicTheory(tuneBuilder.toString(), next) == true) {
+                System.out.println("Music theory doesn't hold");
             } else {
-                current = current.substring(1) + next;
+                System.out.println("Music theory holds");
+
+                tuneBuilder.append(next);
+                length++;
+                if (ORDER == 1) {
+                    current = next;
+                } else {
+                    current = current.substring(1) + next;
+                }
+                if (length > MAX) {
+                    break;
+                }
             }
-            if (length > MAX) {
-                break;
-            }
+
         }
         System.out.println(tuneBuilder.toString());
         return tuneBuilder.toString();
