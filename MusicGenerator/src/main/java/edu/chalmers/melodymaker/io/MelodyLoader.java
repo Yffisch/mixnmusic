@@ -84,13 +84,13 @@ public class MelodyLoader {
             topPart = parts[0];
             botPart = parts[1];
 
-            for (int i = 0; i < fullString.length(); i++) {
-                if (Alphabet.isLetterInAlphabet(fullString.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till
+            for (int i = 0; i < botPart.length(); i++) {
+                if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till
                 {
-                    noteList.add(new Note(fullString.charAt(i) + ""));
+                    noteList.add(new Note(botPart.charAt(i) + ""));
                 }
             }
-            return fullString;
+            return botPart;
         } catch (Exception e) {
             e.printStackTrace();
         }
