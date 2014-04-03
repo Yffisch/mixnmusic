@@ -27,7 +27,7 @@ public class MelodyModel {
         return melodyModel;
     }
 
-    public void makeMelody() throws IOException {
+    public void makeMelody(){
 
         MelodyLoader m = new MelodyLoader();
         m.loadFileList();

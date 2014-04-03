@@ -20,7 +20,7 @@ public class MelodyExporter {
     MelodyLoader m = new MelodyLoader();
 
     //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
-    public MelodyExporter(String importFilename, String exportFilename) throws IOException {
+    public MelodyExporter(String importFilename, String exportFilename){
         MelodyModel model = MelodyModel.getInstance();
         model.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
@@ -28,10 +28,10 @@ public class MelodyExporter {
         String output = generator.generateTune();
         
         try {
-            try (BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/exportfiles/" + exportFilename))) {
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/exportfiles/" + exportFilename));
                 //out.write(m.GetTopPart());
                 out.write(output);
-            }
+            
         } catch (IOException e) {
         }
     }

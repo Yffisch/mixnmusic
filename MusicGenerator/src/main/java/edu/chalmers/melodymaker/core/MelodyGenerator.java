@@ -165,9 +165,9 @@ public class MelodyGenerator {
             //// ifbreaktheory
             //Pre, next
             if (breaksMusicTheory(tuneBuilder.toString(), next) == true) {
-                System.out.println("Music theory doesn't hold");
+               // System.out.println("Music theory doesn't hold");
             } else {
-                System.out.println("Music theory holds");
+                //System.out.println("Music theory holds");
 
                 tuneBuilder.append(next);
                 length++;

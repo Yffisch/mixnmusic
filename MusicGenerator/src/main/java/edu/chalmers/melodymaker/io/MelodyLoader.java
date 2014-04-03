@@ -67,11 +67,12 @@ public class MelodyLoader {
         return sb.toString();
     }
 // Load melody from file and pick top and bot part
-    public String loadMelody(String filename) throws FileNotFoundException, IOException {
+    public String loadMelody(String filename){
         
         noteList = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename))) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename));
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -84,7 +85,6 @@ public class MelodyLoader {
             parts = fullString.split("-");
             topPart = parts[0];
             botPart = parts[1];
-           
 
             for (int i = 0; i < fullString.length(); i++) {
                 if (Alphabet.isLetterInAlphabet(fullString.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till
@@ -92,9 +92,10 @@ public class MelodyLoader {
                     noteList.add(new Note(fullString.charAt(i) + ""));
                 }
             }
-            
-            //System.out.println(noteList.size());
             return fullString;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;    //null is not good to return
     }
 }
