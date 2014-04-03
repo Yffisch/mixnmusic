@@ -21,7 +21,7 @@ public class MelodyExporter {
 
     //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
     public MelodyExporter(String importFilename, String exportFilename) throws IOException {
-        MelodyModel model = new MelodyModel();
+        MelodyModel model = MelodyModel.getInstance();
         model.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
         generator.learnABC(model.getMelodies());

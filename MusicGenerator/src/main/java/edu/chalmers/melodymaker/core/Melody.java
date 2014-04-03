@@ -17,7 +17,7 @@ public class Melody {
     
     //Classvariables
     public String genre, title, noteLength, signature;
-    public ArrayList<Note> listNotes;
+    private ArrayList<Note> listNotes;
     
     
     //for test sake
@@ -61,4 +61,14 @@ public class Melody {
     public ArrayList<Note> getNoteList(){
         return listNotes;
     } 
+    
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Note note : listNotes){
+            sb.append(note.getNote());
+        }
+        return sb.toString();
+    }
 }
