@@ -126,7 +126,7 @@ public class MelodyGenerator {
             existing.updateMap(next);
         }
     }
-
+// Maybe make an own class of this that you can hårdkoda in?
     public boolean breaksMusicTheory(String prev, String next) {
         // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
         //does break theory
