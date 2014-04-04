@@ -126,39 +126,7 @@ public class MelodyGenerator {
             existing.updateMap(next);
         }
     }
-// Maybe make an own class of this that you can hårdkoda in?
-    public boolean breaksMusicTheory(String prev, String next) {
-        // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
-        //does break theory
-        if(prev.charAt(prev.length() - 1) == 'C' && next.equals("C")){
-            return true;
-        }
-        //does break theory
-        else if(prev.charAt(prev.length() - 1) == 'D' && next.equals("D")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == 'E' && next.equals("E")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == 'F' && next.equals("F")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == 'G' && next.equals("G")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == 'A' && next.equals("A")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == 'B' && next.equals("B")){
-            return true;
-        }
-         else if(prev.charAt(prev.length() - 1) == '2' && next.equals("2")){
-            return true;
-        }
-        
-        return false;
 
-    }
 
     /**
      * Returns a generated tune from Markov probabilities
@@ -190,12 +158,12 @@ public class MelodyGenerator {
             if (next.equals(end)) {
                 break;
             }
-            //// ifbreaktheory
+            //// If it breaks our "music theory" or not
             //Pre, next
-            if (breaksMusicTheory(tuneBuilder.toString(), next) == true) {
-               // System.out.println("Music theory doesn't hold");
+            if (MelodyTheory.breaksMusicTheory(tuneBuilder.toString(), next) == true) {
+                System.out.println("Music theory doesn't hold");
             } else {
-                //System.out.println("Music theory holds");
+                System.out.println("Music theory holds");
 
                 tuneBuilder.append(next);
                 length++;
