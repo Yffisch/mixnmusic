@@ -34,10 +34,8 @@ public class MelodyGenerator {
      * For testing purpose
      */
     public MelodyGenerator() {
-        MAX = 100;
-        MIN = 25;
-        ORDER = 2;
-        initTables();
+        //ORDER,MIN,MAX,Genre,Length,Signature
+        this(2, 25, 100, null, null, null);
     }
 
     /**
@@ -127,7 +125,6 @@ public class MelodyGenerator {
         }
     }
 
-
     /**
      * Returns a generated tune from Markov probabilities
      *
@@ -135,7 +132,8 @@ public class MelodyGenerator {
      */
     public String generateTune() {
 
-        StringBuilder tuneBuilder = new StringBuilder();
+        //StringBuilder tuneBuilder = new StringBuilder();
+        ArrayList<String> tuneBuilder = new ArrayList<>();
         int length = ORDER;
 
         System.out.println("Starting table: " + startTable.size() + " " + startTable.toString());
@@ -144,7 +142,7 @@ public class MelodyGenerator {
         System.out.println(list.size() + " STARTLIST");
         int random = new Random().nextInt(list.size());
         String current = list.get(random);
-        tuneBuilder.append(current);
+        tuneBuilder.add(current);
         String keyToRemove = end;
 
         while (true) {
@@ -160,12 +158,12 @@ public class MelodyGenerator {
             }
             //// If it breaks our "music theory" or not
             //Pre, next
-            if (MelodyTheory.breaksMusicTheory(tuneBuilder.toString(), next) == true) {
+            if (MelodyTheory.breaksMusicTheory(tuneBuilder.get(tuneBuilder.size() - 1), next)) {
                 System.out.println("Music theory doesn't hold");
             } else {
                 System.out.println("Music theory holds");
 
-                tuneBuilder.append(next);
+                tuneBuilder.add(next);
                 length++;
                 if (ORDER == 1) {
                     current = next;
@@ -178,7 +176,12 @@ public class MelodyGenerator {
             }
 
         }
-        System.out.println(tuneBuilder.toString());
-        return tuneBuilder.toString();
+        StringBuilder sb = new StringBuilder();
+        for (String s : tuneBuilder) {
+            sb.append(s);
+        }
+                System.out.println(sb.toString());
+
+        return sb.toString();
     }
 }

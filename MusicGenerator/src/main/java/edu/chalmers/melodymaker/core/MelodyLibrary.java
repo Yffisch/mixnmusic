@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public class MelodyLibrary {
 
-    private ArrayList<Melody> melObj;
+    private final ArrayList<Melody> melodies;
     private static final MelodyLibrary melodyModel = new MelodyLibrary();
 
     private MelodyLibrary() {
-        melObj = new ArrayList<>();
+        melodies = new ArrayList<>();
     }
 
     public static MelodyLibrary getInstance() {
@@ -28,18 +28,17 @@ public class MelodyLibrary {
     }
 
     public void makeMelody(){
-
-        MelodyLoader m = new MelodyLoader();
-        m.loadFileList();
+        MelodyLoader melodyLoader = new MelodyLoader();
+        melodyLoader.loadFileList();
 
         if (!MelodyLoader.files.isEmpty()) {
             //String genre, String signature, String key, String length)
-            for (File f : MelodyLoader.files) {
-                m.loadMelody(f.getName());
-                Melody mel = new Melody(m.getNoteList());
-                melObj.add(mel);
+            for (File file : MelodyLoader.files) {
+                melodyLoader.loadMelody(file.getName());
+                Melody melody = new Melody(melodyLoader.getNoteList());
+                melodies.add(melody);
             }
-            for (Melody melody : melObj) {
+            for (Melody melody : melodies) {
                 System.out.print(melody);
                 System.out.println();
             }
@@ -47,7 +46,7 @@ public class MelodyLibrary {
     }
 
     public ArrayList<Melody> getMelodies() {
-        return melObj;
+        return melodies;
     }
 
 }

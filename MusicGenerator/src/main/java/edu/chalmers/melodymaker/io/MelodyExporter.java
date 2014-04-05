@@ -17,14 +17,14 @@ import java.io.IOException;
  */
 public class MelodyExporter {
 
-    MelodyLoader m = new MelodyLoader();
+    MelodyLoader melodyLoader = new MelodyLoader();
 
     //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
     public MelodyExporter(String importFilename, String exportFilename){
-        MelodyLibrary model = MelodyLibrary.getInstance();
-        model.makeMelody();
+        MelodyLibrary melodyLibrary = MelodyLibrary.getInstance();
+        melodyLibrary.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
-        generator.learnABC(model.getMelodies());
+        generator.learnABC(melodyLibrary.getMelodies());
         String output = generator.generateTune();
         
         try {

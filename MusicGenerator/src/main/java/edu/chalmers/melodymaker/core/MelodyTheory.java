@@ -12,25 +12,26 @@ package edu.chalmers.melodymaker.core;
 public class MelodyTheory {
 
     // Maybe make an own class of this that you can hårdkoda in?
-    public static boolean breaksMusicTheory(String prev, String next) {
+    public static boolean breaksMusicTheory(String currentNote, String next) {
         // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
         //does break theory
-        if (prev.charAt(prev.length() - 1) == 'C' && next.equals("C")) {
+        
+        if (currentNote.equals("C/2") && next.equals("C/2")) {
             return true;
         } //does break theory
-        else if (prev.charAt(prev.length() - 1) == 'D' && next.equals("D")) {
+        else if (currentNote.equals("D") && next.equals("D")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == 'E' && next.equals("E")) {
+        } else if (currentNote.equals("E") && next.equals("E")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == 'F' && next.equals("F")) {
+        } else if (currentNote.equals("F") && next.equals("F")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == 'G' && next.equals("G")) {
+        } else if (currentNote.equals("G") && next.equals("G")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == 'A' && next.equals("A")) {
+        } else if (currentNote.equals("A") && next.equals("A")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == 'B' && next.equals("B")) {
+        } else if (currentNote.equals("B") && next.equals("B")) {
             return true;
-        } else if (prev.charAt(prev.length() - 1) == '2' && next.equals("2")) {
+        } else if (currentNote.equals("2") && next.equals("2")) {
             return true;
         }
 
