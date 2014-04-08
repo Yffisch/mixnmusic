@@ -19,6 +19,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
      */
     public MelodyMakerUI() {
         initComponents();
+     //   genreComboBox.setModel(new javax.swing.DefaultComboBoxModel(MelodyController));
     }
 
     /**
@@ -87,6 +88,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         titleTextField.setText("Title of your melody");
 
+        genreComboBox.setEditable(true);
         genreComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         genreComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +227,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
-      //  MelodyController.
+      
     }//GEN-LAST:event_genreComboBoxActionPerformed
 /**
  *

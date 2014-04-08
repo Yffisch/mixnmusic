@@ -1,6 +1,5 @@
 package edu.chalmers.melodymaker;
 
-import static edu.chalmers.melodymaker.Main.main;
 import edu.chalmers.melodymaker.gui.MelodyMakerUI;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 
@@ -16,14 +15,17 @@ public class Main {
     public static void main(String[] args){
         Main main = new Main();   
     }
-
+/**
+ *
+ * @author Emma
+ */
     public Main() {
     
                                        // Import file, export file
               e = new MelodyExporter("supermario.abc", "huuuu.txt");
-              MelodyMakerUI kalle = new MelodyMakerUI();
+              MelodyMakerUI gui = new MelodyMakerUI();
         String[] args = {};
-              kalle.main(args);
+              gui.main(args);
 
        
     }
