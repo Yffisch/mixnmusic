@@ -36,7 +36,7 @@ public class MelodyLoader {
     public String getTopPart() {
         return topPart;
     }
-    
+
 // Shows list of all files in the folder
     public void loadFileList() {
         File folder = new File("src/main/resources/abc/");
@@ -48,14 +48,15 @@ public class MelodyLoader {
                 files.add(file);
             }
         }
-                        //System.out.println(files.size());
+        //System.out.println(files.size());
 
     }
 // Get all the filtered notes in the note list to a string
-    public ArrayList<Note> getNoteList(){
+
+    public ArrayList<Note> getNoteList() {
         return noteList;
     }
-    
+
     public String getNoteListVisible() {
         StringBuilder sb = new StringBuilder();
 
@@ -65,8 +66,9 @@ public class MelodyLoader {
         return sb.toString();
     }
 // Load melody from file and pick top and bot part
-    public String loadMelody(String filename){
-        
+
+    public String loadMelody(String filename) {
+
         noteList = new ArrayList<>();
 
         try {
@@ -83,12 +85,31 @@ public class MelodyLoader {
             parts = fullString.split("-");
             topPart = parts[0];
             botPart = parts[1];
+            //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
 
-            for (int i = 0; i < botPart.length(); i++) {
-                if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") == true) //Måste göra så att eventuellt tecken efteråt läggs till
-                {
-                    noteList.add(new Note(botPart.charAt(i) + ""));
+            for (int i = 0; i < botPart.length()-2; i++) {
+                String s;
+                String s2;
+                if (!Alphabet.isLetterInAlphabet(botPart.charAt(i + 1) + "")) {
+                    s = (botPart.charAt(i + 1) + "");
+                } else {
+                    s = "";
                 }
+
+                if (!Alphabet.isLetterInAlphabet(botPart.charAt(i + 2) + "")) {
+                    s2 = (botPart.charAt(i + 2) + "");
+                } else {
+                    s2 = "";
+                }
+
+                if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + s + s2 +"") == true) //Måste göra så att eventuellt tecken efteråt läggs till
+                {
+                    noteList.add(new Note(botPart.charAt(i)+ s + s2 + ""));
+                }
+            }
+            for(Note n : noteList){
+                            System.out.println("Not: " + n.getNote());
+
             }
             return botPart;
         } catch (Exception e) {

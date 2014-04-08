@@ -35,7 +35,7 @@ public class MelodyGenerator {
      */
     public MelodyGenerator() {
         //ORDER,MIN,MAX,Genre,Length,Signature
-        this(2, 25, 100, null, null, null);
+        this(1, 25, 100, null, null, null);
     }
 
     /**
@@ -164,7 +164,7 @@ public class MelodyGenerator {
             if (MelodyTheory.breaksMusicTheory(noteList.get(noteList.size() - 1), next)) {
                 System.out.println("Music theory doesn't hold");
             } else {
-                System.out.println("Music theory holds");
+               System.out.println("Music theory holds");
 
                 noteList.add(next);
                 length++;
@@ -178,6 +178,8 @@ public class MelodyGenerator {
                 }
             }
         }
+        System.out.println(noteList);
+       // return MelodyTheory.applyMusicTheory(noteList);
         return noteList;
     }
 }
