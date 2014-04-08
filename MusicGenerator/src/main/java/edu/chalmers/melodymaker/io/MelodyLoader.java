@@ -10,6 +10,7 @@ import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,6 @@ public class MelodyLoader {
     String fullString;
 
     public MelodyLoader() {
-
     }
 
     public String getBotPart() {
@@ -70,10 +70,10 @@ public class MelodyLoader {
     public String loadMelody(String filename) {
 
         noteList = new ArrayList<>();
-
+        StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/abc/" + filename));
-            StringBuilder sb = new StringBuilder();
+
             String line = br.readLine();
 
             while (line != null) {
@@ -81,40 +81,37 @@ public class MelodyLoader {
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            fullString = sb.toString();
-            parts = fullString.split("-");
-            topPart = parts[0];
-            botPart = parts[1];
-            //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
-
-            for (int i = 0; i < botPart.length()-2; i++) {
-                String s;
-                String s2;
-                if (!Alphabet.isLetterInAlphabet(botPart.charAt(i + 1) + "")) {
-                    s = (botPart.charAt(i + 1) + "");
-                } else {
-                    s = "";
-                }
-
-                if (!Alphabet.isLetterInAlphabet(botPart.charAt(i + 2) + "")) {
-                    s2 = (botPart.charAt(i + 2) + "");
-                } else {
-                    s2 = "";
-                }
-
-                if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + s + s2 +"") == true) //Måste göra så att eventuellt tecken efteråt läggs till
-                {
-                    noteList.add(new Note(botPart.charAt(i)+ s + s2 + ""));
-                }
-            }
-            for(Note n : noteList){
-                            System.out.println("Not: " + n.getNote());
-
-            }
-            return botPart;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
-        return null;    //null is not good to return
+        fullString = sb.toString();
+        parts = fullString.split("-");
+        topPart = parts[0];
+        botPart = parts[1];
+        //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
+
+         System.out.println("\nLOADING FILE... " + filename);
+         System.out.println("\nNOTES IN ABC...\n" + botPart);
+        
+        for (int i = 0; i < botPart.length() - 2; i++) {
+            String note;
+            if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 3))) {
+                 note = botPart.substring(i, i + 3);
+                 noteList.add(new Note(note));
+            } else if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 2))) {
+                 note = botPart.substring(i, i + 2);
+                 noteList.add(new Note(note));
+            } else if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 1))) {
+                 note = botPart.substring(i, i + 1);
+                 noteList.add(new Note(note));
+            }
+        }
+       
+        System.out.println("PARSING NOTES...\n");
+        
+        for (Note n : noteList) {
+            System.out.print(n.getNote() + " ");
+        }
+        System.out.println("\n________________________________________________________________________________________________________________________________________________________________");
+        return botPart;
     }
 }

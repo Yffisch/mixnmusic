@@ -136,10 +136,8 @@ public class MelodyGenerator {
         ArrayList<String> noteList = new ArrayList<>();
         int length = ORDER;
 
-        System.out.println("Starting table: " + startTable.size() + " " + startTable.toString());
         MarkovInstance start = startTable.get("START");
         ArrayList<String> list = start.toProbabilities("RANDOM_WORD");
-        System.out.println(list.size() + " STARTLIST");
         int random = new Random().nextInt(list.size());
         String current = list.get(random);
         noteList.add(current);
@@ -156,30 +154,32 @@ public class MelodyGenerator {
             if (next.equals(end)) {
                 break;
             }
-            if (next.equals("2")) {
-                System.out.println("Det finns C/2");
-            }
             //// If it breaks our "music theory" or not
             //Pre, next
-            if (MelodyTheory.breaksMusicTheory(noteList.get(noteList.size() - 1), next)) {
-                System.out.println("Music theory doesn't hold");
-            } else {
-               System.out.println("Music theory holds");
+            // if (MelodyTheory.breaksMusicTheory(noteList.get(noteList.size() - 1), next)) {
+            //System.out.println("Music theory doesn't hold");
+            // } else {
+            //System.out.println("Music theory holds");
 
-                noteList.add(next);
-                length++;
-                if (ORDER == 1) {
-                    current = next;
-                } else {
-                    current = current.substring(1) + next;
-                }
-                if (length > MAX) {
-                    break;
-                }
+            noteList.add(next);
+            length++;
+            if (ORDER == 1) {
+                current = next;
+            } else {
+                current = current.substring(1) + next;
             }
+            if (length > MAX) {
+                break;
+            }
+            //     }
         }
-        System.out.println(noteList);
-       // return MelodyTheory.applyMusicTheory(noteList);
-        return noteList;
+        
+        System.out.println("\nGENERATED NOTES BEFORE ANY MUSIC THEORY...");
+        for (String note : noteList){
+            System.out.print(note);
+        }
+        System.out.println();
+        return MelodyTheory.applyMusicTheory(noteList);
+        //   return noteList;
     }
 }

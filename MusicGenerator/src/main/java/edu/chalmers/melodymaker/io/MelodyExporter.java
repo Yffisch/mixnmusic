@@ -26,6 +26,7 @@ public class MelodyExporter {
         melodyLibrary.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
         generator.learnABC(melodyLibrary.getMelodies());
+        System.out.println("GENERATING TUNE...");
         ArrayList<String> output = generator.generateTune();
         
         try {
@@ -35,6 +36,7 @@ public class MelodyExporter {
             for (String string : output) {
                 sb.append(string);
             }
+            System.out.println("\nGENERATED TUNE AFTER MUSIC THEORY HAS BEEN APPLIED...");
                 out.write(sb.toString());
                 System.out.println(sb.toString());
         } catch (IOException e) {

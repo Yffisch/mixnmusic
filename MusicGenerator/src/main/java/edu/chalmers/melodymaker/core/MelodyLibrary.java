@@ -39,8 +39,8 @@ public class MelodyLibrary {
                 melodies.add(melody);
             }
             for (Melody melody : melodies) {
-                System.out.print(melody);
-                System.out.println();
+             //   System.out.print(melody);
+              //  System.out.println();
             }
         }
     }
