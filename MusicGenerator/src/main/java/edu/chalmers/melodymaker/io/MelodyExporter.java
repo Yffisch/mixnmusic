@@ -10,6 +10,7 @@ import edu.chalmers.melodymaker.core.MelodyLibrary;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,13 +26,17 @@ public class MelodyExporter {
         melodyLibrary.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
         generator.learnABC(melodyLibrary.getMelodies());
-        String output = generator.generateTune();
+        ArrayList<String> output = generator.generateTune();
         
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/exportfiles/" + exportFilename));
                 //out.write(m.GetTopPart());
-                out.write(output);
-            
+            StringBuilder sb = new StringBuilder();
+            for (String string : output) {
+                sb.append(string);
+            }
+                out.write(sb.toString());
+                System.out.println(sb.toString());
         } catch (IOException e) {
         }
     }

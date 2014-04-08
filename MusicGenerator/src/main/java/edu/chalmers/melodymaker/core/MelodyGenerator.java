@@ -130,10 +130,10 @@ public class MelodyGenerator {
      *
      * @return a Markov chain presented as a String
      */
-    public String generateTune() {
+    public ArrayList<String> generateTune() {
 
-        //StringBuilder tuneBuilder = new StringBuilder();
-        ArrayList<String> tuneBuilder = new ArrayList<>();
+        //StringBuilder noteList = new StringBuilder();
+        ArrayList<String> noteList = new ArrayList<>();
         int length = ORDER;
 
         System.out.println("Starting table: " + startTable.size() + " " + startTable.toString());
@@ -142,7 +142,7 @@ public class MelodyGenerator {
         System.out.println(list.size() + " STARTLIST");
         int random = new Random().nextInt(list.size());
         String current = list.get(random);
-        tuneBuilder.add(current);
+        noteList.add(current);
         String keyToRemove = end;
 
         while (true) {
@@ -156,14 +156,17 @@ public class MelodyGenerator {
             if (next.equals(end)) {
                 break;
             }
+            if (next.equals("2")) {
+                System.out.println("Det finns C/2");
+            }
             //// If it breaks our "music theory" or not
             //Pre, next
-            if (MelodyTheory.breaksMusicTheory(tuneBuilder.get(tuneBuilder.size() - 1), next)) {
+            if (MelodyTheory.breaksMusicTheory(noteList.get(noteList.size() - 1), next)) {
                 System.out.println("Music theory doesn't hold");
             } else {
                 System.out.println("Music theory holds");
 
-                tuneBuilder.add(next);
+                noteList.add(next);
                 length++;
                 if (ORDER == 1) {
                     current = next;
@@ -174,14 +177,7 @@ public class MelodyGenerator {
                     break;
                 }
             }
-
         }
-        StringBuilder sb = new StringBuilder();
-        for (String s : tuneBuilder) {
-            sb.append(s);
-        }
-                System.out.println(sb.toString());
-
-        return sb.toString();
+        return noteList;
     }
 }
