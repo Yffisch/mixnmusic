@@ -11,7 +11,7 @@ public class Main {
     MelodyExporter e;
 
     public static void main(String[] args){
-        new Main();
+        Main main = new Main();   
     }
 
     public Main() {
