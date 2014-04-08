@@ -225,6 +225,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
+      //  MelodyController.
     }//GEN-LAST:event_genreComboBoxActionPerformed
 /**
  *
