@@ -117,33 +117,31 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lengthComboBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="RuleButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="genreComboBox" min="-2" max="-2" attributes="0"/>
-                              <Component id="titleTextField" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="minorRadioButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="majorRadioButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="genreComboBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="titleTextField" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="minorRadioButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="majorRadioButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="signatureComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="keyComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="signatureComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="keyComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel1" max="32767" attributes="0"/>
-                                      <Component id="rulePre" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ruleNext" max="32767" attributes="0"/>
-                                  </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <Component id="rulePre" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel3" max="32767" attributes="0"/>
+                                  <Component id="ruleNext" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -381,6 +379,7 @@
             <Component class="javax.swing.JButton" name="generateButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Generate"/>
+                <Property name="toolTipText" type="java.lang.String" value="Generate a new melody with given attributes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generateButtonActionPerformed"/>
@@ -388,13 +387,14 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Never have:"/>
+                <Property name="text" type="java.lang.String" value="Never:"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Play your song"/>
+                <Property name="toolTipText" type="java.lang.String" value="Play generated melody with give attributes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -403,6 +403,7 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save your song?"/>
+                <Property name="toolTipText" type="java.lang.String" value="Save your melody"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -431,6 +432,7 @@
             <Component class="javax.swing.JButton" name="RuleButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Rule"/>
+                <Property name="toolTipText" type="java.lang.String" value="Add specific rules that are not allowed in your song. I.e. &quot;C must never be followed by a _C&quot;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RuleButtonActionPerformed"/>

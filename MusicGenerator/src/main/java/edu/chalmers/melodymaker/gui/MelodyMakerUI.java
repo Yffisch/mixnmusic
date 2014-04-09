@@ -6,10 +6,12 @@
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.core.Alphabet;
 import edu.chalmers.melodymaker.core.MIDIplayer;
+import edu.chalmers.melodymaker.core.MelodyTheory;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
-
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,16 +19,7 @@ import java.util.ArrayList;
  */
 public class MelodyMakerUI extends javax.swing.JFrame {
 
-    public static ArrayList<String> preRuleList = new ArrayList<>();
-    public static ArrayList<String> nextRuleList = new ArrayList<>();
-
-    public static ArrayList<String> getPreRuleList() {
-        return preRuleList;
-    }
-
-    public static ArrayList<String> getNextRuleList() {
-        return nextRuleList;
-    }
+    static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
 
     /**
      * Creates new form MelodyMakerUI
@@ -139,16 +132,18 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         majorRadioButton.setText("Major");
 
         generateButton.setText("Generate");
+        generateButton.setToolTipText("Generate a new melody with given attributes");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generateButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Never have:");
+        jLabel1.setText("Never:");
         jLabel1.setToolTipText("");
 
         jButton1.setText("Play your song");
+        jButton1.setToolTipText("Play generated melody with give attributes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -156,6 +151,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Save your song?");
+        jButton2.setToolTipText("Save your melody");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("MusicGenerator");
@@ -175,6 +171,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         });
 
         RuleButton.setText("Add Rule");
+        RuleButton.setToolTipText("Add specific rules that are not allowed in your song. I.e. \"C must never be followed by a _C\"");
         RuleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RuleButtonActionPerformed(evt);
@@ -219,28 +216,27 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
+                        .addGap(18, 18, 18)
                         .addComponent(RuleButton))
-                    .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(generatingPanelLayout.createSequentialGroup()
-                            .addComponent(minorRadioButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(majorRadioButton))
-                        .addComponent(jLabel2)
-                        .addGroup(generatingPanelLayout.createSequentialGroup()
-                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rulePre))
-                            .addGap(18, 18, 18)
-                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(ruleNext)))))
+                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addComponent(minorRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(majorRadioButton))
+                    .addComponent(jLabel2)
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rulePre))
+                        .addGap(18, 18, 18)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ruleNext))))
                 .addGap(23, 23, 23))
         );
         generatingPanelLayout.setVerticalGroup(
@@ -349,8 +345,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
         new MelodyExporter("rocky.abc", "huuuuh.abc");
-        nextRuleList.clear();
-        preRuleList.clear();
+        MelodyTheory.nextRuleList.clear();
+        MelodyTheory.preRuleList.clear();
 
     }//GEN-LAST:event_generateButtonActionPerformed
 
@@ -368,22 +364,24 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private void RuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RuleButtonActionPerformed
 
         ruleArea.removeAll();
-
-        preRuleList.add(rulePre.getText());
-        nextRuleList.add(ruleNext.getText());
+        if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
+            MelodyTheory.preRuleList.add(rulePre.getText());
+        }
+        if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
+            MelodyTheory.nextRuleList.add(ruleNext.getText());
+        }
 
         //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
-        for (int i = 0; i < nextRuleList.size(); i++) {
-            System.out.println(i + 1 + " statement:" + " You have added pre: [" + preRuleList.get(i) + "] and you have added next: [" + nextRuleList.get(i) + "]");
-
-           
-
+        for (int i = 0; i < MelodyTheory.nextRuleList.size(); i++) {
+            System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyTheory.preRuleList.get(i) + "] and you have added next: [" + MelodyTheory.nextRuleList.get(i) + "]");
         }
-         ruleArea.append("Can not have: " + rulePre.getText() + " and " + ruleNext.getText() + " together!\n");
-
-        System.out.println("______________________________________________________________________________");
-
-
+        if (Alphabet.isLetterInAlphabet(rulePre.getText()) && Alphabet.isLetterInAlphabet(ruleNext.getText())) {
+            ruleArea.append("Can't have: " + rulePre.getText() + " and " + ruleNext.getText() + " together!\n");
+            System.out.println("______________________________________________________________________________");
+        }
+        else{
+            ruleArea.append("ERROR, letters are not in alphabet!\n");
+        }
 
     }//GEN-LAST:event_RuleButtonActionPerformed
 
@@ -417,7 +415,9 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MelodyMakerUI().setVisible(true);
+                MelodyMakerUI melodyUI = new MelodyMakerUI();
+                melodyUI.setVisible(true);
+                melodyUI.setIconImage(topIcon.getImage());
             }
         });
     }

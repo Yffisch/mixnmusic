@@ -14,6 +14,16 @@ import java.util.ArrayList;
  */
 public class MelodyTheory {
 
+       public static ArrayList<String> preRuleList = new ArrayList<>();
+    public static ArrayList<String> nextRuleList = new ArrayList<>();
+
+    public static ArrayList<String> getPreRuleList() {
+        return preRuleList;
+    }
+
+    public static ArrayList<String> getNextRuleList() {
+        return nextRuleList;
+    }
     
     public static ArrayList<String> applyMusicTheory(ArrayList<String> s){
         ArrayList<String> newlist = new ArrayList<>();
@@ -35,11 +45,11 @@ public class MelodyTheory {
         // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
         //does break theory
        
-        for(int i = 0; i < MelodyMakerUI.preRuleList.size(); i++){
+        for(int i = 0; i < preRuleList.size(); i++){
                   if (currentNote.equals("") && next.equals("")) {
             return true;
         } 
-           else if (currentNote.equals(MelodyMakerUI.preRuleList.get(i)) && next.equals(MelodyMakerUI.preRuleList.get(i))) {
+           else if (currentNote.equals(preRuleList.get(i)) && next.equals(preRuleList.get(i))) {
             return true;
         }
         
