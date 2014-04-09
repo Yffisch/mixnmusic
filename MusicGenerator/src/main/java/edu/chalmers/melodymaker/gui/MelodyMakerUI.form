@@ -113,6 +113,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="signatureComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="keyComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -120,6 +121,15 @@
                                       <Component id="rulePre" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
+=======
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel1" max="32767" attributes="0"/>
+                                      <Component id="rulePre" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+>>>>>>> 81673b74fa3dc88948a73e23e6b15cfab7be0702
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                       <Component id="ruleNext" max="32767" attributes="0"/>
