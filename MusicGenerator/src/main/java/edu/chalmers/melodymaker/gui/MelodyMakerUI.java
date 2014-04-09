@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.io.MelodyExporter;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,14 +15,25 @@ import edu.chalmers.melodymaker.controller.MelodyController;
  */
 public class MelodyMakerUI extends javax.swing.JFrame {
 
+    public static ArrayList<String> preRuleList = new ArrayList<>();
+    public static ArrayList<String> nextRuleList = new ArrayList<>();
+
+    public static ArrayList<String> getPreRuleList() {
+        return preRuleList;
+    }
+
+    public static ArrayList<String> getNextRuleList() {
+        return nextRuleList;
+    }
+
     /**
      * Creates new form MelodyMakerUI
      */
     public MelodyMakerUI() {
         initComponents();
         genreComboBox.removeAllItems();
-        for (String g : new MelodyController().getGenres() ){
-        genreComboBox.addItem(g);
+        for (String g : new MelodyController().getGenres()) {
+            genreComboBox.addItem(g);
         }
     }
 
@@ -55,6 +67,10 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        rulePre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        ruleNext = new javax.swing.JTextField();
+        RuleButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,7 +140,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Takt, E D D E");
+        jLabel1.setText("Never have:");
         jLabel1.setToolTipText("");
 
         jButton1.setText("Play your song");
@@ -134,37 +150,69 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("MusicGenerator");
 
+        rulePre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rulePreActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Before:");
+
+        ruleNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ruleNextActionPerformed(evt);
+            }
+        });
+
+        RuleButton.setText("Add Rule");
+        RuleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RuleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
             generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(generatingPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(signatureLabel)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(genreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(keyLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lengthLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(majorMinorLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(generatingPanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(signatureLabel)
-                            .addComponent(titleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(genreLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(keyLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lengthLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(majorMinorLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(RuleButton))
+                    .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(generatingPanelLayout.createSequentialGroup()
+                            .addComponent(minorRadioButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(majorRadioButton))
+                        .addComponent(jLabel2)
+                        .addGroup(generatingPanelLayout.createSequentialGroup()
+                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1))
-                            .addGroup(generatingPanelLayout.createSequentialGroup()
-                                .addComponent(minorRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(majorRadioButton))
-                            .addComponent(jLabel2))
-                        .addGap(0, 27, Short.MAX_VALUE))
+                                .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rulePre))
+                            .addGap(18, 18, 18)
+                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(ruleNext)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(generatingPanelLayout.createSequentialGroup()
+                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +220,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                             .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         generatingPanelLayout.setVerticalGroup(
@@ -188,19 +236,24 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genreLabel)
                     .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(signatureLabel)
                     .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(keyLabel)
-                    .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rulePre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ruleNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lengthLabel)
-                    .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RuleButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(majorMinorLabel)
@@ -212,7 +265,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -254,22 +307,48 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_genreComboBoxActionPerformed
-/**
- *
- * @author Emma
- */
+    /**
+     *
+     * @author Emma
+     */
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
-        
-        String inputGenre = (String)genreComboBox.getSelectedItem();
-        String inputSignature = (String)signatureComboBox.getSelectedItem();
-        String inputKey = (String)keyComboBox.getSelectedItem();
-        String inputLength = (String)lengthComboBox.getSelectedItem();
-        
-        new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength); 
+
+        String inputGenre = (String) genreComboBox.getSelectedItem();
+        String inputSignature = (String) signatureComboBox.getSelectedItem();
+        String inputKey = (String) keyComboBox.getSelectedItem();
+        String inputLength = (String) lengthComboBox.getSelectedItem();
+
+        new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
+        new MelodyExporter("rocky.abc", "huuuuh.abc");
+        nextRuleList.clear();
+        preRuleList.clear();
+
     }//GEN-LAST:event_generateButtonActionPerformed
+
+    private void rulePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulePreActionPerformed
+        // rulePre.getAccessibleContext();
+    }//GEN-LAST:event_rulePreActionPerformed
+
+    private void ruleNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruleNextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ruleNextActionPerformed
+
+    private void RuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RuleButtonActionPerformed
+
+        preRuleList.add(rulePre.getText());
+        nextRuleList.add(ruleNext.getText());
+
+        //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
+        for (int i = 0; i < nextRuleList.size(); i++) {
+            System.out.println(i + 1 + " statement:" + " You have added pre: [" + preRuleList.get(i) + "] and you have added next: [" + nextRuleList.get(i) + "]");
+        }
+        System.out.println("______________________________________________________________________________");
+
+
+    }//GEN-LAST:event_RuleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,6 +386,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RuleButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton generateButton;
     private javax.swing.JPanel generatingPanel;
@@ -316,6 +396,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JComboBox keyComboBox;
     private javax.swing.JLabel keyLabel;
     private javax.swing.JComboBox lengthComboBox;
@@ -324,6 +405,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JLabel majorMinorLabel;
     private javax.swing.JRadioButton majorRadioButton;
     private javax.swing.JRadioButton minorRadioButton;
+    private javax.swing.JTextField ruleNext;
+    private javax.swing.JTextField rulePre;
     private javax.swing.JComboBox signatureComboBox;
     private javax.swing.JLabel signatureLabel;
     private javax.swing.JLabel titleLabel;

@@ -5,6 +5,7 @@
  */
 package edu.chalmers.melodymaker.core;
 
+import edu.chalmers.melodymaker.gui.MelodyMakerUI;
 import java.util.ArrayList;
 
 /**
@@ -33,11 +34,18 @@ public class MelodyTheory {
     public static boolean breaksMusicTheory(String currentNote, String next) {
         // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
         //does break theory
-        
-        if (currentNote.equals("C") && next.equals("C")) {
+       
+        for(int i = 0; i < MelodyMakerUI.preRuleList.size(); i++){
+                  if (currentNote.equals("") && next.equals("")) {
             return true;
-        } //does break theory
-        else if (currentNote.equals("C") && next.equals("C")) {
+        } 
+           else if (currentNote.equals(MelodyMakerUI.preRuleList.get(i)) && next.equals(MelodyMakerUI.preRuleList.get(i))) {
+            return true;
+        }
+        
+        }
+       
+       /* else if (currentNote.equals("C") && next.equals("C")) {
             return true;
         } else if (currentNote.equals("C/2") || next.equals("C/2")) {
             return true;
@@ -51,7 +59,7 @@ public class MelodyTheory {
             return true;
         } else if (currentNote.equals("2") && next.equals("2")) {
             return true;
-        }
+        }*/
 
         return false;
 
