@@ -25,7 +25,7 @@ public class Main {
               e = new MelodyExporter("supermario.abc", "huuuu.txt");
               MelodyMakerUI gui = new MelodyMakerUI();
         String[] args = {};
-              gui.main(args);
+              MelodyMakerUI.main(args);
 
        
     }
