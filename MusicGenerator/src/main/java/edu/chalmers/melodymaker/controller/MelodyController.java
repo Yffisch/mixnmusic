@@ -36,7 +36,7 @@ public class MelodyController {
     }
     public Set<String> getGenres(){
          mMelodies =  MelodyLibrary.getInstance().getMelodies();
-         genres = new HashSet<String>();
+         genres = new HashSet<>();
          for (Melody m : mMelodies){
 
              genres.add(m.genre);

@@ -40,34 +40,21 @@ public class MIDIplayer {
         try {
             sequence = MidiSystem.getSequence(midiFile);
         } catch (InvalidMidiDataException e) {
-            System.exit(1);
+            System.exit(0);
         } catch (IOException e) {
-            System.exit(1);
+            System.exit(0);
         }
 
-        /*
-         *	Here, we simply request the default sequencer.
-         */
         try {
             sm_sequencer = MidiSystem.getSequencer();
         } catch (MidiUnavailableException e) {
-            System.exit(1);
+            System.exit(0);
         }
         if (sm_sequencer == null) {
             System.out.println("SimpleMidiPlayer.main(): can't get a Sequencer");
-            System.exit(1);
+            System.exit(0);
         }
 
-        /*
-         *	There is a bug in the Sun jdk1.3/1.4.
-         *	It prevents correct termination of the VM.
-         *	So we have to exit ourselves.
-         *	To accomplish this, we register a Listener to the Sequencer.
-         *	It is called when there are "meta" events. Meta event
-         *	47 is end of track.
-         *
-         *	Thanks to Espen Riskedal for finding this trick.
-         */
         sm_sequencer.addMetaEventListener(new MetaEventListener() {
             @Override
             public void meta(MetaMessage event) {
@@ -81,35 +68,21 @@ public class MIDIplayer {
             }
         });
 
-        /*
-         *	The Sequencer is still a dead object.
-         *	We have to open() it to become live.
-         *	This is necessary to allocate some ressources in
-         *	the native part.
-         */
         try {
             sm_sequencer.open();
         } catch (MidiUnavailableException e) {
-            System.exit(1);
+            System.exit(0);
         }
 
-        /*
-         *	Next step is to tell the Sequencer which
-         *	Sequence it has to play. In this case, we
-         *	set it as the Sequence object created above.
-         */
+
         try {
             sm_sequencer.setSequence(sequence);
         } catch (InvalidMidiDataException e) {
-            System.exit(1);
+            System.exit(0);
         }
 
         if (!(sm_sequencer instanceof Synthesizer)) {
-            /*
-             *	We try to get the default synthesizer, open()
-             *	it and chain it to the sequencer with a
-             *	Transmitter-Receiver pair.
-             */
+
             try {
                 sm_synthesizer = MidiSystem.getSynthesizer();
                 sm_synthesizer.open();
@@ -130,7 +103,7 @@ public class MIDIplayer {
     private static void printUsageAndExit() {
         System.out.println("SimpleMidiPlayer: usage:");
         System.out.println("\tjava SimpleMidiPlayer <midifile>");
-        System.exit(1);
+        System.exit(0);
     }
 
 }

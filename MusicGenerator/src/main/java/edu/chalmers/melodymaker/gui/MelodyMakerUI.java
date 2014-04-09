@@ -8,6 +8,7 @@ package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
 
+
 /**
  *
  * @author David
@@ -128,6 +129,11 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
 
         jButton1.setText("Play your song");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Save your song?");
 
@@ -270,6 +276,10 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         
         new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength); 
     }//GEN-LAST:event_generateButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
