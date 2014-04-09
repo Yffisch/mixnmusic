@@ -9,6 +9,7 @@ package edu.chalmers.melodymaker.controller;
 import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
 import edu.chalmers.melodymaker.gui.MelodyMakerUI;
+import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class MelodyController {
     public String inputGenre, inputSignature, inputKey, inputLength;
     private ArrayList<Melody> mMelodies;
     public Set<String> genres;
+   // public MelodyExporter melodyexporter = new MelodyExporter("hej","hej");
     
     public void sendGenerator(String genre, String signature, String key, String length){
         inputGenre = genre;
