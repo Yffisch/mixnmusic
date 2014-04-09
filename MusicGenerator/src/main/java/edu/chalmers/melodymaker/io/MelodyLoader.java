@@ -25,12 +25,50 @@ public class MelodyLoader {
     String topPart;
     String botPart;
     String fullString;
+    String[] genrePart;
+//X:1
+//T:Rocky
+//Z:arae69
+//M:4/4
+//L:1/8
+//Q:96
+//KC:C
+    String songNumber;
+    String songTitle;
+    String songAuthor;
+    String songSignature;
+    String songNoteLength;
+    String songKey;
 
     public MelodyLoader() {
     }
 
     public String getBotPart() {
         return botPart;
+    }
+
+    public String getSongNumber() {
+        return songNumber;
+    }
+
+    public String getSongTitle() {
+        return songTitle;
+    }
+
+    public String getSongAuthor() {
+        return songAuthor;
+    }
+
+    public String getSongSignature() {
+        return songSignature;
+    }
+
+    public String getSongNoteLength() {
+        return songNoteLength;
+    }
+
+    public String getSongKey() {
+        return songKey;
     }
 
     public String getTopPart() {
@@ -87,27 +125,37 @@ public class MelodyLoader {
         parts = fullString.split("-");
         topPart = parts[0];
         botPart = parts[1];
-        //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
+        genrePart = parts[0].split(System.getProperty("line.separator"));
 
-         System.out.println("\nLOADING FILE... " + filename);
-         System.out.println("\nNOTES IN ABC...\n" + botPart);
-        
+        //The top part lines
+        songNumber = genrePart[0].substring(2);
+        songTitle = genrePart[1].substring(2);
+        songAuthor = genrePart[2].substring(2);
+        songSignature = genrePart[3].substring(2);
+        songNoteLength = genrePart[4].substring(2);
+        songKey = genrePart[5].substring(2);
+
+        //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
+        System.out.println("HEJHEJ" + songKey);
+        System.out.println("\nLOADING FILE... " + filename);
+        System.out.println("\nNOTES IN ABC...\n" + botPart);
+
         for (int i = 0; i < botPart.length() - 2; i++) {
             String note;
             if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 3))) {
-                 note = botPart.substring(i, i + 3);
-                 noteList.add(new Note(note));
+                note = botPart.substring(i, i + 3);
+                noteList.add(new Note(note));
             } else if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 2))) {
-                 note = botPart.substring(i, i + 2);
-                 noteList.add(new Note(note));
+                note = botPart.substring(i, i + 2);
+                noteList.add(new Note(note));
             } else if (Alphabet.isLetterInAlphabet(botPart.substring(i, i + 1))) {
-                 note = botPart.substring(i, i + 1);
-                 noteList.add(new Note(note));
+                note = botPart.substring(i, i + 1);
+                noteList.add(new Note(note));
             }
         }
-       
+
         System.out.println("PARSING NOTES...\n");
-        
+
         for (Note n : noteList) {
             System.out.print(n.getNote() + " ");
         }
