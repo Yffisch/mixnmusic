@@ -387,7 +387,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
            
 
         }
-         ruleArea.append("________________\n");
+         ruleArea.append("________________");
         System.out.println("______________________________________________________________________________");
 
 
