@@ -10,6 +10,7 @@ import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
 import edu.chalmers.melodymaker.gui.MelodyMakerUI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -35,10 +36,13 @@ public class MelodyController {
     }
     public Set<String> getGenres(){
          mMelodies =  MelodyLibrary.getInstance().getMelodies();
+         genres = new HashSet<String>();
          for (Melody m : mMelodies){
-             genres.add(m.getGenre());
+
+             genres.add(m.genre);
+ 
          }
-        
+        System.out.println("This is our genres  " + genres.toString());
         return genres;
     }
     

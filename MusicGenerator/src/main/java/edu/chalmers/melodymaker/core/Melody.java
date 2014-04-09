@@ -23,6 +23,7 @@ public class Melody {
     //for test sake
     public Melody(ArrayList<Note> alN){
         listNotes = alN;
+        genre = "rock";
     }
     
     //Our Melody-object

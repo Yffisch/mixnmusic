@@ -21,6 +21,7 @@ public class MelodyLibrary {
 
     private MelodyLibrary() {
         melodies = new ArrayList<>();
+        
     }
 
     public static MelodyLibrary getInstance() {
@@ -39,14 +40,16 @@ public class MelodyLibrary {
                 melodies.add(melody);
             }
             for (Melody melody : melodies) {
-             //   System.out.print(melody);
+
               //  System.out.println();
             }
         }
     }
 
     public ArrayList<Melody> getMelodies() {
+         
         return melodies;
+                       
     }
 
 }

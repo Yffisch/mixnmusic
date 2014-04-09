@@ -19,7 +19,10 @@ public class MelodyMakerUI extends javax.swing.JFrame {
      */
     public MelodyMakerUI() {
         initComponents();
-     //   genreComboBox.setModel(new javax.swing.DefaultComboBoxModel(MelodyController));
+        genreComboBox.removeAllItems();
+        for (String g : new MelodyController().getGenres() ){
+        genreComboBox.addItem(g);
+        }
     }
 
     /**
