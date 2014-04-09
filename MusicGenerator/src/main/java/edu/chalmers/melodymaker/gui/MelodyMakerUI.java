@@ -6,6 +6,7 @@
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.core.MIDIplayer;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
 
@@ -335,7 +336,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
     }//GEN-LAST:event_jButton1ActionPerformed
     private void rulePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulePreActionPerformed
         // rulePre.getAccessibleContext();
