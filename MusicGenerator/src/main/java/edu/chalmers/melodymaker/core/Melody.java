@@ -18,11 +18,11 @@ public class Melody {
     
     //Classvariables
     public String genre, title, noteLength, signature;
-    private List<Note> listNotes;
+    private final ArrayList<Note> listNotes;
     
     
     //for test sake
-    public Melody(List<Note> alN){
+    public Melody(ArrayList<Note> alN){
         listNotes = alN;
         genre = "rock";
     }
@@ -60,7 +60,7 @@ public class Melody {
     public String getSignature(){
         return signature;
     }
-    public List<Note> getNoteList(){
+    public ArrayList<Note> getNoteList(){
         return listNotes;
     } 
     
