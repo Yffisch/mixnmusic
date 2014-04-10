@@ -5,6 +5,7 @@
  */
 package edu.chalmers.melodymaker.gui;
 
+import edu.chalmers.melodymaker.Main;
 import edu.chalmers.melodymaker.controller.MelodyController;
 import util.Alphabet;
 import player.MIDIplayer;
@@ -12,6 +13,8 @@ import edu.chalmers.melodymaker.core.MelodyTheory;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -69,6 +72,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ruleArea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
+        settingsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,6 +188,13 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         jLabel4.setText("Rules");
 
+        settingsButton.setText("Settings");
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
@@ -228,12 +239,15 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ruleNext)))
-                            .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addGroup(generatingPanelLayout.createSequentialGroup()
-                                    .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(RuleButton))))))
+                            .addGroup(generatingPanelLayout.createSequentialGroup()
+                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                                        .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(RuleButton)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(settingsButton)))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         generatingPanelLayout.setVerticalGroup(
@@ -266,7 +280,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lengthLabel)
                     .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RuleButton))
+                    .addComponent(RuleButton)
+                    .addComponent(settingsButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(majorMinorLabel)
@@ -382,9 +397,21 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_RuleButtonActionPerformed
 
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+      
+           // JFrame frame = new JFrame ("Settings");
+           // frame.getContentPane().add (new MelodyMakerUIAdvanced());
+           // frame.pack();
+           //// frame.setVisible (true);
+    }//GEN-LAST:event_settingsButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    public javax.swing.JTextArea getTextArea(){
+        return ruleArea;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -415,6 +442,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 MelodyMakerUI melodyUI = new MelodyMakerUI();
                 melodyUI.setVisible(true);
                 melodyUI.setIconImage(topIcon.getImage());
+                melodyUI.setTitle("Melody Maker");
             }
         });
     }
@@ -444,6 +472,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JTextArea ruleArea;
     private javax.swing.JTextField ruleNext;
     private javax.swing.JTextField rulePre;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JComboBox signatureComboBox;
     private javax.swing.JLabel signatureLabel;
     private javax.swing.JLabel titleLabel;
