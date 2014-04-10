@@ -13,11 +13,12 @@ import abc.parser.TuneBookParser;
 import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
+import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.Sequence;
@@ -37,11 +38,11 @@ public class MelodyExporter {
         MelodyGenerator generator = new MelodyGenerator();
         generator.learnABC(melodyLibrary.getMelodies());
         System.out.println("GENERATING TUNE...");
-        ArrayList<String> output = generator.generateTune();
+        List<Note> output = generator.generateTune();
 
         StringBuilder sb = new StringBuilder();
-        for (String string : output) {
-            sb.append(string);
+        for (Note note : output) {
+            sb.append(note.toString());
         }
 
         try {

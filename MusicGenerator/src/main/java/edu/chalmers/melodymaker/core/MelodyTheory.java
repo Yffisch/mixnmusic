@@ -7,6 +7,7 @@ package edu.chalmers.melodymaker.core;
 
 import edu.chalmers.melodymaker.gui.MelodyMakerUI;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,13 +26,13 @@ public class MelodyTheory {
         return nextRuleList;
     }
     
-    public static ArrayList<String> applyMusicTheory(ArrayList<String> s){
-        ArrayList<String> newlist = new ArrayList<>();
+    public static List<Note> applyMusicTheory(List<Note> notes){
+        List<Note> newlist = new ArrayList<>();
         int i = 0;
-         newlist.add(s.get(i));
-        for(; i < s.size()-1; i++){
-            if(!breaksMusicTheory(s.get(i),s.get(i+1))){
-                newlist.add(s.get(i+1));
+         newlist.add(notes.get(i));
+        for(; i < notes.size()-1; i++){
+            if(!breaksMusicTheory(notes.get(i).toString(), notes.get(i+1).toString())){
+                newlist.add(notes.get(i+1));
                 
             }
 

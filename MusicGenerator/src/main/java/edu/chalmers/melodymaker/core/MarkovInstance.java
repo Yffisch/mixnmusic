@@ -2,6 +2,7 @@ package edu.chalmers.melodymaker.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,10 +12,10 @@ import java.util.Set;
 public class MarkovInstance {
 
     private int total;
-    private final String history;
-    private final HashMap<String, Integer> following;
+    private final List<Note> history;
+    private final HashMap<Note, Integer> following;
 
-    public MarkovInstance(String history) {
+    public MarkovInstance(List<Note> history) {
         following = new HashMap<>();
         this.history = history;
     }
@@ -24,7 +25,7 @@ public class MarkovInstance {
      *
      * @param follows
      */
-    public void updateMap(String follows) {
+    public void updateMap(Note follows) {
         total++;
         if (!following.containsKey(follows)) {
             following.put(follows, 1);
@@ -33,7 +34,7 @@ public class MarkovInstance {
         }
     }
 
-    public String getHistory() {
+    public List<Note> getHistory() {
         return history;
     }
 
@@ -44,11 +45,11 @@ public class MarkovInstance {
      * @param keyToRemove
      * @return an array list with following notes occurring according to their %
      */
-    public ArrayList<String> toProbabilities(String keyToRemove) {
-        Set<String> keySet = following.keySet();
-        ArrayList<String> probList = new ArrayList<>();
-        for (String key : keySet) {
-            if (!key.equals(keyToRemove)) {
+    public List<Note> toProbabilities(Note keyToRemove) {
+        Set<Note> keySet = following.keySet();
+        List<Note> probList = new ArrayList<>();
+        for (Note key : keySet) {
+            if (!key.toString().equals(keyToRemove.toString())) {
                 double value = (float) following.get(key) / total;
                 value *= 10000;
                 while (value > 0) {
@@ -64,7 +65,9 @@ public class MarkovInstance {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("The sequence \"");
-        sb.append(getHistory());
+        for(Note note : getHistory()){
+            sb.append(note.toString());
+        }
         sb.append("\" has ");
         sb.append(total);
         sb.append(" following notes spread over ");

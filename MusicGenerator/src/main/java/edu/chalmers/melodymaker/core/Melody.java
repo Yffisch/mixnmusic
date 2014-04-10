@@ -7,7 +7,6 @@
 package edu.chalmers.melodymaker.core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -69,7 +68,7 @@ public class Melody {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         for (Note note : listNotes){
-            sb.append(note.getNote());
+            sb.append(note.toString());
         }
         return sb.toString();
     }

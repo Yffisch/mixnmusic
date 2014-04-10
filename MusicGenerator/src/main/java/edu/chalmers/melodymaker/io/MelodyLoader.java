@@ -99,7 +99,7 @@ public class MelodyLoader {
         StringBuilder sb = new StringBuilder();
 
         for (Note n : noteList) {
-            sb.append(n.getNote());
+            sb.append(n.toString());
         }
         return sb.toString();
     }
@@ -157,7 +157,7 @@ public class MelodyLoader {
         System.out.println("PARSING NOTES...\n");
 
         for (Note n : noteList) {
-            System.out.print(n.getNote() + " ");
+            System.out.print(n.toString() + " ");
         }
         System.out.println("\n________________________________________________________________________________________________________________________________________________________________");
         return botPart;

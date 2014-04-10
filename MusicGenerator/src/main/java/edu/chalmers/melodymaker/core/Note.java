@@ -16,8 +16,9 @@ public class Note {
     public Note(String s){
         note = s;
     }
-    
-    public String getNote(){
+   
+    @Override
+    public String toString(){
         return note;
     }
     
