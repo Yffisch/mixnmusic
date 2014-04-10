@@ -5,7 +5,7 @@
  */
 package edu.chalmers.melodymaker.io;
 
-import edu.chalmers.melodymaker.core.Alphabet;
+import util.Alphabet;
 import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedReader;
 import java.io.File;

@@ -6,8 +6,8 @@
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
-import edu.chalmers.melodymaker.core.Alphabet;
-import edu.chalmers.melodymaker.core.MIDIplayer;
+import util.Alphabet;
+import player.MIDIplayer;
 import edu.chalmers.melodymaker.core.MelodyTheory;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
