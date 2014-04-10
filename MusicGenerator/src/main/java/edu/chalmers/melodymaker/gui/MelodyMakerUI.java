@@ -399,10 +399,10 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
       
-            JFrame frame = new JFrame ("Settings");
-            frame.getContentPane().add (new MelodyMakerUIAdvanced());
-            frame.pack();
-            frame.setVisible (true);
+           // JFrame frame = new JFrame ("Settings");
+           // frame.getContentPane().add (new MelodyMakerUIAdvanced());
+           // frame.pack();
+           //// frame.setVisible (true);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     /**
