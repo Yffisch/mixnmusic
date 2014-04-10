@@ -357,8 +357,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
         new MelodyExporter("rocky.abc", "huuuuh.abc");
-        MelodyTheory.nextRuleList.clear();
-        MelodyTheory.preRuleList.clear();
+       // MelodyTheory.nextRuleList.clear();
+       // MelodyTheory.preRuleList.clear();
 
     }//GEN-LAST:event_generateButtonActionPerformed
 
