@@ -17,7 +17,7 @@ import util.Alphabet;
  */
 public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
 
-    MelodyMakerUI mmUI = new MelodyMakerUI();
+    MelodyMakerUI mmUI = MelodyMakerUI.getInstance();
     /**
      * Creates new form MelodyMakerUIAdvanced
      */

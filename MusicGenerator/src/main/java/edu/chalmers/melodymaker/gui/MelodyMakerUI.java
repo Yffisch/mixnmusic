@@ -471,7 +471,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MelodyMakerUI melodyUI = new MelodyMakerUI();
+                MelodyMakerUI melodyUI = MelodyMakerUI.getInstance();
                 melodyUI.setVisible(true);
                 melodyUI.setIconImage(topIcon.getImage());
                 melodyUI.setTitle("Melody Maker");
