@@ -89,7 +89,6 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         majorRadioButton = new javax.swing.JRadioButton();
         generateButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         rulePre = new javax.swing.JTextField();
@@ -100,6 +99,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         ruleArea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         settingsButton = new javax.swing.JButton();
+        playToggleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,14 +173,6 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jLabel1.setText("Never:");
         jLabel1.setToolTipText("");
 
-        jButton1.setText("Play your song");
-        jButton1.setToolTipText("Play generated melody with give attributes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Save your song?");
         jButton2.setToolTipText("Save your melody");
 
@@ -222,6 +214,13 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             }
         });
 
+        playToggleButton.setText("Play");
+        playToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playToggleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
@@ -230,11 +229,11 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -275,7 +274,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                                         .addComponent(RuleButton)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(settingsButton)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(43, 43, 43))
         );
         generatingPanelLayout.setVerticalGroup(
             generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,8 +319,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addComponent(generateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addGap(13, 13, 13)
+                        .addComponent(playToggleButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -389,9 +388,6 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_generateButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
-    }//GEN-LAST:event_jButton1ActionPerformed
     private void rulePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulePreActionPerformed
         // rulePre.getAccessibleContext();
     }//GEN-LAST:event_rulePreActionPerformed
@@ -436,6 +432,14 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             System.out.println(MelodyTheory.preRuleList);
                 System.out.println(MelodyTheory.nextRuleList);
     }//GEN-LAST:event_settingsButtonActionPerformed
+
+    private void playToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playToggleButtonActionPerformed
+        if(playToggleButton.isEnabled()){
+        MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
+        playToggleButton.setEnabled(false);
+        }
+    
+    }//GEN-LAST:event_playToggleButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,7 +490,6 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JPanel generatingPanel;
     private javax.swing.JComboBox genreComboBox;
     private javax.swing.JLabel genreLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -501,6 +504,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JLabel majorMinorLabel;
     private javax.swing.JRadioButton majorRadioButton;
     private javax.swing.JRadioButton minorRadioButton;
+    public static javax.swing.JToggleButton playToggleButton;
     private javax.swing.JTextArea ruleArea;
     private javax.swing.JTextField ruleNext;
     private javax.swing.JTextField rulePre;

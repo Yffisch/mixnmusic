@@ -25,6 +25,7 @@ import javax.sound.midi.Transmitter;
  */
 public class MIDIplayer {
 
+    private static int midiLength = 0;
     private static Sequencer sm_sequencer = null;
     private static Synthesizer sm_synthesizer = null;
     private static Sequence sequence = null;
@@ -39,6 +40,8 @@ public class MIDIplayer {
         }
         try {
             sequence = MidiSystem.getSequence(midiFile);
+            midiLength =(int) sequence.getTickLength();
+            System.out.println("Length of midi:  " + midiLength);
         } catch (InvalidMidiDataException e) {
             System.exit(0);
         } catch (IOException e) {
