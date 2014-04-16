@@ -97,6 +97,7 @@ public class MIDIplayer {
             }
         }
 
+      
         
         // 	Now, we can start over.
          
@@ -107,6 +108,12 @@ public class MIDIplayer {
         System.out.println("SimpleMidiPlayer: usage:");
         System.out.println("\tjava SimpleMidiPlayer <midifile>");
         System.exit(0);
+    }
+    public static void reset(){
+    midiLength = 0;
+    sm_sequencer.stop();
+    sm_synthesizer.close();
+    sequence = null;
     }
 
 }

@@ -100,6 +100,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         settingsButton = new javax.swing.JButton();
         playToggleButton = new javax.swing.JToggleButton();
+        stopButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,6 +222,13 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             }
         });
 
+        stopButton.setText("Stop");
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
@@ -230,9 +238,10 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(stopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(generatingPanelLayout.createSequentialGroup()
@@ -323,6 +332,8 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                         .addComponent(playToggleButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stopButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addContainerGap())
@@ -441,6 +452,12 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     
     }//GEN-LAST:event_playToggleButtonActionPerformed
 
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+
+        MIDIplayer.reset();
+        playToggleButton.setEnabled(true);
+    }//GEN-LAST:event_stopButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -511,6 +528,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private javax.swing.JButton settingsButton;
     private javax.swing.JComboBox signatureComboBox;
     private javax.swing.JLabel signatureLabel;
+    public static javax.swing.JButton stopButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField titleTextField;
     // End of variables declaration//GEN-END:variables
