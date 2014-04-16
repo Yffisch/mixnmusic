@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yff
  */
 public class MelodyTheory {
-
+public static List<Note> newlist;
        public static ArrayList<String> preRuleList = new ArrayList<>();
     public static ArrayList<String> nextRuleList = new ArrayList<>();
 
@@ -27,14 +27,19 @@ public class MelodyTheory {
     }
     
     public static List<Note> applyMusicTheory(List<Note> notes){
-        List<Note> newlist = new ArrayList<>();
+        newlist = new ArrayList<>();
         int i = 0;
          newlist.add(notes.get(i));
         for(; i < notes.size()-1; i++){
             if(!breaksMusicTheory(notes.get(i).toString(), notes.get(i+1).toString())){
-                newlist.add(notes.get(i+1));
+                System.out.println("Comparing " + notes.get(i).toString() + " and " + notes.get(i+1).toString() + " Adding: " +  notes.get(i).toString() + " removing " + notes.get(i+1).toString());
+                                newlist.add(notes.get(i+1));
+
+                //newlist.remove(notes.get(i+1));
+                
                 
             }
+            
 
            // breaksMusicTheory(s.get(i),s.get(i+1));
         }
