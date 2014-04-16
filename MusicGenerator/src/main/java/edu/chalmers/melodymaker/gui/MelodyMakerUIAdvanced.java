@@ -6,6 +6,7 @@
 
 package edu.chalmers.melodymaker.gui;
 
+import edu.chalmers.melodymaker.controller.MelodyController;
 import edu.chalmers.melodymaker.core.MelodyTheory;
 import javax.swing.JPanel;
 import util.Alphabet;
@@ -16,13 +17,28 @@ import util.Alphabet;
  */
 public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
 
-    //MelodyMakerUI mmUI = new MelodyMakerUI();
+    MelodyMakerUI mmUI = new MelodyMakerUI();
     /**
      * Creates new form MelodyMakerUIAdvanced
      */
-    public MelodyMakerUIAdvanced() {
-        initComponents();
+    
+    
+     private static MelodyMakerUIAdvanced instance = null;
+
+    protected MelodyMakerUIAdvanced() {
+                initComponents();
+
     }
+
+    public static MelodyMakerUIAdvanced getInstance() {
+        if (instance == null) {
+            instance = new MelodyMakerUIAdvanced();
+        }
+        return instance;
+    }
+    
+    //public MelodyMakerUIAdvanced() {
+    //}
 
     public JPanel getJpanel(){
         return jPanel1;
@@ -115,6 +131,7 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
                 System.out.println(MelodyTheory.nextRuleList);
 
         MelodyMakerUI.statiska = "Funkar";
+        mmUI.setlol("DUNKAR");
     }//GEN-LAST:event_applyButtonActionPerformed
 
 

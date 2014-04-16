@@ -23,7 +23,7 @@ public class Main {
     
                                        // Import file, export file
               e = new MelodyExporter("supermario.abc", "huuuu.txt");
-              MelodyMakerUI gui = new MelodyMakerUI();
+              MelodyMakerUI gui = MelodyMakerUI.getInstance();
         String[] args = {};
               MelodyMakerUI.main(args);
 

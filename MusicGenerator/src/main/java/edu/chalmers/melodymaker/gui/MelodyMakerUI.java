@@ -24,17 +24,43 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
     static String statiska = "inte";
+    public String lol = "testinte";
 
     /**
      * Creates new form MelodyMakerUI
      */
-    public MelodyMakerUI() {
-        initComponents();
+   
+    private static MelodyMakerUI instance = null;
+
+    protected MelodyMakerUI() {
+                  initComponents();
         genreComboBox.removeAllItems();
         for (String g : MelodyController.getInstance().getGenres()) {
             genreComboBox.addItem(g);
         }
+
     }
+
+    public static MelodyMakerUI getInstance() {
+        if (instance == null) {
+            instance = new MelodyMakerUI();
+        }
+        return instance;
+    }
+    
+    
+    
+    public void setlol(String s){
+        lol = s;
+    }
+    
+    public String getlol(){
+        return lol;
+    }
+    
+    //public MelodyMakerUI() {
+      
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -401,10 +427,12 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
       
             JFrame frame = new JFrame ("Settings");
-            frame.getContentPane().add (new MelodyMakerUIAdvanced());
+            frame.getContentPane().add (MelodyMakerUIAdvanced.getInstance());
             frame.pack();
             frame.setVisible (true);
             System.out.println(statiska);
+                        System.out.println("TT " + getlol());
+
             System.out.println(MelodyTheory.preRuleList);
                 System.out.println(MelodyTheory.nextRuleList);
     }//GEN-LAST:event_settingsButtonActionPerformed
