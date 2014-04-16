@@ -7,28 +7,30 @@ package player;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.MetaEventListener;
 import javax.sound.midi.MetaMessage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Receiver;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Synthesizer;
-import javax.sound.midi.Receiver;
 import javax.sound.midi.Transmitter;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Emma
  */
-public class MIDIplayer {
+public class MIDIplayer extends JFrame{
 
     private static int midiLength = 0;
     private static Sequencer sm_sequencer = null;
     private static Synthesizer sm_synthesizer = null;
     private static Sequence sequence = null;
+    
+    
     
     public static void MIDIplayer(String filename) {
         
