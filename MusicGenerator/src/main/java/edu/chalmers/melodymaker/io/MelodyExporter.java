@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chalmers.melodymaker.io;
 
 import abc.midi.BasicMidiConverter;
 import abc.midi.MidiConverterAbstract;
+import abc.midi.TunePlayer;
 import abc.notation.Tune;
 import abc.notation.TuneBook;
 import abc.parser.TuneBookParser;
@@ -21,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 /**
@@ -31,7 +28,6 @@ public class MelodyExporter {
 
     MelodyLoader melodyLoader = new MelodyLoader();
 
-    //String[] test = {"hey_jude.abc", "rocky.abc", "supermario.abc"};
     public MelodyExporter(String importFilename, String exportFilename) {
         MelodyLibrary melodyLibrary = MelodyLibrary.getInstance();
         melodyLibrary.makeMelody();
@@ -56,41 +52,26 @@ public class MelodyExporter {
 
     }
 
-    public void toMIDI(Melody melody) {
+    public void toMIDI(Melody melody, String midiName) {
         String filePath = "src/main/resources/stupid.abc";
         File f = new File(filePath);
         try {
             TuneBook abcTB = new TuneBookParser().parse(f);
             Tune tune = abcTB.getTune(10);
-            File outMIDI = new File("src/main/resources/exportfiles/test.mid");
+            File outMIDI = new File("src/main/resources/exportfiles/" + midiName + ".mid");
             MidiConverterAbstract conv = new BasicMidiConverter();
             Sequence s = conv.toMidiSequence(tune);
 
+            TunePlayer player = new TunePlayer();
+            player.start();
+            player.play(tune);
+            //The midi file result
+
+            int[] types = MidiSystem.getMidiFileTypes(s);
+
+            MidiSystem.write(s, types[0], outMIDI);
         } catch (IOException ex) {
             Logger.getLogger(MelodyExporter.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-          //  TunePlayer player = new TunePlayer();
-           // player.start();
-           // player.play(tune);
-            //The midi file result
-            //    
-            //     
-            //       
-            //      int[] types = MidiSystem.getMidiFileTypes(s);
-            //      try {
-            //          MidiSystem.write(s, types[0], file);
-            //  } catch (IOException ex) {
-            //       Logger.getLogger(MelodyExporter.class.getName()).log(Level.SEVERE, null, ex);
-            //    }
-            /*              BasicMidiConverter midi = new BasicMidiConverter();
-            String key = melody.getKey();
-            for (Note note : melody.getNoteList()) {
-            new KeySignature
-            midi.getNoteOffMessageFor(note, null);
-            }
-            
-            */
-       
     }
 }
