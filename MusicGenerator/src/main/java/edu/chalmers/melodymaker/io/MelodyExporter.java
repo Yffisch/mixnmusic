@@ -29,10 +29,8 @@ public class MelodyExporter {
     MelodyLoader melodyLoader = new MelodyLoader();
 
     public MelodyExporter(String importFilename, String exportFilename) {
-        MelodyLibrary melodyLibrary = MelodyLibrary.getInstance();
-        melodyLibrary.makeMelody();
         MelodyGenerator generator = new MelodyGenerator();
-        generator.learnABC(melodyLibrary.getMelodies());
+        generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         List<Note> output = generator.generateTune();
 
