@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chalmers.melodymaker.core;
 
 import edu.chalmers.melodymaker.io.MelodyLoader;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -21,14 +15,13 @@ public class MelodyLibrary {
 
     private MelodyLibrary() {
         melodies = new ArrayList<>();
-        
     }
 
     public static MelodyLibrary getInstance() {
         return melodyModel;
     }
 
-    public void makeMelody(){
+    public void makeMelody() {
         MelodyLoader melodyLoader = new MelodyLoader();
         melodyLoader.loadFileList();
 
@@ -39,17 +32,10 @@ public class MelodyLibrary {
                 Melody melody = new Melody(melodyLoader.getNoteList());
                 melodies.add(melody);
             }
-            for (Melody melody : melodies) {
-
-              //  System.out.println();
-            }
         }
     }
 
     public ArrayList<Melody> getMelodies() {
-         
         return melodies;
-                       
     }
-
 }

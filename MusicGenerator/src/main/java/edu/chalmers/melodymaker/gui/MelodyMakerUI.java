@@ -24,7 +24,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
     static String statiska = "inte";
-    public String lol = "testinte";
+    public String testString = "Not yet changed";
 
     /**
      * Creates new form MelodyMakerUI
@@ -50,12 +50,12 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     
     
     
-    public void setlol(String s){
-        lol = s;
+    public void setTestString(String s){
+        testString = s;
     }
     
-    public String getlol(){
-        return lol;
+    public String getTestString(){
+        return testString;
     }
     
     //public MelodyMakerUI() {
@@ -438,7 +438,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
             frame.pack();
             frame.setVisible (true);
             System.out.println(statiska);
-                        System.out.println("TT " + getlol());
+                        System.out.println("TestStringValue " + getTestString());
 
             System.out.println(MelodyTheory.preRuleList);
                 System.out.println(MelodyTheory.nextRuleList);

@@ -51,7 +51,7 @@ public class MelodyController {
         genres = new HashSet<>();
         for (Melody m : mMelodies) {
 
-            genres.add(m.genre);
+            genres.add(m.getGenre());
 
         }
         System.out.println("This is our genres  " + genres.toString());

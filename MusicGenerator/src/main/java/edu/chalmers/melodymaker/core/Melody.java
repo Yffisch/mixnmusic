@@ -3,71 +3,74 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chalmers.melodymaker.core;
 
 import java.util.ArrayList;
-
 
 /**
  *
  * @author Emma
  */
 public class Melody {
-    
+
     //Classvariables
-    public String genre, title, noteLength, signature;
+    private String genre, title, noteLength, signature;
+    private int id;
     private final ArrayList<Note> listNotes;
-    
-    
+
     //for test sake
-    public Melody(ArrayList<Note> alN){
+    public Melody(ArrayList<Note> alN) {
         listNotes = alN;
         genre = "rock";
     }
-    
-    //Our Melody-object
 
+    //Our Melody-object
     /**
      *
-     * @param g
-     * @param t
-     * @param n
-     * @param s
+     * @param id
+     * @param genre
+     * @param title
+     * @param noteLength
+     * @param signature
      * @param alN
      */
-        public Melody(String g, String t, String n, String s, ArrayList<Note> alN ){
-        genre = g;
-        title = t;
-        noteLength = n;
-        signature = s;
+    public Melody(int id, String genre, String title, String noteLength, String signature, ArrayList<Note> alN) {
+        this.id = id;
+        this.genre = genre;
+        this.title = title;
+        this.noteLength = noteLength;
+        this.signature = signature;
         listNotes = alN;
     }
-      
-    public String getGenre(){
+
+    public String getGenre() {
         return genre;
     }
-    
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
-    
-    public String getNoteLegnth(){
+
+    public String getNoteLegnth() {
         return noteLength;
     }
-    
-    public String getSignature(){
+
+    public String getSignature() {
         return signature;
     }
-    public ArrayList<Note> getNoteList(){
+
+    public ArrayList<Note> getNoteList() {
         return listNotes;
-    } 
+    }
     
-    
+    public int getID(){
+        return id;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Note note : listNotes){
+        for (Note note : listNotes) {
             sb.append(note.toString());
         }
         return sb.toString();
