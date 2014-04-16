@@ -3,6 +3,7 @@ package edu.chalmers.melodymaker.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class MelodyGenerator {
     private final int ORDER;
     private final Note end = new Note("EOM");
     private HashMap<List<Note>, Integer> startTable;
-    private HashMap<List<Note>, MarkovInstance> markovTable;
+    private HashMap<String, MarkovInstance> markovTable;
     private String genre;
     private String toneLength;
     private String signature;
@@ -40,7 +41,7 @@ public class MelodyGenerator {
      */
     public MelodyGenerator() {
         //ORDER,MIN,MAX,Genre,Length,Signature
-        this(1, 5, 100, null, null, null);
+        this(4, 5, 100, null, null, null);
     }
 
     /**
@@ -57,14 +58,24 @@ public class MelodyGenerator {
      */
     public void learnABC(List<Melody> melodies) {
         for (Melody melody : melodies) {
-            setStartTable(melody.getNoteList());
-            setOrderTable(melody.getNoteList());
+      //      if (melody.getGenre().equals(genre)){
+                if(setStartTable(melody.getNoteList())){
+                   setOrderTable(melody.getNoteList());
+                }
+       //     }
+        }
+        
+        for (Entry<String, MarkovInstance> entry  : markovTable.entrySet()) {
+            System.out.println(entry.toString());
+            System.out.println(entry.getValue());
         }
     }
 
-    private void setStartTable(List<Note> tune) {
-        if (tune.size() < ORDER)
+    private boolean setStartTable(List<Note> tune) {
+        if (tune.size() < ORDER){
             System.err.print("Melody is to short!");
+            return false;
+        }
         List<Note> startList = tune.subList(0, ORDER);
         
         if (!startTable.containsKey(startList)) {
@@ -72,6 +83,7 @@ public class MelodyGenerator {
         } else {
             startTable.put(startList, startTable.get(startList) + 1);
         }
+        return true;
     }
 
     private void setOrderTable(List<Note> tune) {
@@ -98,12 +110,16 @@ public class MelodyGenerator {
      * @param hmap the table that should be updated
      */
     private void updateTable(List<Note> seq, Note next) {
-        if (!markovTable.containsKey(seq)) {
+        StringBuilder sb = new StringBuilder();
+        for (Note note : seq){
+            sb.append(note);
+        }
+        if (!markovTable.containsKey(sb.toString())) {
             MarkovInstance instance = new MarkovInstance(seq);
             instance.updateMap(next);
-            markovTable.put(seq, instance);
+            markovTable.put(sb.toString(), instance);
         } else {
-            MarkovInstance existing = markovTable.get(seq);
+            MarkovInstance existing = markovTable.get(sb.toString());
             existing.updateMap(next);
         }
     }
@@ -130,7 +146,11 @@ public class MelodyGenerator {
             if (length >= MIN) {
                 keyToRemove = new Note("RANDOM_WORD");
             }
-            MarkovInstance history = markovTable.get(current);
+            StringBuilder sb = new StringBuilder();
+            for (Note note : current){
+                sb.append(note);
+            }
+            MarkovInstance history = markovTable.get(sb.toString());
             List<Note> nextProb = history.toProbabilities(keyToRemove);
             random = new Random().nextInt(nextProb.size());
             Note next = nextProb.get(random);
@@ -143,7 +163,7 @@ public class MelodyGenerator {
             if (ORDER == 1){
                 current = new ArrayList<>();
             } else {
-                current = current.subList(1, ORDER + 1);
+                current = current.subList(1, ORDER);
             }
             current.add(next);
             System.out.println("Current is : " + current);
