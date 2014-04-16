@@ -30,18 +30,7 @@ public class MIDIplayer extends JFrame{
     private static Synthesizer sm_synthesizer = null;
     private static Sequence sequence = null;
     
-    final JFrame player = new JFrame();
-    player.setTitle("Main Menu");
-    player.setSize(500,350);
-    player.setLocationRelativeTo(null);
-    player.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
-        /*JPanel creation*/
-        JPanel panel = new JPanel ();                                                       
-        panel.setLayout(new GridLayout(0, 1));                                              
-
+    
     
     public static void MIDIplayer(String filename) {
         
