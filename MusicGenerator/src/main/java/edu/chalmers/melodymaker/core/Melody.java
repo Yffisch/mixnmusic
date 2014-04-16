@@ -30,7 +30,7 @@ public class Melody {
      * @param key
      * @param alN
      */
-    public Melody(int id, String genre, String title, String noteLength, String signature, String key, List<Note> alN) {
+    public Melody(int id, String title, String genre, String noteLength, String signature, String key, List<Note> alN) {
         this.id = id;
         this.genre = genre;
         this.title = title;

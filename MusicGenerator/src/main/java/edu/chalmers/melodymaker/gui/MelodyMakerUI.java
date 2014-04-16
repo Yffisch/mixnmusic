@@ -387,16 +387,15 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
 
+        String inputTitle = titleTextField.getText();
         String inputGenre = (String) genreComboBox.getSelectedItem();
         String inputSignature = (String) signatureComboBox.getSelectedItem();
         String inputKey = (String) keyComboBox.getSelectedItem();
         String inputLength = (String) lengthComboBox.getSelectedItem();
 
-        MelodyController.getInstance().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
-        new MelodyExporter("rocky.abc", "huuuuh.abc");
+        MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
        // MelodyTheory.nextRuleList.clear();
        // MelodyTheory.preRuleList.clear();
-
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void rulePreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulePreActionPerformed

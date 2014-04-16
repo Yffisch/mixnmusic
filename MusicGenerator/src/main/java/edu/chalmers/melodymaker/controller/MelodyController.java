@@ -30,20 +30,17 @@ public class MelodyController {
         }
         return instance;
     }
-    public String inputGenre, inputSignature, inputKey, inputLength;
     private ArrayList<Melody> mMelodies;
     public Set<String> genres;
    // public MelodyExporter melodyexporter = new MelodyExporter("hej","hej");
 
-    public void sendGenerator(String genre, String signature, String key, String length) {
-        inputGenre = genre;
-        inputSignature = signature;
-        inputKey = key;
-        inputLength = length;
+    public void sendGenerator(String title, String genre, String signature, String key, String length) {
 
-        System.out.print("genre: " + inputGenre + "\nsignature: " + inputSignature);
-        System.out.print("\nkey: " + inputKey + "\nlength: " + inputLength);
+        System.out.print("genre: " + genre + "\nsignature: " + signature);
+        System.out.print("\nkey: " + key + "\nlength: " + length);
 
+        MelodyExporter exporter = new MelodyExporter(title, genre, signature, key, length);
+        exporter.exportTune("temp.abc", 3);
     }
 
     public Set<String> getGenres() {

@@ -21,14 +21,16 @@ public class MelodyGenerator {
     private HashMap<String, MarkovInstance> markovTable;
     private String genre, title, toneLength, signature, key;
 
-    public MelodyGenerator(int order, int minNrOfNotes, int maxNrOfNotes, String genre, String title, String length, String signature, String key) { //Genre/Length/Signature
+    public MelodyGenerator(int order, int minNrOfNotes, int maxNrOfNotes, String title, String genre, String length, String signature, String key) {
         this.MIN = minNrOfNotes;
         this.MAX = maxNrOfNotes;
         if (order < 1) {
             System.err.println("Order has to be at least 1");
         }
+        this.title = title;
         this.ORDER = order;
         this.genre = genre;
+        this.key = key;
         toneLength = length;
         this.signature = signature;
         initTables();
@@ -176,7 +178,7 @@ public class MelodyGenerator {
         }
         System.out.println();
         //return MelodyTheory.applyMusicTheory(noteList);
-        Melody melody = new Melody(new Random().nextInt(MAX), genre, title, toneLength, signature, key, noteList);
+        Melody melody = new Melody(new Random().nextInt(MAX), title, genre, toneLength, signature, key, noteList);
         return melody;
     }
     

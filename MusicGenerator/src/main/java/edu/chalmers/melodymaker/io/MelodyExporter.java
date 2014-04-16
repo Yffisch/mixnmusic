@@ -27,10 +27,19 @@ import javax.sound.midi.Sequence;
  */
 public class MelodyExporter {
 
-    MelodyLoader melodyLoader = new MelodyLoader();
+    private MelodyLoader melodyLoader = new MelodyLoader();
+    private String title, genre, signature, key, length;
+    
+    public MelodyExporter(String title, String genre, String signature, String key, String length){
+        this.title = title;
+        this.genre = genre;
+        this.signature = signature;
+        this.key = key;
+        this.length = length;
+    }
 
-    public void exportTune(String exportFilename) {
-        MelodyGenerator generator = new MelodyGenerator();
+    public void exportTune(String exportFilename, int order) {
+        MelodyGenerator generator = new MelodyGenerator(order, 20, 100, title, genre, length, signature, key);
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();
