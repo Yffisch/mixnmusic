@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 public class MelodyMakerUI extends javax.swing.JFrame {
 
     static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
+    static String statiska = "inte";
 
     /**
      * Creates new form MelodyMakerUI
@@ -30,7 +31,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     public MelodyMakerUI() {
         initComponents();
         genreComboBox.removeAllItems();
-        for (String g : new MelodyController().getGenres()) {
+        for (String g : MelodyController.getInstance().getGenres()) {
             genreComboBox.addItem(g);
         }
     }
@@ -355,7 +356,7 @@ public class MelodyMakerUI extends javax.swing.JFrame {
         String inputKey = (String) keyComboBox.getSelectedItem();
         String inputLength = (String) lengthComboBox.getSelectedItem();
 
-        new MelodyController().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
+        MelodyController.getInstance().sendGenerator(inputGenre, inputSignature, inputKey, inputLength);
         new MelodyExporter("rocky.abc", "huuuuh.abc");
        // MelodyTheory.nextRuleList.clear();
        // MelodyTheory.preRuleList.clear();
@@ -399,10 +400,13 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
       
-           // JFrame frame = new JFrame ("Settings");
-           // frame.getContentPane().add (new MelodyMakerUIAdvanced());
-           // frame.pack();
-           //// frame.setVisible (true);
+            JFrame frame = new JFrame ("Settings");
+            frame.getContentPane().add (new MelodyMakerUIAdvanced());
+            frame.pack();
+            frame.setVisible (true);
+            System.out.println(statiska);
+            System.out.println(MelodyTheory.preRuleList);
+                System.out.println(MelodyTheory.nextRuleList);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     /**

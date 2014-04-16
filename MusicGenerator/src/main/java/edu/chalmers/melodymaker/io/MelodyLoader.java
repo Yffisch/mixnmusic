@@ -39,7 +39,7 @@ public class MelodyLoader {
     String songSignature;
     String songNoteLength;
     String songKey;
-
+    
     public MelodyLoader() {
     }
 

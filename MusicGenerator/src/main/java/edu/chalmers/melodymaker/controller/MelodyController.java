@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chalmers.melodymaker.controller;
 
 import edu.chalmers.melodymaker.core.Melody;
@@ -20,33 +19,43 @@ import java.util.Set;
  */
 public class MelodyController {
 
-  
+    private static MelodyController instance = null;
+
+    protected MelodyController() {
+    }
+
+    public static MelodyController getInstance() {
+        if (instance == null) {
+            instance = new MelodyController();
+        }
+        return instance;
+    }
     public String inputGenre, inputSignature, inputKey, inputLength;
     private ArrayList<Melody> mMelodies;
     public Set<String> genres;
    // public MelodyExporter melodyexporter = new MelodyExporter("hej","hej");
-    
-    public void sendGenerator(String genre, String signature, String key, String length){
+
+    public void sendGenerator(String genre, String signature, String key, String length) {
         inputGenre = genre;
         inputSignature = signature;
         inputKey = key;
         inputLength = length;
-        
+
         System.out.print("genre: " + inputGenre + "\nsignature: " + inputSignature);
         System.out.print("\nkey: " + inputKey + "\nlength: " + inputLength);
 
     }
-    public Set<String> getGenres(){
-         mMelodies =  MelodyLibrary.getInstance().getMelodies();
-         genres = new HashSet<>();
-         for (Melody m : mMelodies){
 
-             genres.add(m.genre);
- 
-         }
+    public Set<String> getGenres() {
+        mMelodies = MelodyLibrary.getInstance().getMelodies();
+        genres = new HashSet<>();
+        for (Melody m : mMelodies) {
+
+            genres.add(m.genre);
+
+        }
         System.out.println("This is our genres  " + genres.toString());
         return genres;
     }
-    
-    
+
 }

@@ -7,6 +7,8 @@
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.core.MelodyTheory;
+import javax.swing.JPanel;
+import util.Alphabet;
 
 /**
  *
@@ -14,7 +16,7 @@ import edu.chalmers.melodymaker.core.MelodyTheory;
  */
 public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
 
-    MelodyMakerUI mmUI = new MelodyMakerUI();
+    //MelodyMakerUI mmUI = new MelodyMakerUI();
     /**
      * Creates new form MelodyMakerUIAdvanced
      */
@@ -22,7 +24,9 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
         initComponents();
     }
 
-    
+    public JPanel getJpanel(){
+        return jPanel1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,16 +38,22 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        applyButton = new javax.swing.JButton();
+        beforeField = new javax.swing.JTextField();
+        afterField = new javax.swing.JTextField();
 
         jLabel1.setText("Filter settings");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        applyButton.setText("Apply");
+        applyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                applyButtonActionPerformed(evt);
             }
         });
+
+        beforeField.setText("Before");
+
+        afterField.setText("After");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -56,16 +66,26 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
-                        .addComponent(jButton1)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                        .addComponent(applyButton)))
+                .addContainerGap(239, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(beforeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(afterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(84, 84, 84)
-                .addComponent(jButton1)
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(beforeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(afterField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(applyButton)
                 .addContainerGap(168, Short.MAX_VALUE))
         );
 
@@ -81,17 +101,27 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       // mmUI.getTextArea().setText("TEST");
-        MelodyTheory.preRuleList.add("c");
-        MelodyTheory.nextRuleList.add("c");
-        System.out.println("HEJ");
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+        // mmUI.getTextArea().setText("TEST");
+       // MelodyTheory.preRuleList.add("c");
+       // MelodyTheory.nextRuleList.add("c");
+        if (Alphabet.isLetterInAlphabet(beforeField.getText())) {
+            MelodyTheory.preRuleList.add(beforeField.getText());
+        }
+        if (Alphabet.isLetterInAlphabet(afterField.getText())) {
+            MelodyTheory.nextRuleList.add(afterField.getText());
+        }
+        System.out.println(MelodyTheory.preRuleList);
+                System.out.println(MelodyTheory.nextRuleList);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        MelodyMakerUI.statiska = "Funkar";
+    }//GEN-LAST:event_applyButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField afterField;
+    private javax.swing.JButton applyButton;
+    private javax.swing.JTextField beforeField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
