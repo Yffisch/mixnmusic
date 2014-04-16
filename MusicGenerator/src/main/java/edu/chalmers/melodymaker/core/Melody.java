@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chalmers.melodymaker.core;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,12 +9,12 @@ import java.util.ArrayList;
 public class Melody {
 
     //Classvariables
-    private String genre, title, noteLength, signature;
+    private String genre, title, noteLength, signature, key;
     private int id;
-    private final ArrayList<Note> listNotes;
+    private final List<Note> listNotes;
 
     //for test sake
-    public Melody(ArrayList<Note> alN) {
+    public Melody(List<Note> alN) {
         listNotes = alN;
         genre = "rock";
     }
@@ -32,14 +27,16 @@ public class Melody {
      * @param title
      * @param noteLength
      * @param signature
+     * @param key
      * @param alN
      */
-    public Melody(int id, String genre, String title, String noteLength, String signature, ArrayList<Note> alN) {
+    public Melody(int id, String genre, String title, String noteLength, String signature, String key, List<Note> alN) {
         this.id = id;
         this.genre = genre;
         this.title = title;
         this.noteLength = noteLength;
         this.signature = signature;
+        this.key = key;
         listNotes = alN;
     }
 
@@ -51,7 +48,7 @@ public class Melody {
         return title;
     }
 
-    public String getNoteLegnth() {
+    public String getNoteLength() {
         return noteLength;
     }
 
@@ -59,12 +56,16 @@ public class Melody {
         return signature;
     }
 
-    public ArrayList<Note> getNoteList() {
+    public List<Note> getNoteList() {
         return listNotes;
     }
-    
-    public int getID(){
+
+    public int getID() {
         return id;
+    }
+    
+    public String getKey() {
+        return key;
     }
 
     @Override

@@ -19,11 +19,9 @@ public class MelodyGenerator {
     private final Note end = new Note("EOM");
     private HashMap<List<Note>, Integer> startTable;
     private HashMap<String, MarkovInstance> markovTable;
-    private String genre;
-    private String toneLength;
-    private String signature;
+    private String genre, title, toneLength, signature, key;
 
-    public MelodyGenerator(int order, int minNrOfNotes, int maxNrOfNotes, String genre, String length, String signature) { //Genre/Length/Signature
+    public MelodyGenerator(int order, int minNrOfNotes, int maxNrOfNotes, String genre, String title, String length, String signature, String key) { //Genre/Length/Signature
         this.MIN = minNrOfNotes;
         this.MAX = maxNrOfNotes;
         if (order < 1) {
@@ -41,7 +39,7 @@ public class MelodyGenerator {
      */
     public MelodyGenerator() {
         //ORDER,MIN,MAX,Genre,Length,Signature
-        this(4, 5, 100, null, null, null);
+        this(4, 5, 100, null, null, null, null, null);
     }
 
     /**
@@ -129,7 +127,7 @@ public class MelodyGenerator {
      *
      * @return a Markov chain presented as a String
      */
-    public List<Note> generateTune() {
+    public Melody generateTune() {
 
         List<Note> noteList = new ArrayList<>();
         int length = ORDER;
@@ -177,8 +175,9 @@ public class MelodyGenerator {
             System.out.print(note);
         }
         System.out.println();
-        return MelodyTheory.applyMusicTheory(noteList);
-        //   return noteList;
+        //return MelodyTheory.applyMusicTheory(noteList);
+        Melody melody = new Melody(new Random().nextInt(MAX), genre, title, toneLength, signature, key, noteList);
+        return melody;
     }
     
     private List<List<Note>> startProbabilities() {

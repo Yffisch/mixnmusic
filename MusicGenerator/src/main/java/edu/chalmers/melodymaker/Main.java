@@ -10,8 +10,6 @@ import edu.chalmers.melodymaker.io.MelodyExporter;
  */
 public class Main {
 
-    MelodyExporter e;
-
     public static void main(String[] args) {
         Main main = new Main();
     }
@@ -23,8 +21,7 @@ public class Main {
     public Main() {
         MelodyLibrary.getInstance().makeMelody();
         // Import file, export file
-        e = new MelodyExporter("supermario.abc", "huuuu.txt");
-        e.toMIDI(null, "test");
+        new MelodyExporter().exportTune("temp.abc");
         MelodyMakerUI gui = MelodyMakerUI.getInstance();
         String[] args = {};
         MelodyMakerUI.main(args);
