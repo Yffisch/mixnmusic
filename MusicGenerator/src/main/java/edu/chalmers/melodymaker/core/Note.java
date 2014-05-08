@@ -22,4 +22,8 @@ public class Note {
         return note;
     }
     
+    public void setNote(String s){
+        note = s;
+    }
+    
 }

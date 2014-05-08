@@ -409,16 +409,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void RuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RuleButtonActionPerformed
 
         ruleArea.removeAll();
+        MelodyFilter.regExpList.add(rulePre.getText());
         if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
-            MelodyFilter.preRuleList.add(rulePre.getText());
+            //MelodyFilter.preRuleList.add(rulePre.getText());
         }
         if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
-            MelodyFilter.nextRuleList.add(ruleNext.getText());
+            //MelodyFilter.nextRuleList.add(ruleNext.getText());
         }
 
         //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
         for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
-            System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
+           // System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
         }
         if (Alphabet.isLetterInAlphabet(rulePre.getText()) && Alphabet.isLetterInAlphabet(ruleNext.getText())) {
             ruleArea.append("Can't have: " + rulePre.getText() + " and " + ruleNext.getText() + " together!\n");
