@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package player;
+package edu.chalmers.melodymaker.player;
 
 import java.io.File;
 import java.io.IOException;

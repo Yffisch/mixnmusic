@@ -9,7 +9,6 @@ import abc.parser.TuneBookParser;
 import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
-import edu.chalmers.melodymaker.core.MelodyTheory;
 import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,11 +38,11 @@ public class MelodyExporter {
     }
 
     public void exportTune(String exportFilename, int order) {
-        MelodyGenerator generator = new MelodyGenerator(order, 20, 100, title, genre, length, signature, key);
+        MelodyGenerator generator = new MelodyGenerator(order, 50, 100, title, genre, length, signature, key);
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();
-        List<Note> output = melody.getNoteList();
+        List<Note> output = generator.applyFilter(melody.getNoteList());
         StringBuilder sb = new StringBuilder();
         //Build ABC
         sb.append("X:");
@@ -59,30 +58,29 @@ public class MelodyExporter {
         sb.append("\nK:");
         sb.append(melody.getKey());
         sb.append("\n");
-        output = MelodyTheory.applyMusicTheory(output);
         for (Note note : output) {
             sb.append(note);
         }
 
         try {
-            FileWriter writer = new FileWriter("src/main/resources/exportfiles/" + exportFilename);
+            FileWriter writer = new FileWriter("src/main/resources/exportfiles/" + exportFilename + ".abc");
             BufferedWriter out = new BufferedWriter(writer);
             out.write(sb.toString());
             out.close();
         } catch (IOException e) {
         }
 
-  //      toMIDI(melody, "test");
+        toMIDI(melody, exportFilename, "test");
         System.out.println("\nGENERATED TUNE AFTER MUSIC THEORY HAS BEEN APPLIED...");
         System.out.println(sb.toString());
     }
 
-    private void toMIDI(Melody melody, String midiName) {
-        String filePath = "src/main/resources/stupid.abc";
+    private void toMIDI(Melody melody, String abcName, String midiName) {
+        String filePath = "src/main/resources/exportfiles/" + abcName + ".abc";
         File f = new File(filePath);
         try {
             TuneBook abcTB = new TuneBookParser().parse(f);
-            Tune tune = abcTB.getTune(57);
+            Tune tune = abcTB.getTune(melody.getID());
             File outMIDI = new File("src/main/resources/exportfiles/" + midiName + ".mid");
             MidiConverterAbstract conv = new BasicMidiConverter();
             Sequence s = conv.toMidiSequence(tune);

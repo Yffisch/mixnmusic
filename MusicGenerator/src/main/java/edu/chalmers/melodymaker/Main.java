@@ -1,7 +1,7 @@
 package edu.chalmers.melodymaker;
 
 import edu.chalmers.melodymaker.core.MelodyLibrary;
-import edu.chalmers.melodymaker.gui.MelodyMakerUI;
+import edu.chalmers.melodymaker.gui.MainFrame;
 
 /**
  * @author: Kristofer
@@ -20,8 +20,8 @@ public class Main {
     public Main() {
         MelodyLibrary.getInstance().makeMelody();
         // Import file, export file
-        MelodyMakerUI gui = MelodyMakerUI.getInstance();
+        MainFrame gui = MainFrame.getInstance();
         String[] args = {};
-        MelodyMakerUI.main(args);
+        MainFrame.main(args);
     }
 }

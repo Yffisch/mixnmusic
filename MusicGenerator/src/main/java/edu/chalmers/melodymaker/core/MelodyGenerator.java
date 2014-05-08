@@ -3,7 +3,6 @@ package edu.chalmers.melodymaker.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 
@@ -37,14 +36,6 @@ public class MelodyGenerator {
     }
 
     /**
-     * For testing purpose
-     */
-    public MelodyGenerator() {
-        //ORDER,MIN,MAX,Genre,Length,Signature
-        this(4, 5, 100, null, null, null, null, null);
-    }
-
-    /**
      * Initiate the HashMaps
      */
     private void initTables() {
@@ -58,12 +49,14 @@ public class MelodyGenerator {
      */
     public void learnABC(List<Melody> melodies) {
         for (Melody melody : melodies) {
-      //      if (melody.getGenre().equals(genre)){
                 if(setStartTable(melody.getNoteList())){
                    setOrderTable(melody.getNoteList());
                 }
-       //     }
         }
+    }
+
+    public List<Note> applyFilter(List<Note> noteList){
+        return MelodyFilter.applyFilter(noteList);
     }
 
     private boolean setStartTable(List<Note> tune) {
@@ -161,7 +154,6 @@ public class MelodyGenerator {
                 current = current.subList(1, ORDER);
             }
             current.add(next);
-            //System.out.println("Current is : " + current);
             if (length > MAX) {
                 break;
             }

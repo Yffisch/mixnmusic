@@ -5,7 +5,6 @@
  */
 package edu.chalmers.melodymaker.core;
 
-import edu.chalmers.melodymaker.gui.MelodyMakerUI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author Yff
  */
-public class MelodyTheory {
+public class MelodyFilter {
 public static List<Note> newlist;
        public static ArrayList<String> preRuleList = new ArrayList<>();
     public static ArrayList<String> nextRuleList = new ArrayList<>();
@@ -26,12 +25,12 @@ public static List<Note> newlist;
         return nextRuleList;
     }
     
-    public static List<Note> applyMusicTheory(List<Note> notes){
+    public static List<Note> applyFilter(List<Note> notes){
         newlist = new ArrayList<>();
         int i = 0;
          newlist.add(notes.get(i));
         for(; i < notes.size()-1; i++){
-            if(!breaksMusicTheory(notes.get(i).toString(), notes.get(i+1).toString())){
+            if(!breaksFilter(notes.get(i).toString(), notes.get(i+1).toString())){
                 System.out.println("Comparing " + notes.get(i).toString() + " and " + notes.get(i+1).toString() + " Adding: " +  notes.get(i).toString() + " removing " + notes.get(i+1).toString());
                                 newlist.add(notes.get(i+1));
 
@@ -47,7 +46,7 @@ public static List<Note> newlist;
         
     }
     // Maybe make an own class of this that you can hårdkoda in?
-    public static boolean breaksMusicTheory(String currentNote, String next) {
+    public static boolean breaksFilter(String currentNote, String next) {
         // Här kanske man ska ha en getTonart och getMeter och så to be able to implement what notes that are allowed
         //does break theory
        

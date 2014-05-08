@@ -7,32 +7,32 @@
 package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
-import edu.chalmers.melodymaker.core.MelodyTheory;
+import edu.chalmers.melodymaker.core.MelodyFilter;
 import javax.swing.JPanel;
-import util.Alphabet;
+import edu.chalmers.melodymaker.util.Alphabet;
 
 /**
  *
  * @author Yff
  */
-public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
+public class SettingsFrame extends javax.swing.JPanel {
 
-    MelodyMakerUI melodyMakerUI = MelodyMakerUI.getInstance();
+    MainFrame melodyMakerUI = MainFrame.getInstance();
     /**
      * Creates new form MelodyMakerUIAdvanced
      */
     
     
-     private static MelodyMakerUIAdvanced instance = null;
+     private static SettingsFrame instance = null;
 
-    protected MelodyMakerUIAdvanced() {
+    protected SettingsFrame() {
                 initComponents();
 
     }
 
-    public static MelodyMakerUIAdvanced getInstance() {
+    public static SettingsFrame getInstance() {
         if (instance == null) {
-            instance = new MelodyMakerUIAdvanced();
+            instance = new SettingsFrame();
         }
         return instance;
     }
@@ -118,15 +118,15 @@ public class MelodyMakerUIAdvanced extends javax.swing.JPanel {
        // MelodyTheory.preRuleList.add("c");
        // MelodyTheory.nextRuleList.add("c");
         if (Alphabet.isLetterInAlphabet(beforeField.getText())) {
-            MelodyTheory.preRuleList.add(beforeField.getText());
+            MelodyFilter.preRuleList.add(beforeField.getText());
         }
         if (Alphabet.isLetterInAlphabet(afterField.getText())) {
-            MelodyTheory.nextRuleList.add(afterField.getText());
+            MelodyFilter.nextRuleList.add(afterField.getText());
         }
-        System.out.println(MelodyTheory.preRuleList);
-                System.out.println(MelodyTheory.nextRuleList);
+        System.out.println(MelodyFilter.preRuleList);
+                System.out.println(MelodyFilter.nextRuleList);
 
-        MelodyMakerUI.statiska = "Funkar";
+        MainFrame.statiska = "Funkar";
         melodyMakerUI.setTestString("This works just fine");
     }//GEN-LAST:event_applyButtonActionPerformed
 

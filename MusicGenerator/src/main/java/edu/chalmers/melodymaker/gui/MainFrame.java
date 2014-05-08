@@ -7,9 +7,9 @@ package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.Main;
 import edu.chalmers.melodymaker.controller.MelodyController;
-import util.Alphabet;
-import player.MIDIplayer;
-import edu.chalmers.melodymaker.core.MelodyTheory;
+import edu.chalmers.melodymaker.util.Alphabet;
+import edu.chalmers.melodymaker.player.MIDIplayer;
+import edu.chalmers.melodymaker.core.MelodyFilter;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  *
  * @author David
  */
-public class MelodyMakerUI extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
     static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
     static String statiska = "inte";
@@ -30,9 +30,9 @@ public class MelodyMakerUI extends javax.swing.JFrame {
      * Creates new form MelodyMakerUI
      */
    
-    private static MelodyMakerUI instance = null;
+    private static MainFrame instance = null;
 
-    protected MelodyMakerUI() {
+    protected MainFrame() {
                   initComponents();
         genreComboBox.removeAllItems();
         for (String g : MelodyController.getInstance().getGenres()) {
@@ -41,9 +41,9 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
     }
 
-    public static MelodyMakerUI getInstance() {
+    public static MainFrame getInstance() {
         if (instance == null) {
-            instance = new MelodyMakerUI();
+            instance = new MainFrame();
         }
         return instance;
     }
@@ -410,15 +410,15 @@ public class MelodyMakerUI extends javax.swing.JFrame {
 
         ruleArea.removeAll();
         if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
-            MelodyTheory.preRuleList.add(rulePre.getText());
+            MelodyFilter.preRuleList.add(rulePre.getText());
         }
         if (Alphabet.isLetterInAlphabet(rulePre.getText())) {
-            MelodyTheory.nextRuleList.add(ruleNext.getText());
+            MelodyFilter.nextRuleList.add(ruleNext.getText());
         }
 
         //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
-        for (int i = 0; i < MelodyTheory.nextRuleList.size(); i++) {
-            System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyTheory.preRuleList.get(i) + "] and you have added next: [" + MelodyTheory.nextRuleList.get(i) + "]");
+        for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
+            System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
         }
         if (Alphabet.isLetterInAlphabet(rulePre.getText()) && Alphabet.isLetterInAlphabet(ruleNext.getText())) {
             ruleArea.append("Can't have: " + rulePre.getText() + " and " + ruleNext.getText() + " together!\n");
@@ -433,14 +433,14 @@ public class MelodyMakerUI extends javax.swing.JFrame {
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
       
             JFrame frame = new JFrame ("Settings");
-            frame.getContentPane().add (MelodyMakerUIAdvanced.getInstance());
+            frame.getContentPane().add (SettingsFrame.getInstance());
             frame.pack();
             frame.setVisible (true);
             System.out.println(statiska);
                         System.out.println("TestStringValue " + getTestString());
 
-            System.out.println(MelodyTheory.preRuleList);
-                System.out.println(MelodyTheory.nextRuleList);
+            System.out.println(MelodyFilter.preRuleList);
+                System.out.println(MelodyFilter.nextRuleList);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void playToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playToggleButtonActionPerformed
@@ -478,20 +478,20 @@ public class MelodyMakerUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MelodyMakerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MelodyMakerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MelodyMakerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MelodyMakerUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MelodyMakerUI melodyUI = MelodyMakerUI.getInstance();
+                MainFrame melodyUI = MainFrame.getInstance();
                 melodyUI.setVisible(true);
                 melodyUI.setIconImage(topIcon.getImage());
                 melodyUI.setTitle("Melody Maker");

@@ -45,7 +45,7 @@ public class MarkovInstance {
      * @param keyToRemove
      * @return an array list with following notes occurring according to their %
      */
-    public List<Note> toProbabilities(Note keyToRemove) {
+    protected List<Note> toProbabilities(Note keyToRemove) {
         Set<Note> keySet = following.keySet();
         List<Note> probList = new ArrayList<>();
         for (Note key : keySet) {
