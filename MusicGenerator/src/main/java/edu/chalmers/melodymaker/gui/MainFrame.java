@@ -171,7 +171,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("RegExp:");
+        jLabel1.setText("RegExp: \\w typ");
         jLabel1.setToolTipText("");
 
         jButton2.setText("Save your song?");
@@ -186,7 +186,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Replace:");
+        jLabel3.setText("Replace with:");
 
         replaceField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,9 +261,7 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(generatingPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel1)
                                     .addGroup(generatingPanelLayout.createSequentialGroup()
                                         .addComponent(regExpField)
                                         .addGap(160, 160, 160))))
@@ -392,15 +390,19 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
-
+ if(!MelodyFilter.regExpList.isEmpty() || !MelodyFilter.replaceList.isEmpty() ){
         String inputTitle = titleTextField.getText();
         String inputGenre = (String) genreComboBox.getSelectedItem();
         String inputSignature = (String) signatureComboBox.getSelectedItem();
         String inputKey = (String) keyComboBox.getSelectedItem();
         String inputLength = (String) lengthComboBox.getSelectedItem();
-
+       
         MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
-       // MelodyTheory.nextRuleList.clear();
+        }
+        else{
+            System.out.print("DU HAR GLÖMT ETT REGEXP!! DET RÄCKER ATT TRYCKA PÅ REGEXPKNAPPEN LOL \n");
+        }
+// MelodyTheory.nextRuleList.clear();
        // MelodyTheory.preRuleList.clear();
     }//GEN-LAST:event_generateButtonActionPerformed
 
@@ -417,24 +419,25 @@ public class MainFrame extends javax.swing.JFrame {
         ruleArea.removeAll();
         MelodyFilter.regExpList.add(regExpField.getText());
         MelodyFilter.replaceList.add(replaceField.getText());
-        if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
+        ruleArea.append("Added: " + regExpField.getText() + " gör regexp-alfabet btw \n");
+      //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
             //MelodyFilter.preRuleList.add(rulePre.getText());
-        }
-        if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
+      //  }
+      //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
             //MelodyFilter.nextRuleList.add(ruleNext.getText());
-        }
+      //  }
 
         //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
-        for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
+       // for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
            // System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
-        }
-        if (Alphabet.isLetterInAlphabet(regExpField.getText()) && Alphabet.isLetterInAlphabet(replaceField.getText())) {
-            ruleArea.append("Can't have: " + regExpField.getText() + " and " + replaceField.getText() + " together!\n");
-            System.out.println("______________________________________________________________________________");
-        }
-        else{
-            ruleArea.append("ERROR, letters are not in alphabet!\n");
-        }
+       // }
+       // if (Alphabet.isLetterInAlphabet(regExpField.getText()) && Alphabet.isLetterInAlphabet(replaceField.getText())) {
+          //  ruleArea.append("Can't have: " + regExpField.getText() + " and " + replaceField.getText() + " together!\n");
+          //  System.out.println("______________________________________________________________________________");
+       // }
+       // else{
+            //ruleArea.append("ERROR, letters are not in alphabet MEN DU TRYCKTE PÅ KNAPPEN IAF OCH DET FUNKAR!\n");
+       // }
 
     }//GEN-LAST:event_RuleButtonActionPerformed
 
