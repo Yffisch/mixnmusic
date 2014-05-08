@@ -42,7 +42,7 @@ public class MelodyExporter {
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();
-        List<Note> output = generator.applyFilter(melody.getNoteList());
+        List<String> output = generator.applyFilter(melody.getNoteList());
         StringBuilder sb = new StringBuilder();
         //Build ABC
         sb.append("X:");
@@ -58,7 +58,7 @@ public class MelodyExporter {
         sb.append("\nK:");
         sb.append(melody.getKey());
         sb.append("\n");
-        for (Note note : output) {
+        for (String note : output) {
             sb.append(note);
         }
 

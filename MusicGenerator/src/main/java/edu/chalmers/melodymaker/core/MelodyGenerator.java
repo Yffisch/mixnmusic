@@ -55,7 +55,7 @@ public class MelodyGenerator {
         }
     }
 
-    public List<Note> applyFilter(List<Note> noteList){
+    public List<String> applyFilter(List<Note> noteList){
         return MelodyFilter.applyFilter(noteList);
     }
 

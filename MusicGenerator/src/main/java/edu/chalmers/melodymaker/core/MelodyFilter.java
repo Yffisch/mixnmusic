@@ -14,10 +14,12 @@ import java.util.List;
  */
 public class MelodyFilter {
 
-    public static List<Note> newlist;
+    public static List<String> newlist;
     public static ArrayList<String> preRuleList = new ArrayList<>();
     public static ArrayList<String> nextRuleList = new ArrayList<>();
     public static ArrayList<String> regExpList = new ArrayList<>();
+    public static ArrayList<String> replaceList = new ArrayList<>();
+
 
     public static ArrayList<String> getPreRuleList() {
         return preRuleList;
@@ -30,15 +32,24 @@ public class MelodyFilter {
     
     
     
-    
+    static String pattern;
    
-    public static List<Note> applyFilter(List<Note> notes) {
+    public static List<String> applyFilter(List<Note> notes) {
         newlist = new ArrayList<>();
-        String pattern = "(\\W)";
+        pattern = regExpList.get(0);
+        System.out.print("Ditt RegExp är: " + regExpList.get(0) + " och ersätts med: " + replaceList.get(0) + "\n");
+
        // for (int i = 0; i <=notes.size()-1; i++){
          //           for (int j = 0; j <=pattern.size()-1; i++){
-
-            System.out.println(notes.toString().replaceAll(pattern, "D"));
+             for (Note note : notes){
+            System.out.print(note.toString().replaceAll(pattern, replaceList.get(0)));
+            
+            newlist.add(note.toString().replaceAll(pattern, replaceList.get(0)));
+        }
+        //newlist = notes;
+              for (String note : newlist){
+      //System.out.print("hej" + note);
+              }
            //         }
            
           //  if(notes.get(i).toString().equals("C")){
