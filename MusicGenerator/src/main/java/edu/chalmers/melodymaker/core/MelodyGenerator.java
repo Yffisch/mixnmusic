@@ -64,11 +64,6 @@ public class MelodyGenerator {
                 }
        //     }
         }
-        
-        for (Entry<String, MarkovInstance> entry  : markovTable.entrySet()) {
-            System.out.println(entry.toString());
-            System.out.println(entry.getValue());
-        }
     }
 
     private boolean setStartTable(List<Note> tune) {
@@ -166,7 +161,7 @@ public class MelodyGenerator {
                 current = current.subList(1, ORDER);
             }
             current.add(next);
-            System.out.println("Current is : " + current);
+            //System.out.println("Current is : " + current);
             if (length > MAX) {
                 break;
             }
@@ -177,7 +172,6 @@ public class MelodyGenerator {
             System.out.print(note);
         }
         System.out.println();
-        //return MelodyTheory.applyMusicTheory(noteList);
         Melody melody = new Melody(new Random().nextInt(MAX), title, genre, toneLength, signature, key, noteList);
         return melody;
     }
