@@ -8,7 +8,6 @@ package edu.chalmers.melodymaker.gui;
 import edu.chalmers.melodymaker.Main;
 import edu.chalmers.melodymaker.controller.MelodyController;
 import edu.chalmers.melodymaker.util.Alphabet;
-import edu.chalmers.melodymaker.player.MIDIplayer;
 import edu.chalmers.melodymaker.core.MelodyFilter;
 import edu.chalmers.melodymaker.io.MelodyExporter;
 import java.util.ArrayList;
@@ -100,7 +99,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         settingsButton = new javax.swing.JButton();
         playToggleButton = new javax.swing.JToggleButton();
-        stopButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,17 +213,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        playToggleButton.setText("Play");
+        playToggleButton.setText("To player");
         playToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playToggleButtonActionPerformed(evt);
-            }
-        });
-
-        stopButton.setText("Stop");
-        stopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopButtonActionPerformed(evt);
             }
         });
 
@@ -240,8 +231,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(stopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(generatingPanelLayout.createSequentialGroup()
@@ -336,8 +326,6 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(playToggleButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stopButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addContainerGap())
@@ -455,18 +443,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void playToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playToggleButtonActionPerformed
-        if(playToggleButton.isEnabled()){
-        MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
-        playToggleButton.setEnabled(false);
-        }
-    
+
+        PlayerJFrame s = new PlayerJFrame();
+        s.setVisible(true);
+  
     }//GEN-LAST:event_playToggleButtonActionPerformed
-
-    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
-
-        MIDIplayer.reset();
-        playToggleButton.setEnabled(true);
-    }//GEN-LAST:event_stopButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -538,7 +519,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton settingsButton;
     private javax.swing.JComboBox signatureComboBox;
     private javax.swing.JLabel signatureLabel;
-    public static javax.swing.JButton stopButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField titleTextField;
     // End of variables declaration//GEN-END:variables
