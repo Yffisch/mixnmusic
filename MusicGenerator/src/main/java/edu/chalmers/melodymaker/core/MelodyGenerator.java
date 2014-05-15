@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.Set;
 
 /**
+ * MelodyGenerator can generates new tunes with Markov chains. The probabilities
+ * is based on the note succession in the melodies in MelodyLibrary.
  *
  * @author Yff
  */
@@ -18,8 +20,19 @@ public class MelodyGenerator {
     private final Note end = new Note("EOM");
     private HashMap<List<Note>, Integer> startTable;
     private HashMap<String, MarkovInstance> markovTable;
-    private String genre, title, toneLength, signature, key;
+    private String genre, title, toneLength, signature, tuneKey;
 
+    /**
+     *
+     * @param order is the order of the Markov chain
+     * @param minNrOfNotes the minimum length of the tune in notes
+     * @param maxNrOfNotes the maximum length of the tune in notes
+     * @param title
+     * @param genre the probability tables is loaded with melodies in this genre
+     * @param length
+     * @param signature
+     * @param key
+     */
     public MelodyGenerator(int order, int minNrOfNotes, int maxNrOfNotes, String title, String genre, String length, String signature, String key) {
         this.MIN = minNrOfNotes;
         this.MAX = maxNrOfNotes;
@@ -29,7 +42,7 @@ public class MelodyGenerator {
         this.title = title;
         this.ORDER = order;
         this.genre = genre;
-        this.key = key;
+        tuneKey = key;
         toneLength = length;
         this.signature = signature;
         initTables();
@@ -42,30 +55,32 @@ public class MelodyGenerator {
         startTable = new HashMap<>();
         markovTable = new HashMap<>();
     }
-    
+
     /**
+     * Read all Melody-objects to get the correct probabilities in the
+     * transition tables
      *
      * @param melodies
      */
     public void learnABC(List<Melody> melodies) {
         for (Melody melody : melodies) {
-                if(setStartTable(melody.getNoteList())){
-                   setOrderTable(melody.getNoteList());
-                }
+            if (setStartTable(melody.getNoteList())) {
+                setOrderTable(melody.getNoteList());
+            }
         }
     }
 
-    public List<String> applyFilter(List<Note> noteList){
+    public List<String> applyFilter(List<Note> noteList) {
         return MelodyFilter.applyFilter(noteList);
     }
 
     private boolean setStartTable(List<Note> tune) {
-        if (tune.size() < ORDER){
+        if (tune.size() < ORDER) {
             System.err.print("Melody is to short!");
             return false;
         }
         List<Note> startList = tune.subList(0, ORDER);
-        
+
         if (!startTable.containsKey(startList)) {
             startTable.put(startList, 1);
         } else {
@@ -99,7 +114,7 @@ public class MelodyGenerator {
      */
     private void updateTable(List<Note> seq, Note next) {
         StringBuilder sb = new StringBuilder();
-        for (Note note : seq){
+        for (Note note : seq) {
             sb.append(note);
         }
         if (!markovTable.containsKey(sb.toString())) {
@@ -115,7 +130,7 @@ public class MelodyGenerator {
     /**
      * Returns a generated tune from Markov probabilities
      *
-     * @return a Markov chain presented as a String
+     * @return a Melody with the generated list of notes
      */
     public Melody generateTune() {
 
@@ -135,7 +150,7 @@ public class MelodyGenerator {
                 keyToRemove = new Note("RANDOM_WORD");
             }
             StringBuilder sb = new StringBuilder();
-            for (Note note : current){
+            for (Note note : current) {
                 sb.append(note);
             }
             MarkovInstance history = markovTable.get(sb.toString());
@@ -145,10 +160,10 @@ public class MelodyGenerator {
             if (next.equals(end)) {
                 break;
             }
-        
+
             noteList.add(next);
             length++;
-            if (ORDER == 1){
+            if (ORDER == 1) {
                 current = new ArrayList<>();
             } else {
                 current = current.subList(1, ORDER);
@@ -158,25 +173,25 @@ public class MelodyGenerator {
                 break;
             }
         }
-        
+
         System.out.println("\nGENERATED NOTES BEFORE ANY MUSIC THEORY...");
-        for (Note note : noteList){
+        for (Note note : noteList) {
             System.out.print(note);
         }
         System.out.println();
-        Melody melody = new Melody(new Random().nextInt(MAX), title, genre, toneLength, signature, key, noteList);
+        Melody melody = new Melody(new Random().nextInt(MAX), title, genre, toneLength, signature, tuneKey, noteList);
         return melody;
     }
-    
+
     private List<List<Note>> startProbabilities() {
         Set<List<Note>> keySet = startTable.keySet();
         List<List<Note>> probList = new ArrayList<>();
         for (List<Note> key : keySet) {
-                int occurence = startTable.get(key);
-                while (occurence > 0) {
-                    probList.add(key);
-                    occurence--;
-                }
+            int occurence = startTable.get(key);
+            while (occurence > 0) {
+                probList.add(key);
+                occurence--;
+            }
         }
         return probList;
     }

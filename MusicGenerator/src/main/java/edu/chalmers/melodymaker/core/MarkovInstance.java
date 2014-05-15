@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * The probability tables in MelodyGenerator is filled with MarkovInstances. An
+ * object of this class stores information of for a sequence of notes and the
+ * probabilities for other notes to follow this sequence.
  *
  * @author David
  */
@@ -15,6 +18,10 @@ public class MarkovInstance {
     private final List<Note> history;
     private final HashMap<Note, Integer> following;
 
+    /**
+     * 
+     * @param history is the sequence of notes that is to be studied
+     */
     public MarkovInstance(List<Note> history) {
         following = new HashMap<>();
         this.history = history;
@@ -65,7 +72,7 @@ public class MarkovInstance {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("The sequence \"");
-        for(Note note : getHistory()){
+        for (Note note : getHistory()) {
             sb.append(note.toString());
         }
         sb.append("\" has ");

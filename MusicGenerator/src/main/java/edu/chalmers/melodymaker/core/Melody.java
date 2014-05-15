@@ -3,7 +3,8 @@ package edu.chalmers.melodymaker.core;
 import java.util.List;
 
 /**
- *
+ * An object of this class stores all information we need for a melody
+ * 
  * @author Emma
  */
 public class Melody {
@@ -12,15 +13,10 @@ public class Melody {
     private String genre, title, noteLength, signature, key;
     private int id;
     private final List<Note> listNotes;
+    private List<String> filteredNotes;
 
-    //for test sake
-    public Melody(List<Note> alN) {
-        listNotes = alN;
-        genre = "rock";
-    }
-
-    //Our Melody-object
     /**
+     * Our Melody-object
      *
      * @param id
      * @param genre
@@ -63,9 +59,17 @@ public class Melody {
     public int getID() {
         return id;
     }
-    
+
     public String getKey() {
         return key;
+    }
+
+    public List<String> getFilteredNotes() {
+        return filteredNotes;
+    }
+
+    public void setFilteredNotes(List<String> notes) {
+        filteredNotes = notes;
     }
 
     @Override
