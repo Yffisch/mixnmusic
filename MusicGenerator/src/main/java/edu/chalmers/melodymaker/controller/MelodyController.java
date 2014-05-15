@@ -57,7 +57,7 @@ public class MelodyController {
         for (Melody m : mMelodies) {
             genres.add(m.getGenre());
         }
-        System.out.println("This is our genres  " + genres.toString());
+        System.out.println("\nThis is our genres  " + genres.toString());
         return genres;
     }
 }
