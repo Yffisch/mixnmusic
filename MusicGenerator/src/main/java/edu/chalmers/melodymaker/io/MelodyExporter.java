@@ -7,9 +7,6 @@ import abc.notation.Tune;
 import abc.notation.TuneBook;
 import abc.parser.TuneBookParser;
 import edu.chalmers.melodymaker.core.Melody;
-import edu.chalmers.melodymaker.core.MelodyGenerator;
-import edu.chalmers.melodymaker.core.MelodyLibrary;
-import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -21,28 +18,26 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 /**
- *
+ * Handles writing of abc-files and midi-files from Melody-objects.
+ * 
  * @author Kristofer
  */
-public class MelodyExporter {
+public class MelodyExporter implements IMelodyIO {
 
-    private MelodyLoader melodyLoader = new MelodyLoader();
-    private String title, genre, signature, key, length;
-    
-    public MelodyExporter(String title, String genre, String signature, String key, String length){
-        this.title = title;
-        this.genre = genre;
-        this.signature = signature;
-        this.key = key;
-        this.length = length;
+    public MelodyExporter() {
     }
 
-    public void exportTune(String exportFilename, int order) {
-        MelodyGenerator generator = new MelodyGenerator(order, 50, 100, title, genre, length, signature, key);
-        generator.learnABC(MelodyLibrary.getInstance().getMelodies());
-        System.out.println("GENERATING TUNE...");
-        Melody melody = generator.generateTune();
-        List<String> output = generator.applyFilter(melody.getNoteList());
+    /**
+     * Takes a Melody-object and writes it to an abc-file. It also creates a
+     * midi-file through the helper method toMidi
+     *
+     * @param exportName
+     * @param melody
+     */
+    @Override
+    public void exportTune(String exportName, Melody melody) {
+
+        List<String> notes = melody.getFilteredNotes();
         StringBuilder sb = new StringBuilder();
         //Build ABC
         sb.append("X:");
@@ -58,30 +53,30 @@ public class MelodyExporter {
         sb.append("\nK:");
         sb.append(melody.getKey());
         sb.append("\n");
-        for (String note : output) {
+        for (String note : notes) {
             sb.append(note);
         }
 
         try {
-            FileWriter writer = new FileWriter("src/main/resources/exportfiles/" + exportFilename + ".abc");
+            FileWriter writer = new FileWriter("src/main/resources/exportfiles/" + exportName + ".abc");
             BufferedWriter out = new BufferedWriter(writer);
             out.write(sb.toString());
             out.close();
         } catch (IOException e) {
         }
 
-        toMIDI(melody, exportFilename, "test");
+        toMIDI(melody, exportName);
         System.out.println("\nGENERATED TUNE AFTER MUSIC THEORY HAS BEEN APPLIED...");
         System.out.println(sb.toString());
     }
 
-    private void toMIDI(Melody melody, String abcName, String midiName) {
-        String filePath = "src/main/resources/exportfiles/" + abcName + ".abc";
+    private void toMIDI(Melody melody, String exportName) {
+        String filePath = "src/main/resources/exportfiles/" + exportName + ".abc";
         File f = new File(filePath);
         try {
             TuneBook abcTB = new TuneBookParser().parse(f);
             Tune tune = abcTB.getTune(melody.getID());
-            File outMIDI = new File("src/main/resources/exportfiles/" + midiName + ".mid");
+            File outMIDI = new File("src/main/resources/exportfiles/" + exportName + ".mid");
             MidiConverterAbstract conv = new BasicMidiConverter();
             Sequence s = conv.toMidiSequence(tune);
 
@@ -96,5 +91,15 @@ public class MelodyExporter {
         } catch (IOException ex) {
             Logger.getLogger(MelodyExporter.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Melody loadMelody(String filename) {
+        throw new UnsupportedOperationException("Use the MelodyIOFactory to get the loader to load a melody");
+    }
+
+    @Override
+    public List<File> loadFileList() {
+        throw new UnsupportedOperationException("Use the MelodyIOFactory to get the loader to load the filelist");
     }
 }
