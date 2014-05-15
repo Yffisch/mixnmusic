@@ -1,11 +1,14 @@
 package edu.chalmers.melodymaker.core;
 
-import edu.chalmers.melodymaker.io.MelodyLoader;
+import edu.chalmers.melodymaker.io.IMelodyIO;
+import edu.chalmers.melodymaker.io.MelodyIOFactory;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
+ * Holds all Melody-objects
+ * 
  * @author Emma Nyborg
  */
 public class MelodyLibrary {
@@ -21,20 +24,27 @@ public class MelodyLibrary {
         return melodyModel;
     }
 
-    public void makeMelody() {
-        MelodyLoader melodyLoader = new MelodyLoader();
-        melodyLoader.loadFileList();
+    /**
+     * Loads all abc-files within the import directory (abc)
+     */
+    public void fillLibrary() {
+        IMelodyIO melodyLoader = MelodyIOFactory.getLoader();
+        List<File> files = melodyLoader.loadFileList();
 
-        if (!MelodyLoader.files.isEmpty()) {
+        if (!files.isEmpty()) {
             //String genre, String signature, String key, String length)
-            for (File file : MelodyLoader.files) {
-                melodyLoader.loadMelody(file.getName());
-                Melody melody = new Melody(melodyLoader.getNoteList());
+            for (File file : files) {
+                Melody melody = melodyLoader.loadMelody(file.getName());
                 melodies.add(melody);
             }
         }
     }
 
+    /**
+     * Returns a list of all melodies in the MelodyLibrary class
+     *
+     * @return
+     */
     public ArrayList<Melody> getMelodies() {
         return melodies;
     }
