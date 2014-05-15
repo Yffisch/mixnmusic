@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chalmers.melodymaker.io;
 
+import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.util.Alphabet;
 import edu.chalmers.melodymaker.core.Note;
 import java.io.BufferedReader;
@@ -12,100 +8,63 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * This class handles the reads the import directory (abc). The class can also
+ * load files and parse them into Melody-objects for the MelodyLibrary
  *
  * @author Kristofer
  */
-public class MelodyLoader {
+public class MelodyLoader implements IMelodyIO {
 
-    public ArrayList<Note> noteList;
-    public static ArrayList<File> files = new ArrayList();
-    String[] parts;
-    String topPart;
-    String botPart;
-    String fullString;
-    String[] genrePart;
-//X:1
-//T:Rocky
-//Z:arae69
-//M:4/4
-//L:1/8
-//Q:96
-//KC:C
-    String songNumber;
-    String songTitle;
-    String songAuthor;
-    String songSignature;
-    String songNoteLength;
-    String songKey;
-    
+    private List<Note> noteList;
+    private String[] parts;
+    private String topPart;
+    private String botPart;
+    private String fullString;
+    private String[] genrePart;
+
     public MelodyLoader() {
     }
 
-    public String getBotPart() {
-        return botPart;
-    }
-
-    public String getSongNumber() {
-        return songNumber;
-    }
-
-    public String getSongTitle() {
-        return songTitle;
-    }
-
-    public String getSongAuthor() {
-        return songAuthor;
-    }
-
-    public String getSongSignature() {
-        return songSignature;
-    }
-
-    public String getSongNoteLength() {
-        return songNoteLength;
-    }
-
-    public String getSongKey() {
-        return songKey;
-    }
-
-    public String getTopPart() {
-        return topPart;
-    }
-
-// Shows list of all files in the folder
-    public void loadFileList() {
+    /**
+     * Fetches all files in the directory
+     * 
+     * @return 
+     */
+    @Override
+    public List<File> loadFileList() {
+        List<File> files = new ArrayList();
         File folder = new File("src/main/resources/abc/");
         File[] listOfFiles = folder.listFiles();
 
         for (File file : listOfFiles) {
             if (file.isFile()) {
-                //System.out.println(file.getName());
                 files.add(file);
             }
         }
-        //System.out.println(files.size());
-
-    }
-// Get all the filtered notes in the note list to a string
-
-    public ArrayList<Note> getNoteList() {
-        return noteList;
+        return files;
     }
 
-    public String getNoteListVisible() {
+    private String getNoteListVisible() {
         StringBuilder sb = new StringBuilder();
-
         for (Note n : noteList) {
             sb.append(n.toString());
+            sb.append(" ");
         }
         return sb.toString();
     }
-// Load melody from file and pick top and bot part
 
-    public String loadMelody(String filename) {
+    /**
+     * Loads a file then reads the overhead and note part. Then parses the
+     * information and creates a Melody-object
+     *
+     * @param filename
+     * @return
+     */
+    @Override
+    public Melody loadMelody(String filename) {
 
         noteList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
@@ -123,20 +82,19 @@ public class MelodyLoader {
         }
         fullString = sb.toString();
         parts = fullString.split("-");
-        topPart = parts[0];
         botPart = parts[1];
         genrePart = parts[0].split(System.getProperty("line.separator"));
 
-        //The top part lines
-        songNumber = genrePart[0].substring(2);
-        songTitle = genrePart[1].substring(2);
-        songAuthor = genrePart[2].substring(2);
-        songSignature = genrePart[3].substring(2);
-        songNoteLength = genrePart[4].substring(2);
-        songKey = genrePart[5].substring(2);
+        //Parsing the overhead (top part)
+        String songNumber = genrePart[0].substring(2);
+        String songTitle = genrePart[1].substring(2);
+        String songGenre = genrePart[2].substring(2);
+        String songSignature = genrePart[3].substring(2);
+        String songNoteLength = genrePart[4].substring(2);
+        String songKey = genrePart[5].substring(2);
 
         //  if (Alphabet.isLetterInAlphabet(botPart.charAt(i) + "") && Alphabet.isLetterInAlphabet(botPart.charAt(i+1) + "")&& Alphabet.isLetterInAlphabet(botPart.charAt(i+2) + "")) //Måste göra så att eventuellt tecken efteråt läggs till
-        System.out.println("HEJHEJ" + songKey);
+        //System.out.println("HEJHEJ" + songKey);
         System.out.println("\nLOADING FILE... " + filename);
         System.out.println("\nNOTES IN ABC...\n" + botPart);
 
@@ -155,11 +113,15 @@ public class MelodyLoader {
         }
 
         System.out.println("PARSING NOTES...\n");
-
-        for (Note n : noteList) {
-            System.out.print(n.toString() + " ");
-        }
+        System.out.print(getNoteListVisible());
         System.out.println("\n________________________________________________________________________________________________________________________________________________________________");
-        return botPart;
+
+        Melody melody = new Melody(Integer.parseInt(songNumber), songTitle, songGenre, songNoteLength, songSignature, songKey, noteList);
+        return melody;
+    }
+
+    @Override
+    public void exportTune(String exportName, Melody melody) {
+        throw new UnsupportedOperationException("Use the MelodyIOFactory to get the exporter");
     }
 }
