@@ -28,39 +28,35 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MelodyMakerUI
      */
-   
     private static MainFrame instance = null;
 
     protected MainFrame() {
-                  initComponents();
+        initComponents();
         genreComboBox.removeAllItems();
         for (String g : MelodyController.getInstance().getGenres()) {
             genreComboBox.addItem(g);
         }
-
     }
 
     public static MainFrame getInstance() {
         if (instance == null) {
             instance = new MainFrame();
+            instance.setIconImage(topIcon.getImage());
+            instance.setTitle("Melody Maker");
         }
         return instance;
     }
-    
-    
-    
-    public void setTestString(String s){
+
+    public void setTestString(String s) {
         testString = s;
     }
-    
-    public String getTestString(){
+
+    public String getTestString() {
         return testString;
     }
-    
-    //public MelodyMakerUI() {
-      
-    //}
 
+    //public MelodyMakerUI() {
+    //}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -378,20 +374,19 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         // TODO add your handling code here:
- if(!MelodyFilter.regExpList.isEmpty() || !MelodyFilter.replaceList.isEmpty() ){
-        String inputTitle = titleTextField.getText();
-        String inputGenre = (String) genreComboBox.getSelectedItem();
-        String inputSignature = (String) signatureComboBox.getSelectedItem();
-        String inputKey = (String) keyComboBox.getSelectedItem();
-        String inputLength = (String) lengthComboBox.getSelectedItem();
-       
-        MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
-        }
-        else{
+        if (!MelodyFilter.regExpList.isEmpty() || !MelodyFilter.replaceList.isEmpty()) {
+            String inputTitle = titleTextField.getText();
+            String inputGenre = (String) genreComboBox.getSelectedItem();
+            String inputSignature = (String) signatureComboBox.getSelectedItem();
+            String inputKey = (String) keyComboBox.getSelectedItem();
+            String inputLength = (String) lengthComboBox.getSelectedItem();
+
+            MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
+        } else {
             System.out.print("DU HAR GLÖMT ETT REGEXP!! DET RÄCKER ATT TRYCKA PÅ REGEXPKNAPPEN LOL \n");
         }
 // MelodyTheory.nextRuleList.clear();
-       // MelodyTheory.preRuleList.clear();
+        // MelodyTheory.preRuleList.clear();
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void regExpFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regExpFieldActionPerformed
@@ -409,87 +404,53 @@ public class MainFrame extends javax.swing.JFrame {
         MelodyFilter.replaceList.add(replaceField.getText());
         ruleArea.append("Added: " + regExpField.getText() + " gör regexp-alfabet btw \n");
       //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
-            //MelodyFilter.preRuleList.add(rulePre.getText());
-      //  }
-      //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
-            //MelodyFilter.nextRuleList.add(ruleNext.getText());
-      //  }
+        //MelodyFilter.preRuleList.add(rulePre.getText());
+        //  }
+        //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
+        //MelodyFilter.nextRuleList.add(ruleNext.getText());
+        //  }
 
         //System.out.println("Never have a: " + rulePre.getText() + " with the following character: " + rulePre.getText());
-       // for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
-           // System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
-       // }
-       // if (Alphabet.isLetterInAlphabet(regExpField.getText()) && Alphabet.isLetterInAlphabet(replaceField.getText())) {
-          //  ruleArea.append("Can't have: " + regExpField.getText() + " and " + replaceField.getText() + " together!\n");
-          //  System.out.println("______________________________________________________________________________");
-       // }
-       // else{
-            //ruleArea.append("ERROR, letters are not in alphabet MEN DU TRYCKTE PÅ KNAPPEN IAF OCH DET FUNKAR!\n");
-       // }
+        // for (int i = 0; i < MelodyFilter.nextRuleList.size(); i++) {
+        // System.out.println(i + 1 + " statement:" + " You have added pre: [" + MelodyFilter.preRuleList.get(i) + "] and you have added next: [" + MelodyFilter.nextRuleList.get(i) + "]");
+        // }
+        // if (Alphabet.isLetterInAlphabet(regExpField.getText()) && Alphabet.isLetterInAlphabet(replaceField.getText())) {
+        //  ruleArea.append("Can't have: " + regExpField.getText() + " and " + replaceField.getText() + " together!\n");
+        //  System.out.println("______________________________________________________________________________");
+        // }
+        // else{
+        //ruleArea.append("ERROR, letters are not in alphabet MEN DU TRYCKTE PÅ KNAPPEN IAF OCH DET FUNKAR!\n");
+        // }
 
     }//GEN-LAST:event_RuleButtonActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-      
-            JFrame frame = new JFrame ("Settings");
-            frame.getContentPane().add (SettingsFrame.getInstance());
-            frame.pack();
-            frame.setVisible (true);
-            System.out.println(statiska);
-                        System.out.println("TestStringValue " + getTestString());
 
-            System.out.println(MelodyFilter.preRuleList);
-                System.out.println(MelodyFilter.nextRuleList);
+        JFrame frame = new JFrame("Settings");
+        frame.getContentPane().add(SettingsFrame.getInstance());
+        frame.pack();
+        frame.setVisible(true);
+        System.out.println(statiska);
+        System.out.println("TestStringValue " + getTestString());
+
+        System.out.println(MelodyFilter.preRuleList);
+        System.out.println(MelodyFilter.nextRuleList);
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void playToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playToggleButtonActionPerformed
 
         PlayerJFrame s = new PlayerJFrame();
         s.setVisible(true);
-  
+
     }//GEN-LAST:event_playToggleButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public javax.swing.JTextArea getTextArea(){
+    public javax.swing.JTextArea getTextArea() {
         return ruleArea;
     }
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                MainFrame melodyUI = MainFrame.getInstance();
-                melodyUI.setVisible(true);
-                melodyUI.setIconImage(topIcon.getImage());
-                melodyUI.setTitle("Melody Maker");
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton RuleButton;
