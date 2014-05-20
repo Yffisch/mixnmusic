@@ -42,7 +42,7 @@ public class MIDIplayer extends JFrame{
         }
         try {
             sequence = MidiSystem.getSequence(midiFile);
-            midiLength =(int) sequence.getTickLength();
+            midiLength =(int) sequence.getMicrosecondLength();
             System.out.println("Length of midi:  " + midiLength);
         } catch (InvalidMidiDataException e) {
             System.exit(0);

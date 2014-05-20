@@ -52,7 +52,6 @@ public class PlayerJFrame extends javax.swing.JFrame {
         });
 
         jToggleButton1.setText("Pause");
-        jToggleButton1.setEnabled(false);
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -112,7 +111,7 @@ public class PlayerJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        MIDIplayer.setPaused(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
