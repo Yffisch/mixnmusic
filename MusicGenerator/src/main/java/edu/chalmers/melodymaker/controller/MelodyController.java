@@ -1,6 +1,7 @@
 package edu.chalmers.melodymaker.controller;
 
 import edu.chalmers.melodymaker.core.Melody;
+import edu.chalmers.melodymaker.core.MelodyConverter;
 import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
 import edu.chalmers.melodymaker.io.IMelodyIO;
@@ -54,7 +55,8 @@ public class MelodyController {
     public void sendSave(){
         
         IMelodyIO exporter = MelodyIOFactory.getExporter();
-        exporter.exportTune(activeMelody.getTitle(), activeMelody);
+        String abcMelody = MelodyConverter.getInstance().convertMelody(activeMelody);
+        exporter.exportTune(activeMelody.getTitle(), abcMelody, activeMelody.getID());
     }
     
     

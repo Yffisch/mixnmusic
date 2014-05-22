@@ -121,7 +121,7 @@ public class MelodyLoader implements IMelodyIO {
     }
 
     @Override
-    public void exportTune(String exportName, Melody melody) {
+    public void exportTune(String exportName, String melody, int ID) {
         throw new UnsupportedOperationException("Use the MelodyIOFactory to get the exporter");
     }
 }

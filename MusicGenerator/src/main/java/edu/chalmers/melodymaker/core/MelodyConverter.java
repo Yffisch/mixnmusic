@@ -1,17 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.chalmers.melodymaker.core;
+
 import java.util.List;
+
 /**
  * Converts a Melody object to a String
  * @author PearlOfNash
  */
 public class MelodyConverter {
+
+   private static MelodyConverter instance = null;
     
+   protected MelodyConverter(){
+   }
+   
+   public static MelodyConverter getInstance(){
+       if (instance == null) {
+            instance = new MelodyConverter();
+        }
+        return instance;
+   }
 
     public String convertMelody(Melody melody){
         List<String> notes = melody.getFilteredNotes();

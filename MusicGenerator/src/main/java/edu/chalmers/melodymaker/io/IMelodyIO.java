@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IMelodyIO {
 
-    public void exportTune(String exportName, Melody melody);
+    public void exportTune(String exportName, String melody, int ID);
 
     public Melody loadMelody(String filename);
 
