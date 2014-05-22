@@ -37,6 +37,7 @@ public class PlayerJFrame extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Player");
 
         jButton1.setText("Play");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

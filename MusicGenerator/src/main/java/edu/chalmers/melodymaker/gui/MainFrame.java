@@ -170,6 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton2.setText("Save your song?");
         jButton2.setToolTipText("Save your melody");
+        jButton2.setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("MusicGenerator");
@@ -385,6 +386,7 @@ public class MainFrame extends javax.swing.JFrame {
             MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
             
             playToggleButton.setEnabled(true);
+            jButton2.setEnabled(true);
         } else {
             System.out.print("DU HAR GLÖMT ETT REGEXP!! DET RÄCKER ATT TRYCKA PÅ REGEXPKNAPPEN LOL \n");
         }
