@@ -5,6 +5,7 @@ import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
 import edu.chalmers.melodymaker.io.IMelodyIO;
 import edu.chalmers.melodymaker.io.MelodyIOFactory;
+import edu.chalmers.melodymaker.player.MIDIplayer;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Set;
 public class MelodyController {
     
     private static MelodyController instance = null;
+    private Melody activeMelody;
     
     protected MelodyController() {
     }
@@ -44,9 +46,27 @@ public class MelodyController {
         System.out.println("APLLYING FILTERS...");
         melody.setFilteredNotes(generator.applyFilter(melody.getNoteList()));
         
-        IMelodyIO exporter = MelodyIOFactory.getExporter();
-        exporter.exportTune(melody.getTitle(), melody);
+        activeMelody = melody;
+        
+        
     }
+    
+    public void sendSave(){
+        
+        IMelodyIO exporter = MelodyIOFactory.getExporter();
+        exporter.exportTune(activeMelody.getTitle(), activeMelody);
+    }
+    
+    
+    public void sendPlay(){
+        
+        MIDIplayer.MIDIplayer("src/main/resources/"+ activeMelody.getTitle());
+    }
+    
+    public void sendStop(){
+        MIDIplayer.reset();
+    }
+    
 
     /**
      * Loads all abc-files within the import directory (abc) and fills the

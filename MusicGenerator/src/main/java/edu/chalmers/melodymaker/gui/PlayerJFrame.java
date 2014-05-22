@@ -6,6 +6,7 @@
 
 package edu.chalmers.melodymaker.gui;
 
+import edu.chalmers.melodymaker.controller.MelodyController;
 import edu.chalmers.melodymaker.player.MIDIplayer;
 
 /**
@@ -86,13 +87,11 @@ public class PlayerJFrame extends javax.swing.JFrame {
 
         if(i < 1){
            
-           
-        MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
+        MelodyController.getInstance().sendPlay();
         jButton1.setEnabled(false);
         i = 1;
     }//GEN-LAST:event_jButton1ActionPerformed
-       else{
-          // MIDIplayer.MIDIplayer("src/main/resources/Let It Go.mid");
+        else{
            jButton1.setEnabled(false);
        }
     }
@@ -100,7 +99,7 @@ public class PlayerJFrame extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (i==1){
-        MIDIplayer.reset();
+        MelodyController.getInstance().sendStop();
         jButton1.setEnabled(true);
         i = 0;
         }
