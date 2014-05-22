@@ -50,6 +50,11 @@ public class MelodyController {
         activeMelody = melody;
         
         
+        
+        IMelodyIO exporter = MelodyIOFactory.getExporter();
+        String abcMelody = MelodyConverter.getInstance().convertMelody(activeMelody);
+        exporter.exportTune("temp", abcMelody, activeMelody.getID());
+        
     }
     
     public void sendSave(){
@@ -62,7 +67,7 @@ public class MelodyController {
     
     public void sendPlay(){
         
-        MIDIplayer.MIDIplayer("src/main/resources/"+ activeMelody.getTitle());
+        MIDIplayer.MIDIplayer("src/main/resources/exportfiles/temp.mid");
     }
     
     public void sendStop(){
