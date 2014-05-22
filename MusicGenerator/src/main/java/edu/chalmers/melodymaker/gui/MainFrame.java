@@ -210,6 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         playToggleButton.setText("To player");
+        playToggleButton.setEnabled(false);
         playToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playToggleButtonActionPerformed(evt);
@@ -382,6 +383,8 @@ public class MainFrame extends javax.swing.JFrame {
             String inputLength = (String) lengthComboBox.getSelectedItem();
 
             MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
+            
+            playToggleButton.setEnabled(true);
         } else {
             System.out.print("DU HAR GLÖMT ETT REGEXP!! DET RÄCKER ATT TRYCKA PÅ REGEXPKNAPPEN LOL \n");
         }
