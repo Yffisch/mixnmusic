@@ -5,6 +5,7 @@ import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
 import edu.chalmers.melodymaker.io.IMelodyIO;
 import edu.chalmers.melodymaker.io.MelodyIOFactory;
+import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,34 +17,51 @@ import java.util.Set;
  * @author Emma
  */
 public class MelodyController {
-
+    
     private static MelodyController instance = null;
-
+    
     protected MelodyController() {
     }
-
+    
     public static MelodyController getInstance() {
         if (instance == null) {
             instance = new MelodyController();
         }
         return instance;
     }
-
+    
     public void sendGenerator(String title, String genre, String signature, String key, String length) {
-
+        
         System.out.print("genre: " + genre + "\nsignature: " + signature);
         System.out.print("\nkey: " + key + "\nlength: " + length);
-
+        
         int order = 2; //Maybe let the user decide order in the UI
         
-        IMelodyIO exporter = MelodyIOFactory.getExporter();
         MelodyGenerator generator = new MelodyGenerator(order, 50, 100, title, genre, length, signature, key);
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();
         System.out.println("APLLYING FILTERS...");
         melody.setFilteredNotes(generator.applyFilter(melody.getNoteList()));
+        
+        IMelodyIO exporter = MelodyIOFactory.getExporter();
         exporter.exportTune(melody.getTitle(), melody);
+    }
+
+    /**
+     * Loads all abc-files within the import directory (abc) and fills the
+     * MelodyLibrary
+     */
+    public void fillLibrary() {
+        IMelodyIO melodyLoader = MelodyIOFactory.getLoader();
+        List<File> files = melodyLoader.loadFileList();
+        
+        if (!files.isEmpty()) {
+            for (File file : files) {
+                Melody melody = melodyLoader.loadMelody(file.getName());
+                MelodyLibrary.getInstance().addMelody(melody);
+            }
+        }
     }
 
     /**
