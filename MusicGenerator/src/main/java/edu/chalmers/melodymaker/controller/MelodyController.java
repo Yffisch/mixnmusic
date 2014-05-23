@@ -105,4 +105,9 @@ public class MelodyController {
         System.out.println("\nThis is our genres  " + genres.toString());
         return genres;
     }
+    
+    public String getTheTitle(){
+        String title = activeMelody.getTitle();
+        return title;
+    }
 }
