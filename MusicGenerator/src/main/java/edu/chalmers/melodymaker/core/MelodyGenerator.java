@@ -64,8 +64,10 @@ public class MelodyGenerator {
      */
     public void learnABC(List<Melody> melodies) {
         for (Melody melody : melodies) {
-            if (setStartTable(melody.getNoteList())) {
-                setOrderTable(melody.getNoteList());
+            if (genre.equals(melody.getGenre())){
+                if (setStartTable(melody.getNoteList())) {
+                    setOrderTable(melody.getNoteList());
+                }
             }
         }
     }

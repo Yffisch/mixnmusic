@@ -402,8 +402,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Save your song?"/>
+                <Property name="text" type="java.lang.String" value="Save song"/>
                 <Property name="toolTipText" type="java.lang.String" value="Save your melody"/>
+                <Property name="actionCommand" type="java.lang.String" value="Save song"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>

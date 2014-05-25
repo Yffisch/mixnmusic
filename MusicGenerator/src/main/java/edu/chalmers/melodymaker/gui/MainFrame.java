@@ -168,8 +168,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setText("RegExp: \\w typ");
         jLabel1.setToolTipText("");
 
-        jButton2.setText("Save your song?");
+        jButton2.setText("Save song");
         jButton2.setToolTipText("Save your melody");
+        jButton2.setActionCommand("Save song");
         jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

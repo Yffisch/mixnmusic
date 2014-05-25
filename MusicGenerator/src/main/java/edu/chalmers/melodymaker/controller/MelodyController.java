@@ -40,7 +40,7 @@ public class MelodyController {
         
         int order = 2; //Maybe let the user decide order in the UI
         
-        MelodyGenerator generator = new MelodyGenerator(order, 50, 100, title, genre, length, signature, key);
+        MelodyGenerator generator = new MelodyGenerator(order, 40, 100, title, genre, length, signature, key);
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();

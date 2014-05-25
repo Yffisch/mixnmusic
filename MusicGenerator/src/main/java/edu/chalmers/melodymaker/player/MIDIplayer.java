@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chalmers.melodymaker.player;
 
 import java.io.File;
@@ -29,8 +24,6 @@ public class MIDIplayer extends JFrame{
     private static Sequencer sm_sequencer = null;
     private static Synthesizer sm_synthesizer = null;
     private static Sequence sequence = null;
-    
-    
     
     public static void MIDIplayer(String filename) {
         
@@ -68,7 +61,7 @@ public class MIDIplayer extends JFrame{
                     if (sm_synthesizer != null) {
                         sm_synthesizer.close();
                     }
-                    System.exit(0);
+                   // System.exit(0);
                 }
             }
         });
