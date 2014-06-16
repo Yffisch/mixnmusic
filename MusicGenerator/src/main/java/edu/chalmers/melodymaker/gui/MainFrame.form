@@ -141,7 +141,7 @@
                                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Component id="regExpField" min="-2" pref="47" max="-2" attributes="0"/>
-                                                          <Component id="regExpList" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="regExpListan" min="-2" max="-2" attributes="0"/>
                                                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
@@ -190,7 +190,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="signatureLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="signatureComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="regExpList" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="regExpListan" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -523,7 +523,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="regExpList">
+            <Component class="javax.swing.JComboBox" name="regExpListan">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -535,7 +535,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regExpListActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regExpListanActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

@@ -11,6 +11,7 @@ import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.util.Alphabet;
 import edu.chalmers.melodymaker.core.MelodyFilter;
 import edu.chalmers.melodymaker.io.MelodyExporter;
+import edu.chalmers.melodymaker.util.RegExpAlphabet;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -97,7 +98,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         settingsButton = new javax.swing.JButton();
         playToggleButton = new javax.swing.JToggleButton();
-        regExpList = new javax.swing.JComboBox();
+        regExpListan = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         undoButton = new javax.swing.JButton();
 
@@ -233,10 +234,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        regExpList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "\\w", "\\W", "D", "C" }));
-        regExpList.addActionListener(new java.awt.event.ActionListener() {
+        regExpListan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "\\w", "\\W", "D", "C" }));
+        regExpListan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regExpListActionPerformed(evt);
+                regExpListanActionPerformed(evt);
             }
         });
 
@@ -303,7 +304,7 @@ public class MainFrame extends javax.swing.JFrame {
                                                 .addGap(8, 8, 8)
                                                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(regExpField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(regExpList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(regExpListan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel5))))
                                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(generatingPanelLayout.createSequentialGroup()
@@ -335,7 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(signatureLabel)
                             .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regExpList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(regExpListan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(keyLabel)
@@ -462,10 +463,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         ruleArea.removeAll();
        // MelodyFilter.regExpList.add(regExpField.getText());
+        
         MelodyFilter.replaceList.add(replaceField.getText());
+        
+            if (RegExpAlphabet.isLetterInREAlphabet(regExpField.getText())) {
         ruleArea.append("Added: " + regExpField.getText() + " gör regexp-alfabet btw \n");
-        String regExpChoice = (String) regExpList.getSelectedItem();
+        String regExpChoice = (String) regExpListan.getSelectedItem();
         MelodyFilter.regExpList.add(regExpChoice);
+            }
+            else{
+                System.out.println("FINNS EJ REGEXP");
+            }
 
       //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
         //MelodyFilter.preRuleList.add(rulePre.getText());
@@ -512,9 +520,9 @@ public class MainFrame extends javax.swing.JFrame {
         MelodyController.getInstance().sendSave();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void regExpListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regExpListActionPerformed
+    private void regExpListanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regExpListanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_regExpListActionPerformed
+    }//GEN-LAST:event_regExpListanActionPerformed
 
     private void signatureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signatureComboBoxActionPerformed
         // TODO add your handling code here:
@@ -562,7 +570,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton minorRadioButton;
     public static javax.swing.JToggleButton playToggleButton;
     private javax.swing.JTextField regExpField;
-    private javax.swing.JComboBox regExpList;
+    private javax.swing.JComboBox regExpListan;
     private javax.swing.JTextField replaceField;
     private javax.swing.JTextArea ruleArea;
     private javax.swing.JButton settingsButton;
