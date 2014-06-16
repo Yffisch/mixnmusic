@@ -4,6 +4,7 @@ import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.core.MelodyConverter;
 import edu.chalmers.melodymaker.core.MelodyGenerator;
 import edu.chalmers.melodymaker.core.MelodyLibrary;
+import edu.chalmers.melodymaker.gui.MainFrame;
 import edu.chalmers.melodymaker.io.IMelodyIO;
 import edu.chalmers.melodymaker.io.MelodyIOFactory;
 import edu.chalmers.melodymaker.player.MIDIplayer;
@@ -49,7 +50,13 @@ public class MelodyController {
         tempGeneratedMelody = melody;
         //System.out.println("Här är den!!" + melody.getNoteList());
         System.out.println("APPLYING FILTERS...");
+        if(MainFrame.undoPressed == false){
         melody.setFilteredNotes(generator.applyFilter(melody.getNoteList()));
+        }
+        else{
+        melody.setFilteredNotes(generator.applyFilter(tempGeneratedMelody.getNoteList()));
+    
+        }
        
         activeMelody = melody;
         
@@ -80,8 +87,8 @@ public class MelodyController {
     public void sendSave(){
         
         IMelodyIO exporter = MelodyIOFactory.getExporter();
-        String abcMelody = MelodyConverter.getInstance().convertMelody(activeMelody);
-        exporter.exportTune(activeMelody.getTitle(), abcMelody, activeMelody.getID());
+        String abcMelody = MelodyConverter.getInstance().convertMelody(getActiveMelody());
+        exporter.exportTune(getActiveMelody().getTitle(), abcMelody, getActiveMelody().getID());
     }
     
     

@@ -25,6 +25,7 @@ public class MainFrame extends javax.swing.JFrame {
     static ImageIcon topIcon = new ImageIcon("src/main/resources/music-note.png");
     static String statiska = "inte";
     public String testString = "Not yet changed";
+    public static boolean undoPressed = false;
 
     /**
      * Creates new form MelodyMakerUI
@@ -522,8 +523,10 @@ public class MainFrame extends javax.swing.JFrame {
    
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         MelodyController.activeMelody = MelodyController.tempGeneratedMelody;
-        System.out.println(MelodyController.activeMelody);
-        MelodyController.setActiveMelody(MelodyController.activeMelody);
+        System.out.println(MelodyController.tempGeneratedMelody);
+        MelodyController.setActiveMelody(MelodyController.tempGeneratedMelody);
+        undoPressed = true;
+        
        // MelodyController.exporting();
     }//GEN-LAST:event_undoButtonActionPerformed
 
