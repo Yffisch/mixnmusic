@@ -7,6 +7,7 @@ package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.Main;
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.util.Alphabet;
 import edu.chalmers.melodymaker.core.MelodyFilter;
 import edu.chalmers.melodymaker.io.MelodyExporter;
@@ -95,6 +96,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         settingsButton = new javax.swing.JButton();
         playToggleButton = new javax.swing.JToggleButton();
+        regExpList = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        undoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +147,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         signatureComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "4/4", "2/2", "2/4", "3/4", "3/8", "6/8", "9/8", "12/8" }));
+        signatureComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signatureComboBoxActionPerformed(evt);
+            }
+        });
 
         keyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C", "D", "E", "F", "G", "A", "B", "C#", "Bb", "Eb", "F#", "Ab" }));
 
@@ -165,12 +174,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("RegExp: \\w typ");
+        jLabel1.setText("RegExp:");
         jLabel1.setToolTipText("");
 
         jButton2.setText("Save song");
         jButton2.setToolTipText("Save your melody");
-        jButton2.setActionCommand("Save song");
         jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
         ruleArea.setRows(5);
         jScrollPane1.setViewportView(ruleArea);
 
-        jLabel4.setText("Rules");
+        jLabel4.setText("Melody");
 
         settingsButton.setText("Settings");
         settingsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +232,22 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        regExpList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "\\w", "\\W", "D", "C" }));
+        regExpList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regExpListActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Custom RE:");
+
+        undoButton.setText("Undo");
+        undoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generatingPanelLayout = new javax.swing.GroupLayout(generatingPanel);
         generatingPanel.setLayout(generatingPanelLayout);
         generatingPanelLayout.setHorizontalGroup(
@@ -233,7 +257,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(generatingPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(playToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,38 +273,46 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(majorMinorLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
                             .addGroup(generatingPanelLayout.createSequentialGroup()
                                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(generatingPanelLayout.createSequentialGroup()
-                                        .addComponent(regExpField)
-                                        .addGap(160, 160, 160))))
-                            .addGroup(generatingPanelLayout.createSequentialGroup()
-                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addGroup(generatingPanelLayout.createSequentialGroup()
+                                            .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(109, 109, 109)))
                                     .addGroup(generatingPanelLayout.createSequentialGroup()
                                         .addComponent(minorRadioButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(majorRadioButton))
-                                    .addComponent(jLabel2)
+                                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(generatingPanelLayout.createSequentialGroup()
-                                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addGroup(generatingPanelLayout.createSequentialGroup()
-                                                .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(RuleButton)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3))
+                                    .addGroup(generatingPanelLayout.createSequentialGroup()
                                         .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(replaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(settingsButton)
-                                            .addComponent(jLabel3))))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                            .addComponent(RuleButton)
+                                            .addGroup(generatingPanelLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(regExpField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(regExpList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel5))))
+                                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(generatingPanelLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(settingsButton))
+                                            .addGroup(generatingPanelLayout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(undoButton)
+                                                    .addComponent(replaceField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
                 .addGap(43, 43, 43))
         );
         generatingPanelLayout.setVerticalGroup(
@@ -292,34 +324,51 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleLabel)
                     .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(genreLabel)
-                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(signatureLabel)
-                    .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(keyLabel)
-                    .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(regExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(replaceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(8, 8, 8)
-                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lengthLabel)
-                    .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RuleButton)
-                    .addComponent(settingsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(majorMinorLabel)
-                    .addComponent(minorRadioButton)
-                    .addComponent(majorRadioButton))
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(genreLabel)
+                            .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(signatureLabel)
+                            .addComponent(signatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regExpList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(keyLabel)
+                            .addComponent(keyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(replaceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generatingPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lengthLabel)
+                            .addComponent(lengthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(majorMinorLabel)
+                            .addComponent(minorRadioButton)
+                            .addComponent(majorRadioButton)))
+                    .addGroup(generatingPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(regExpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(undoButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(generatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(settingsButton)
+                            .addComponent(RuleButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(2, 2, 2)
@@ -331,7 +380,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -390,9 +439,9 @@ public class MainFrame extends javax.swing.JFrame {
             String inputLength = (String) lengthComboBox.getSelectedItem();
 
             MelodyController.getInstance().sendGenerator(inputTitle, inputGenre, inputSignature, inputKey, inputLength);
-            
             playToggleButton.setEnabled(true);
             jButton2.setEnabled(true);
+            ruleArea.setText(MelodyExporter.getMelodyInfoForTextField());
         } else {
             System.out.print("DU HAR GLÖMT ETT REGEXP!! DET RÄCKER ATT TRYCKA PÅ REGEXPKNAPPEN LOL \n");
         }
@@ -411,9 +460,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void RuleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RuleButtonActionPerformed
 
         ruleArea.removeAll();
-        MelodyFilter.regExpList.add(regExpField.getText());
+       // MelodyFilter.regExpList.add(regExpField.getText());
         MelodyFilter.replaceList.add(replaceField.getText());
         ruleArea.append("Added: " + regExpField.getText() + " gör regexp-alfabet btw \n");
+        String regExpChoice = (String) regExpList.getSelectedItem();
+        MelodyFilter.regExpList.add(regExpChoice);
+
       //  if (Alphabet.isLetterInAlphabet(regExpField.getText())) {
         //MelodyFilter.preRuleList.add(rulePre.getText());
         //  }
@@ -459,6 +511,22 @@ public class MainFrame extends javax.swing.JFrame {
         MelodyController.getInstance().sendSave();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void regExpListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regExpListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regExpListActionPerformed
+
+    private void signatureComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signatureComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signatureComboBoxActionPerformed
+
+   
+    private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
+        MelodyController.activeMelody = MelodyController.tempGeneratedMelody;
+        System.out.println(MelodyController.activeMelody);
+        MelodyController.setActiveMelody(MelodyController.activeMelody);
+       // MelodyController.exporting();
+    }//GEN-LAST:event_undoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,6 +547,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox keyComboBox;
     private javax.swing.JLabel keyLabel;
@@ -490,6 +559,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton minorRadioButton;
     public static javax.swing.JToggleButton playToggleButton;
     private javax.swing.JTextField regExpField;
+    private javax.swing.JComboBox regExpList;
     private javax.swing.JTextField replaceField;
     private javax.swing.JTextArea ruleArea;
     private javax.swing.JButton settingsButton;
@@ -497,5 +567,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel signatureLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField titleTextField;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }

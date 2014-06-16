@@ -34,13 +34,15 @@ public class MelodyExporter implements IMelodyIO {
      * @param melody
      * @param id
      */
+    static String testMelody;
     @Override
     public void exportTune(String exportName, String melody, int id) {
 
         try {
             FileWriter writer = new FileWriter("src/main/resources/exportfiles/" + exportName + ".abc");
             BufferedWriter out = new BufferedWriter(writer);
-            out.write(melody);
+            testMelody = melody;
+            out.write(testMelody);
             out.close();
         } catch (IOException e) {
         }
@@ -49,6 +51,10 @@ public class MelodyExporter implements IMelodyIO {
         System.out.println(melody);
     }
 
+     public static String getMelodyInfoForTextField(){
+        return testMelody;
+    }
+    
     private void toMIDI(int melodyID, String exportName) {
         String filePath = "src/main/resources/exportfiles/" + exportName + ".abc";
         File f = new File(filePath);

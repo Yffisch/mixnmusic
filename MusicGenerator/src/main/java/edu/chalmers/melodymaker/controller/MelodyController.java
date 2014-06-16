@@ -21,7 +21,9 @@ import java.util.Set;
 public class MelodyController {
     
     private static MelodyController instance = null;
-    private Melody activeMelody;
+    public static Melody activeMelody;
+    public static Melody tempGeneratedMelody;
+    
     
     protected MelodyController() {
     }
@@ -44,17 +46,35 @@ public class MelodyController {
         generator.learnABC(MelodyLibrary.getInstance().getMelodies());
         System.out.println("GENERATING TUNE...");
         Melody melody = generator.generateTune();
-        System.out.println("APLLYING FILTERS...");
+        tempGeneratedMelody = melody;
+        //System.out.println("Här är den!!" + melody.getNoteList());
+        System.out.println("APPLYING FILTERS...");
         melody.setFilteredNotes(generator.applyFilter(melody.getNoteList()));
-        
+       
         activeMelody = melody;
         
         
+        exporting();
         
+        
+    }
+    
+    public static void exporting(){
         IMelodyIO exporter = MelodyIOFactory.getExporter();
-        String abcMelody = MelodyConverter.getInstance().convertMelody(activeMelody);
-        exporter.exportTune("temp", abcMelody, activeMelody.getID());
-        
+        String abcMelody = MelodyConverter.getInstance().convertMelody(getActiveMelody());
+        exporter.exportTune("temp", abcMelody, getActiveMelody().getID());
+    }
+    
+    public static Melody getActiveMelody(){
+        return activeMelody;
+    }
+    
+     public static Melody getTempMelody(){
+        return tempGeneratedMelody;
+    }
+    
+    public static void setActiveMelody(Melody melody){
+        activeMelody = melody;
     }
     
     public void sendSave(){
