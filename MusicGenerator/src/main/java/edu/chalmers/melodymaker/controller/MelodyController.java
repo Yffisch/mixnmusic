@@ -95,10 +95,27 @@ public class MelodyController {
     public void sendPlay(){
         
         MIDIplayer.MIDIplayer("src/main/resources/exportfiles/temp.mid");
+        
     }
     
     public void sendStop(){
         MIDIplayer.reset();
+    }
+    
+     public void sendLowTemp(){
+        MIDIplayer.lowerTempo();
+    }
+     
+      public void sendHighTemp(){
+        MIDIplayer.higherTempo();
+    }
+      
+       public void sendLower(){
+        MIDIplayer.lowerVolume();
+    }
+       
+         public void sendHigher(){
+        MIDIplayer.higherVolume();
     }
     
 

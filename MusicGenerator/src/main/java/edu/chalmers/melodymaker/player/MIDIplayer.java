@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MetaEventListener;
 import javax.sound.midi.MetaMessage;
+import javax.sound.midi.MidiChannel;
+import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
@@ -24,6 +26,9 @@ public class MIDIplayer extends JFrame{
     private static Sequencer sm_sequencer = null;
     private static Synthesizer sm_synthesizer = null;
     private static Sequence sequence = null;
+    MIDIplayer m = new MIDIplayer();
+    public static int tempo = 1;
+    public static MidiChannel channel;
     
     public static void MIDIplayer(String filename) {
         
@@ -109,6 +114,25 @@ public class MIDIplayer extends JFrame{
     sm_sequencer.stop();
     sm_synthesizer.close();
     sequence = null;
+    }
+    
+    public static void lowerTempo(){
+        sm_sequencer.setTempoInBPM(50);
+    }
+    
+    public static void higherTempo(){
+        sm_sequencer.setTempoInBPM(500);
+        
+    }
+    
+     public static void lowerVolume() throws MidiUnavailableException{
+       //channel.controlChange(100, (int)200);
+       //sm_synthesizer.getReceiver().send(null, -1);
+    }
+    
+    public static void higherVolume(){
+       //channel.controlChange(100, (int)200);
+       //channel.
     }
 
 }
