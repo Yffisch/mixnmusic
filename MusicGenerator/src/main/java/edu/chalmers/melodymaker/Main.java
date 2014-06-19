@@ -1,6 +1,7 @@
 package edu.chalmers.melodymaker;
 
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.core.JsoupClass;
 import edu.chalmers.melodymaker.gui.MainFrame;
 
 /**
@@ -23,6 +24,8 @@ public class Main {
             public void run() {
                 MainFrame melodyUI = MainFrame.getInstance();
                 melodyUI.setVisible(true);
+                
+               
             }
         });
     }

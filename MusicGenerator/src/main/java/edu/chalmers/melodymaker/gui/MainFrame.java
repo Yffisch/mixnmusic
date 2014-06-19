@@ -7,6 +7,7 @@ package edu.chalmers.melodymaker.gui;
 
 import edu.chalmers.melodymaker.Main;
 import edu.chalmers.melodymaker.controller.MelodyController;
+import edu.chalmers.melodymaker.core.JsoupClass;
 import edu.chalmers.melodymaker.core.Melody;
 import edu.chalmers.melodymaker.util.Alphabet;
 import edu.chalmers.melodymaker.core.MelodyFilter;
@@ -35,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     protected MainFrame() {
         initComponents();
+        ruleArea.setText(JsoupClass.getTextFrom("http://thesession.org/tunes", "div.primary"));
         genreComboBox.removeAllItems();
         for (String g : MelodyController.getInstance().getGenres()) {
             genreComboBox.addItem(g);

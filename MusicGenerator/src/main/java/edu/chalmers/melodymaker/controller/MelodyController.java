@@ -111,7 +111,7 @@ public class MelodyController {
     }
       
        public void sendLower(){
-        MIDIplayer.lowerVolume();
+        //MIDIplayer.lowerVolume();
     }
        
          public void sendHigher(){
